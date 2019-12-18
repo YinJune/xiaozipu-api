@@ -1,0 +1,23 @@
+${AnsiColor.BRIGHT_MAGENTA}
+
+DDDDDDDDDDDDD           SSSSSSSSSSSSSSS BBBBBBBBBBBBBBBBB
+D::::::::::::DDD      SS:::::::::::::::SB::::::::::::::::B
+D:::::::::::::::DD   S:::::SSSSSS::::::SB::::::BBBBBB:::::B
+DDD:::::DDDDD:::::D  S:::::S     SSSSSSSBB:::::B     B:::::B
+  D:::::D    D:::::D S:::::S              B::::B     B:::::Byyyyyyy           yyyyyyy
+  D:::::D     D:::::DS:::::S              B::::B     B:::::B y:::::y         y:::::y
+  D:::::D     D:::::D S::::SSSS           B::::BBBBBB:::::B   y:::::y       y:::::y
+  D:::::D     D:::::D  SS::::::SSSSS      B:::::::::::::BB     y:::::y     y:::::y
+  D:::::D     D:::::D    SSS::::::::SS    B::::BBBBBB:::::B     y:::::y   y:::::y
+  D:::::D     D:::::D       SSSSSS::::S   B::::B     B:::::B     y:::::y y:::::y
+  D:::::D     D:::::D            S:::::S  B::::B     B:::::B      y:::::y:::::y
+  D:::::D    D:::::D             S:::::S  B::::B     B:::::B       y:::::::::y
+DDD:::::DDDDD:::::D  SSSSSSS     S:::::SBB:::::BBBBBB::::::B        y:::::::y
+D:::::::::::::::DD   S::::::SSSSSS:::::SB:::::::::::::::::B          y:::::y
+D::::::::::::DDD     S:::::::::::::::SS B::::::::::::::::B          y:::::y
+DDDDDDDDDDDDD         SSSSSSSSSSSSSSS   BBBBBBBBBBBBBBBBB          y:::::y
+                                                                  y:::::y
+                                                                 y:::::y
+                                                                y:::::y
+                                                               y:::::y
+                                                              yyyyyyy

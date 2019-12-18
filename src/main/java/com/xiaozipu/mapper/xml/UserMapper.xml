@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaozipu.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaozipu.entity.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_datetime" property="gmtDatetime" jdbcType="TIMESTAMP" />
+    <result column="upt_datetime" property="uptDatetime" jdbcType="TIMESTAMP" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="auth_status" property="authStatus" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="pay_pwd" property="payPwd" jdbcType="VARCHAR" />
+    <result column="auth_score" property="authScore" jdbcType="INTEGER" />
+    <result column="phone_sign" property="phoneSign" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="coupon_all_count" property="couponAllCount" jdbcType="INTEGER" />
+    <result column="coupon_use_count" property="couponUseCount" jdbcType="INTEGER" />
+    <result column="coupon_past_count" property="couponPastCount" jdbcType="INTEGER" />
+    <result column="refuse_remove_time" property="refuseRemoveTime" jdbcType="DATE" />
+    <result column="is_old" property="isOld" jdbcType="INTEGER" />
+    <result column="bankauth_num" property="bankauthNum" jdbcType="INTEGER" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="is_xuqi" property="isXuqi" jdbcType="INTEGER" />
+    <result column="overdue_times" property="overdueTimes" jdbcType="INTEGER" />
+    <result column="loan_times" property="loanTimes" jdbcType="INTEGER" />
+    <result column="press_times" property="pressTimes" jdbcType="INTEGER" />
+    <result column="admin_audit_id" property="adminAuditId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gmt_datetime, upt_datetime, uuid, user_name, password, head_img, phone, money, 
+    user_type, auth_status, token, status, pay_pwd, auth_score, phone_sign, is_pay, coupon_all_count, 
+    coupon_use_count, coupon_past_count, refuse_remove_time, is_old, bankauth_num, channel_id, 
+    channel_name, open_id, is_xuqi, overdue_times, loan_times, press_times, admin_audit_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiaozipu.entity.User" >
+    insert into user (id, gmt_datetime, upt_datetime, 
+      uuid, user_name, password, 
+      head_img, phone, money, 
+      user_type, auth_status, token, 
+      status, pay_pwd, auth_score, 
+      phone_sign, is_pay, coupon_all_count, 
+      coupon_use_count, coupon_past_count, refuse_remove_time, 
+      is_old, bankauth_num, channel_id, 
+      channel_name, open_id, is_xuqi, 
+      overdue_times, loan_times, press_times, 
+      admin_audit_id)
+    values (#{id,jdbcType=BIGINT}, #{gmtDatetime,jdbcType=TIMESTAMP}, #{uptDatetime,jdbcType=TIMESTAMP}, 
+      #{uuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{headImg,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{userType,jdbcType=INTEGER}, #{authStatus,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{payPwd,jdbcType=VARCHAR}, #{authScore,jdbcType=INTEGER}, 
+      #{phoneSign,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{couponAllCount,jdbcType=INTEGER}, 
+      #{couponUseCount,jdbcType=INTEGER}, #{couponPastCount,jdbcType=INTEGER}, #{refuseRemoveTime,jdbcType=DATE}, 
+      #{isOld,jdbcType=INTEGER}, #{bankauthNum,jdbcType=INTEGER}, #{channelId,jdbcType=BIGINT}, 
+      #{channelName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{isXuqi,jdbcType=INTEGER}, 
+      #{overdueTimes,jdbcType=INTEGER}, #{loanTimes,jdbcType=INTEGER}, #{pressTimes,jdbcType=INTEGER}, 
+      #{adminAuditId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaozipu.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtDatetime != null" >
+        gmt_datetime,
+      </if>
+      <if test="uptDatetime != null" >
+        upt_datetime,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="authStatus != null" >
+        auth_status,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="payPwd != null" >
+        pay_pwd,
+      </if>
+      <if test="authScore != null" >
+        auth_score,
+      </if>
+      <if test="phoneSign != null" >
+        phone_sign,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="couponAllCount != null" >
+        coupon_all_count,
+      </if>
+      <if test="couponUseCount != null" >
+        coupon_use_count,
+      </if>
+      <if test="couponPastCount != null" >
+        coupon_past_count,
+      </if>
+      <if test="refuseRemoveTime != null" >
+        refuse_remove_time,
+      </if>
+      <if test="isOld != null" >
+        is_old,
+      </if>
+      <if test="bankauthNum != null" >
+        bankauth_num,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="isXuqi != null" >
+        is_xuqi,
+      </if>
+      <if test="overdueTimes != null" >
+        overdue_times,
+      </if>
+      <if test="loanTimes != null" >
+        loan_times,
+      </if>
+      <if test="pressTimes != null" >
+        press_times,
+      </if>
+      <if test="adminAuditId != null" >
+        admin_audit_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtDatetime != null" >
+        #{gmtDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptDatetime != null" >
+        #{uptDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="authStatus != null" >
+        #{authStatus,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payPwd != null" >
+        #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="authScore != null" >
+        #{authScore,jdbcType=INTEGER},
+      </if>
+      <if test="phoneSign != null" >
+        #{phoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="couponAllCount != null" >
+        #{couponAllCount,jdbcType=INTEGER},
+      </if>
+      <if test="couponUseCount != null" >
+        #{couponUseCount,jdbcType=INTEGER},
+      </if>
+      <if test="couponPastCount != null" >
+        #{couponPastCount,jdbcType=INTEGER},
+      </if>
+      <if test="refuseRemoveTime != null" >
+        #{refuseRemoveTime,jdbcType=DATE},
+      </if>
+      <if test="isOld != null" >
+        #{isOld,jdbcType=INTEGER},
+      </if>
+      <if test="bankauthNum != null" >
+        #{bankauthNum,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="isXuqi != null" >
+        #{isXuqi,jdbcType=INTEGER},
+      </if>
+      <if test="overdueTimes != null" >
+        #{overdueTimes,jdbcType=INTEGER},
+      </if>
+      <if test="loanTimes != null" >
+        #{loanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="pressTimes != null" >
+        #{pressTimes,jdbcType=INTEGER},
+      </if>
+      <if test="adminAuditId != null" >
+        #{adminAuditId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaozipu.entity.User" >
+    update user
+    <set >
+      <if test="gmtDatetime != null" >
+        gmt_datetime = #{gmtDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptDatetime != null" >
+        upt_datetime = #{uptDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="authStatus != null" >
+        auth_status = #{authStatus,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payPwd != null" >
+        pay_pwd = #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="authScore != null" >
+        auth_score = #{authScore,jdbcType=INTEGER},
+      </if>
+      <if test="phoneSign != null" >
+        phone_sign = #{phoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="couponAllCount != null" >
+        coupon_all_count = #{couponAllCount,jdbcType=INTEGER},
+      </if>
+      <if test="couponUseCount != null" >
+        coupon_use_count = #{couponUseCount,jdbcType=INTEGER},
+      </if>
+      <if test="couponPastCount != null" >
+        coupon_past_count = #{couponPastCount,jdbcType=INTEGER},
+      </if>
+      <if test="refuseRemoveTime != null" >
+        refuse_remove_time = #{refuseRemoveTime,jdbcType=DATE},
+      </if>
+      <if test="isOld != null" >
+        is_old = #{isOld,jdbcType=INTEGER},
+      </if>
+      <if test="bankauthNum != null" >
+        bankauth_num = #{bankauthNum,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="isXuqi != null" >
+        is_xuqi = #{isXuqi,jdbcType=INTEGER},
+      </if>
+      <if test="overdueTimes != null" >
+        overdue_times = #{overdueTimes,jdbcType=INTEGER},
+      </if>
+      <if test="loanTimes != null" >
+        loan_times = #{loanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="pressTimes != null" >
+        press_times = #{pressTimes,jdbcType=INTEGER},
+      </if>
+      <if test="adminAuditId != null" >
+        admin_audit_id = #{adminAuditId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaozipu.entity.User" >
+    update user
+    set gmt_datetime = #{gmtDatetime,jdbcType=TIMESTAMP},
+      upt_datetime = #{uptDatetime,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      user_type = #{userType,jdbcType=INTEGER},
+      auth_status = #{authStatus,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      pay_pwd = #{payPwd,jdbcType=VARCHAR},
+      auth_score = #{authScore,jdbcType=INTEGER},
+      phone_sign = #{phoneSign,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      coupon_all_count = #{couponAllCount,jdbcType=INTEGER},
+      coupon_use_count = #{couponUseCount,jdbcType=INTEGER},
+      coupon_past_count = #{couponPastCount,jdbcType=INTEGER},
+      refuse_remove_time = #{refuseRemoveTime,jdbcType=DATE},
+      is_old = #{isOld,jdbcType=INTEGER},
+      bankauth_num = #{bankauthNum,jdbcType=INTEGER},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      is_xuqi = #{isXuqi,jdbcType=INTEGER},
+      overdue_times = #{overdueTimes,jdbcType=INTEGER},
+      loan_times = #{loanTimes,jdbcType=INTEGER},
+      press_times = #{pressTimes,jdbcType=INTEGER},
+      admin_audit_id = #{adminAuditId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
