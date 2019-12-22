@@ -1,6 +1,6 @@
 package com.xiaozipu.service;
 
-import com.xiaozipu.entity.LoanOrder;
+import com.xiaozipu.dao.entity.LoanOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

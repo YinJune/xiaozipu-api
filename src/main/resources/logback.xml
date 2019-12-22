@@ -5,8 +5,8 @@
     <property name="LOG_HOME" value="${catalina.base}/logs/xiaozipulog" />
     <!--定义参数，保存时间-->
     <property name="LOG_MAXHISTORY" value="60" />
-    <!--定义参数，格式化输出：%d表示日期，%-5level：日志级别从左显示5个字符宽度，%thread：线程名，%msg：日志消息，%n：换行符-->
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%logger] %L - %msg%n" />
+    <!--定义参数，格式化输出：%d表示日期，%-5level：日志级别从左显示5个字符宽度，%thread：线程名，%message：日志消息，%n：换行符-->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%logger] %L - %message%n" />
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
