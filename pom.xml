@@ -28,36 +28,42 @@
     </properties>
 
     <dependencies>
+        <!-- spring boot web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <!-- mybatis plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
+        <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- hikaricp -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>${HikariCP.version}</version>
         </dependency>
+        <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -69,6 +75,7 @@
             <!--<artifactId>hutool-all</artifactId>-->
             <!--<version>4.1.19</version>-->
         <!--</dependency>-->
+        <!-- httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

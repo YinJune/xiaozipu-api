@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
  * @date: 2019/12/21 23:59
  */
 @Service
-public class WxServiceImpl implements WxService {
-    private static Logger logger= LoggerFactory.getLogger(WxServiceImpl.class);
+public class WeChatServiceImpl implements WeChatService {
+    private static Logger logger= LoggerFactory.getLogger(WeChatServiceImpl.class);
 
     private static final String MINI_LOGIN_URL="https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
 

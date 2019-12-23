@@ -7,7 +7,7 @@ import com.xiaozipu.thirdapi.weixin.dto.MiniLoginResDto;
  * @author: Yin JunJie
  * @date: 2019/12/21 23:59
  */
-public interface WxService {
+public interface WeChatService {
     /**
      * 小程序登陆
      *
