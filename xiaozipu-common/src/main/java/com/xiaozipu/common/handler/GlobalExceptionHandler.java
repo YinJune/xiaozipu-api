@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
+    private static final String SYS_ERROR_CODE="000000";
+    private static final String SYS_ERROR_MESSAGE="系统异常";
     @ExceptionHandler(BusinessRuntimeException.class)
     public ResultInfo bizExceptionHandler(BusinessRuntimeException e) {
         logger.error("业务异常：", e);
@@ -28,6 +29,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResultInfo exceptionHandler(Exception e) {
         logger.error("系统异常：", e);
-        return new ResultInfo(ErrorCodeEnum.SYS_ERROR.getCode(), ErrorCodeEnum.SYS_ERROR.getMessage());
+        return new ResultInfo(SYS_ERROR_CODE, SYS_ERROR_MESSAGE);
     }
 }

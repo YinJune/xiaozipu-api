@@ -10,6 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xiaozipu-merchant</artifactId>
-
+    <description>商户端</description>
 
 </project>
