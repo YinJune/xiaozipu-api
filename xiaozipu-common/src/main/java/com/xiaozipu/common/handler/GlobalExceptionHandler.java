@@ -1,6 +1,5 @@
 package com.xiaozipu.common.handler;
 
-import com.xiaozipu.common.enums.ErrorCodeEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.result.ResultInfo;
 import org.slf4j.Logger;
