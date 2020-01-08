@@ -1,6 +1,5 @@
 package com.xiaozipu.common.result;
 
-import com.xiaozipu.common.enums.ErrorCodeEnum;
 
 /**
  * @description:
@@ -11,11 +10,11 @@ public class ResultInfo<T> {
     /**
      * 返回码
      */
-    private String code = ErrorCodeEnum.SUCCESS.getCode();
+    private String code = "000000";
     /**
      * 消息
      */
-    private String message = ErrorCodeEnum.SUCCESS.getMessage();
+    private String message = "请求成功";
     /**
      * 返回体
      */

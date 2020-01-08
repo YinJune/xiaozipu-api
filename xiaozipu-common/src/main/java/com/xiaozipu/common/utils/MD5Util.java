@@ -150,26 +150,26 @@ public class MD5Util {
      * @throws NoSuchAlgorithmException
      * @throws UnsupportedEncodingException
      */
-    public static String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        //确定计算方法
-        // 加盐
-        str = str + PropertiesUtil.prop("MD5.password.salt");
-        //加密后的字符串
-        return new BASE64Encoder()
-                .encode(MessageDigest
-                        .getInstance("MD5")
-                        .digest(str.getBytes("utf-8")));
-    }
+//    public static String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+//        //确定计算方法
+//        // 加盐
+//        str = str + PropertiesUtil.prop("MD5.password.salt");
+//        //加密后的字符串
+//        return new BASE64Encoder()
+//                .encode(MessageDigest
+//                        .getInstance("MD5")
+//                        .digest(str.getBytes("utf-8")));
+//    }
 
 
-    public static void main(String[] args) throws Exception {
-        //String data = "{devType:\"1\",Sys:\"01\",Name:\"张三\",PoId:\"000002\",TarPho:\"15527609770\",Desc:\"张三偷窃\"}";
-        //String key = "12345678";//秘钥
-        //String encode = encrypt(data, key);
-        //System.err.println("加密:"+encode);
-        //String dcode = decrypt(encode, key);
-        //System.err.println("解密:"+dcode);
-        String s = EncoderByMd5("123");
-        System.out.println(s);
-    }
+//    public static void main(String[] args) throws Exception {
+//        //String data = "{devType:\"1\",Sys:\"01\",Name:\"张三\",PoId:\"000002\",TarPho:\"15527609770\",Desc:\"张三偷窃\"}";
+//        //String key = "12345678";//秘钥
+//        //String encode = encrypt(data, key);
+//        //System.err.println("加密:"+encode);
+//        //String dcode = decrypt(encode, key);
+//        //System.err.println("解密:"+dcode);
+//        String s = EncoderByMd5("123");
+//        System.out.println(s);
+//    }
 }
