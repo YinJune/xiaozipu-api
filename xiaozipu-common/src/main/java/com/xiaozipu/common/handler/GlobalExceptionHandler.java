@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    private static final String SYS_ERROR_CODE="000000";
+    private static final String SYS_ERROR_CODE="999999";
     private static final String SYS_ERROR_MESSAGE="系统异常";
     @ExceptionHandler(BusinessRuntimeException.class)
     public ResultInfo bizExceptionHandler(BusinessRuntimeException e) {
