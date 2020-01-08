@@ -4,9 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xiaozipu</groupId>
-    <artifactId>xiaozipu</artifactId>
+    <artifactId>xiaozipu-api</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>xiaozipu-merchant</module>
+        <module>xiaozipu-admin</module>
+        <module>xiaozipu-client</module>
+        <module>xiaozipu-service</module>
+        <module>xiaozipu-dao</module>
+        <module>xiaozipu-common</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>xiaozipu-api</name>
     <description>xiaozipu-api</description>
@@ -81,9 +89,9 @@
         </dependency>
         <!--hutool工具包-->
         <!--<dependency>-->
-            <!--<groupId>cn.hutool</groupId>-->
-            <!--<artifactId>hutool-all</artifactId>-->
-            <!--<version>4.1.19</version>-->
+        <!--<groupId>cn.hutool</groupId>-->
+        <!--<artifactId>hutool-all</artifactId>-->
+        <!--<version>4.1.19</version>-->
         <!--</dependency>-->
         <!-- httpclient -->
         <dependency>
