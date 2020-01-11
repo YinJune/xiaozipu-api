@@ -4,6 +4,7 @@ import com.xiaozipu.admin.dto.req.AddBannerReqDto;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.TBanner;
 import com.xiaozipu.service.banner.BannerService;
+import com.xiaozipu.service.enums.BannerStatusEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class BannerController {
     public ResultInfo insertBanner(@RequestBody AddBannerReqDto addBannerReqDto){
         TBanner banner=new TBanner();
         BeanUtils.copyProperties(addBannerReqDto,banner);
+        banner.setStatus(BannerStatusEnum.VALID.getKey());
         bannerService.insertBanner(banner);
         return new ResultInfo();
     }

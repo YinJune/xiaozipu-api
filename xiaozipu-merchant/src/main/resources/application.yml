@@ -1,9 +1,9 @@
 server:
-  port: 8082
+  port: 8083
   servlet:
-    context-path: /admin
+    context-path: /merchant
 spring:
   application:
-    name: xiaozipu-admin
+    name: xiaozipu-merchant
   profiles:
     active: dev

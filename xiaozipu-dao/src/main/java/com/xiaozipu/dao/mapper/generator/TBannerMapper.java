@@ -2,8 +2,9 @@ package com.xiaozipu.dao.mapper.generator;
 
 import com.xiaozipu.dao.entity.TBanner;
 import com.xiaozipu.dao.entity.TBannerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TBannerMapper {
     int countByExample(TBannerExample example);
