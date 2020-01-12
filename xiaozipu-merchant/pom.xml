@@ -11,5 +11,11 @@
 
     <artifactId>xiaozipu-merchant</artifactId>
     <description>商户端</description>
-
+<dependencies>
+    <dependency>
+        <groupId>com.xiaozipu</groupId>
+        <artifactId>xiaozipu-service</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 </project>

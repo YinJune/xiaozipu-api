@@ -1,7 +1,7 @@
 package com.xiaozipu.dao.mapper.generator;
 
-import com.xiaozipu.dao.entity.TBanner;
-import com.xiaozipu.dao.entity.TBannerExample;
+import com.xiaozipu.dao.entity.generator.TBanner;
+import com.xiaozipu.dao.entity.generator.TBannerExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

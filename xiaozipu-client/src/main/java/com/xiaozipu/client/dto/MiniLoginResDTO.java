@@ -8,7 +8,7 @@ import lombok.Data;
  * @date: 2019/12/22 0:24
  */
 @Data
-public class MiniLoginResDto {
+public class MiniLoginResDTO {
     private String openid;
     private String session_key;
     private String unionid;

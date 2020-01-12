@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.dao.entity.generator.TBanner;
 import com.xiaozipu.service.banner.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

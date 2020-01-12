@@ -1,4 +1,4 @@
-package com.xiaozipu.dao.entity;
+package com.xiaozipu.dao.entity.generator;
 
 import java.util.Date;
 

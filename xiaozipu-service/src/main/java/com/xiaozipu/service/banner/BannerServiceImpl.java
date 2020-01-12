@@ -1,7 +1,7 @@
 package com.xiaozipu.service.banner;
 
-import com.xiaozipu.dao.entity.TBanner;
-import com.xiaozipu.dao.entity.TBannerExample;
+import com.xiaozipu.dao.entity.generator.TBanner;
+import com.xiaozipu.dao.entity.generator.TBannerExample;
 import com.xiaozipu.dao.mapper.generator.TBannerMapper;
 import com.xiaozipu.service.enums.BannerStatusEnum;
 import org.springframework.stereotype.Service;

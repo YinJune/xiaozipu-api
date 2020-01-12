@@ -1,7 +1,6 @@
-package com.xiaozipu.admin.banner;
+package com.xiaozipu.merchant;
 
-import com.xiaozipu.dao.entity.generator.TBanner;
-import com.xiaozipu.service.banner.BannerService;
+import com.xiaozipu.service.product.RecommendProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -10,31 +9,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: YinJunJie
- * @date: 2020/1/11 16:42
+ * @date: 2020/1/12 16:33
  * @description:
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ComponentScan(basePackages = {"com.xiaozipu"})
 @MapperScan(basePackages = {"com.xiaozipu.dao.mapper"})
-public class BannerTest {
+public class RecommendProductTest {
 
     @Autowired
-    private BannerService bannerService;
+    private RecommendProductService recommendProductService;
 
     @Test
-    public void insertBannerTest(){
-        TBanner banner=new TBanner();
-        banner.setName("测试banner");
-        banner.setBannerUrl("www.baidu.com");
-        banner.setPosition("1");
-        banner.setStatus("1");
-        banner.setCreateTime(new Date());
+    public void batchInsert(){
+        List<Integer> productIds=new ArrayList<>();
+        productIds.add(1);
+        productIds.add(2);
+        productIds.add(3);
 
-        bannerService.insertBanner(banner);
+        recommendProductService.insertRecommendProduct(productIds);
     }
 }
