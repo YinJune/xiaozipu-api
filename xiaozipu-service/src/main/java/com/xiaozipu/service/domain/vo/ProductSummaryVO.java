@@ -1,4 +1,4 @@
-package com.xiaozipu.service.bo;
+package com.xiaozipu.service.domain.vo;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @description:
  */
 @Data
-public class ProductSummaryBO {
+public class ProductSummaryVO {
     private Integer productId;
     private String productName;
     private String productImageUrl;

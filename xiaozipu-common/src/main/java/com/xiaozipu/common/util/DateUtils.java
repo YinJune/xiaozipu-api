@@ -1,4 +1,4 @@
-package com.xiaozipu.common.utils;
+package com.xiaozipu.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @Slf4j
-public class DateUtil {
+public class DateUtils {
 
     /**
      * 字串转为日期

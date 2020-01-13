@@ -1,4 +1,4 @@
-package com.xiaozipu.common.utils;
+package com.xiaozipu.common.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.xiaozipu.client.dto;
+package com.xiaozipu.service.domain.dto;
 
 /**
  * @description:

@@ -1,32 +1,32 @@
 package com.xiaozipu.client.web;
 
-import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.dao.entity.generator.TBanner;
-import com.xiaozipu.service.banner.BannerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+@Api(tags = "Banner相关接口")
 @RestController
 public class BannerController {
 
-    @Autowired
-    private BannerService bannerService;
-
-    /**
-     * 根据位置查询banner
-     *
-     * @param position
-     * @return
-     */
-    @GetMapping("/banner/list")
-    public ResultInfo listBannerByPosition(@RequestParam("position") String position) {
-        List<TBanner> bannerList = bannerService.listBannerByPosition(position);
-        ResultInfo resultInfo = new ResultInfo();
-        resultInfo.setData(bannerList);
-        return resultInfo;
-    }
+//    @Autowired
+//    private BannerService bannerService;
+//
+//    /**
+//     * 根据位置查询banner
+//     *
+//     * @param position
+//     * @return
+//     */
+//    @ApiOperation(value = "首页顶部Banner查询")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "position",value = "banner位置",required = true,paramType = "form")
+//    })
+//    @GetMapping("/banner/list")
+//    public ResultInfo listBannerByPosition(@RequestParam("position") String position) {
+//        List<TBanner> bannerList = bannerService.listBannerByPosition(position);
+//        ResultInfo resultInfo = new ResultInfo();
+//        List<BannerResDTO> bannerResDTOS=new ArrayList<>();
+//        BeanUtils.copyProperties(bannerList,bannerResDTOS);
+//        resultInfo.setData(bannerResDTOS);
+//        return resultInfo;
+//    }
 }

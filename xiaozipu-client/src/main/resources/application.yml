@@ -1,7 +1,9 @@
 server:
   port: 8080
+  servlet:
+    context-path: /client
 spring:
   application:
-    name: xiaozipu
+    name: xiaozipu-client
   profiles:
     active: dev

@@ -1,4 +1,4 @@
-package com.xiaozipu.common.utils;
+package com.xiaozipu.common.util;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;

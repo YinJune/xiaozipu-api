@@ -1,6 +1,9 @@
 package com.xiaozipu.service.product;
 
-import com.xiaozipu.service.bo.ProductSummaryBO;
+import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.service.domain.vo.ProductSummaryVO;
+
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -14,5 +17,13 @@ public interface ProductService {
      * @param productId
      * @return
      */
-    ProductSummaryBO getProductSummaryBoById(Integer productId);
+    ProductSummaryDO getProductSummaryBoById(Integer productId);
+
+    /**
+     * 排行榜
+     *
+     * @param type
+     * @return
+     */
+    List<ProductSummaryDO> getRankingList(Integer currentPage, String type);
 }

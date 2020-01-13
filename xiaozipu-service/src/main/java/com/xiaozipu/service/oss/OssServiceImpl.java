@@ -1,6 +1,6 @@
 package com.xiaozipu.service.oss;
 
-import com.xiaozipu.common.utils.OssUtils;
+import com.xiaozipu.common.util.OssUtils;
 import org.springframework.stereotype.Service;
 
 /**

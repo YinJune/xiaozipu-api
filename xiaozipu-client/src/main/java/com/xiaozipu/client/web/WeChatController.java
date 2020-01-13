@@ -1,8 +1,9 @@
 package com.xiaozipu.client.web;
 
-import com.xiaozipu.client.utils.WechatSignUtils;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.service.wechat.WeChatService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author: Yin JunJie
  * @date: 2019/12/22 10:17
  */
+@Api(tags = "微信相关接口")
 @RestController
 public class WeChatController {
 
@@ -30,6 +32,7 @@ public class WeChatController {
      *
      * @return
      */
+    @ApiOperation(value = "解密数据")
     @PostMapping("/anon/wechat/data/decrypt")
     public ResultInfo decryptUserInfo() {
         ResultInfo resultInfo = new ResultInfo();
@@ -41,6 +44,7 @@ public class WeChatController {
     /**
      * 确认请求来自微信服务器
      */
+    @ApiOperation(value = "确认请求来自微信服务器")
     @RequestMapping(value = "/anon/wechat/echostr")
     public void doGet(HttpServletRequest request) {
         logger.info("确认请求来自微信服务...");

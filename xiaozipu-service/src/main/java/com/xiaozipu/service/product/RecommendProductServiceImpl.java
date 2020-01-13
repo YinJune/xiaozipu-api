@@ -1,9 +1,10 @@
 package com.xiaozipu.service.product;
 
+import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TRecommendProduct;
 import com.xiaozipu.dao.entity.generator.TRecommendProductExample;
 import com.xiaozipu.dao.mapper.generator.TRecommendProductMapper;
-import com.xiaozipu.service.bo.ProductSummaryBO;
+import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 import com.xiaozipu.service.enums.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,7 @@ public class RecommendProductServiceImpl implements RecommendProductService {
      * @return
      */
     @Override
-    public List<ProductSummaryBO> listRecommendProduct(Integer currentPage) {
+    public List<ProductSummaryDO> listRecommendProduct(Integer currentPage) {
 //        PageHelper.startPage(currentPage,2);
         TRecommendProductExample recommendProductExample=new TRecommendProductExample();
         recommendProductExample.createCriteria().andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey());
@@ -65,13 +66,13 @@ public class RecommendProductServiceImpl implements RecommendProductService {
 //        PageInfo pageInfo=new PageInfo(recommendProductList);
 //        logger.info("---page:{}",pageInfo.getTotal());
 
-        List<ProductSummaryBO> productSummaryBOList=new ArrayList<>();
+        List<ProductSummaryDO> productSummaryDOList =new ArrayList<>();
         if (!CollectionUtils.isEmpty(recommendProductList)){
             for (TRecommendProduct recommendProduct:recommendProductList){
-                ProductSummaryBO productSummaryBO=productService.getProductSummaryBoById(recommendProduct.getProductId());
-                productSummaryBOList.add(productSummaryBO);
+                ProductSummaryDO productSummaryDO =productService.getProductSummaryBoById(recommendProduct.getProductId());
+                productSummaryDOList.add(productSummaryDO);
             }
         }
-        return productSummaryBOList;
+        return productSummaryDOList;
     }
 }

@@ -1,6 +1,7 @@
 package com.xiaozipu.client.banner;
 
-import com.xiaozipu.service.bo.ProductSummaryBO;
+import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 import com.xiaozipu.service.product.RecommendProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ public class RecommendProductTest {
 
     @Test
     public void getRecommendProduct(){
-        List<ProductSummaryBO> productSummaryBOList= recommendProductService.listRecommendProduct(1);
-        System.out.println(productSummaryBOList);
+        List<ProductSummaryDO> productSummaryDOList = recommendProductService.listRecommendProduct(1);
+        System.out.println(productSummaryDOList);
     }
 }

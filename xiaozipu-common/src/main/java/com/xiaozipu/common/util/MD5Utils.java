@@ -1,4 +1,4 @@
-package com.xiaozipu.common.utils;
+package com.xiaozipu.common.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -20,7 +20,7 @@ import java.security.SecureRandom;
  * @create 2018/6/11
  * @since 1.0.0
  */
-public class MD5Util {
+public class MD5Utils {
 
     private final static String DES = "DES";
 

@@ -1,0 +1,60 @@
+package com.xiaozipu.service.index;
+
+import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.dao.entity.generator.TBanner;
+import com.xiaozipu.service.banner.BannerService;
+import com.xiaozipu.service.domain.vo.BannerVO;
+import com.xiaozipu.service.domain.vo.IndexVO;
+import com.xiaozipu.service.domain.vo.ProductSummaryVO;
+import com.xiaozipu.service.product.ProductService;
+import com.xiaozipu.service.product.RecommendProductService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author: YinJunJie
+ * @date: 2020/1/13 16:10
+ * @description:
+ */
+@Service
+public class IndexServiceImpl implements IndexService {
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private RecommendProductService recommendProductService;
+    @Autowired
+    private BannerService bannerService;
+
+
+    /**
+     * 首页数据
+     *
+     * @return
+     */
+    @Override
+    public IndexVO getIndexData() {
+        List<TBanner> banners = bannerService.listBannerByPosition("INDEX");
+        List<BannerVO> bannerVOList = new ArrayList<>();
+        BeanUtils.copyProperties(banners, bannerVOList);
+        List<ProductSummaryDO> rankingListProducts = productService.getRankingList(1, "2");
+        List<ProductSummaryDO> recommendProducts = recommendProductService.listRecommendProduct(1);
+        IndexVO indexVO = new IndexVO();
+        indexVO.setBannerList(bannerVOList);
+        List<ProductSummaryVO> rankListProductSummaryVoList = null;
+        if (!CollectionUtils.isEmpty(rankingListProducts)) {
+            BeanUtils.copyProperties(rankingListProducts, rankListProductSummaryVoList);
+        }
+        List<ProductSummaryVO> recommendProductVoList = null;
+        if (!CollectionUtils.isEmpty(recommendProducts)) {
+            BeanUtils.copyProperties(recommendProducts, recommendProductVoList);
+        }
+        indexVO.setRankListProductList(rankListProductSummaryVoList);
+        indexVO.setRecommendProductList(recommendProductVoList);
+        return indexVO;
+    }
+}

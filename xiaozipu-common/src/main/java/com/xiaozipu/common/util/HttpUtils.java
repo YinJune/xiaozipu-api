@@ -1,4 +1,4 @@
-package com.xiaozipu.common.utils;
+package com.xiaozipu.common.util;
 
 
 import org.apache.http.HttpEntity;

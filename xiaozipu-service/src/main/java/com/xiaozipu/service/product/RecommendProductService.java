@@ -1,6 +1,7 @@
 package com.xiaozipu.service.product;
 
-import com.xiaozipu.service.bo.ProductSummaryBO;
+import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface RecommendProductService {
      * @param currentPage
      * @return
      */
-    List<ProductSummaryBO> listRecommendProduct(Integer currentPage);
+    List<ProductSummaryDO> listRecommendProduct(Integer currentPage);
 
     /**
      * 插入

@@ -2,7 +2,7 @@ package com.xiaozipu.service.wechat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
-import com.xiaozipu.common.utils.HttpUtils;
+import com.xiaozipu.common.util.HttpUtils;
 import com.xiaozipu.service.config.WxConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
