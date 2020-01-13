@@ -1,4 +1,4 @@
-package com.xiaozipu.admin.dto.req;
+package com.xiaozipu.service.domain.dto;
 
 import lombok.Data;
 
