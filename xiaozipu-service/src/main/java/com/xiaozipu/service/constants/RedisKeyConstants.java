@@ -1,4 +1,4 @@
-package com.xiaozipu.client.constants;
+package com.xiaozipu.service.constants;
 
 /**
  * @description:
@@ -6,4 +6,6 @@ package com.xiaozipu.client.constants;
  * @date: 2019/12/21 20:13
  */
 public interface RedisKeyConstants {
+    //用户token
+    String USER_TOKEN="user:token:";
 }

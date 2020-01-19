@@ -18,15 +18,22 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/user/login/password")
-    public ResultInfo loginPassword(){
-        ResultInfo resultInfo=new ResultInfo();
+    public ResultInfo loginPassword() {
+        ResultInfo resultInfo = new ResultInfo();
 
         return resultInfo;
     }
+
+    /**
+     * 验证码登陆
+     *
+     * @param captchaLoginDto
+     * @return
+     */
     @PostMapping("/user/login/captcha")
-    public ResultInfo loginCaptcha(CaptchaLoginDto captchaLoginDto){
-        ResultInfo resultInfo=new ResultInfo();
-        String token=userService.loginCaptcha(captchaLoginDto);
+    public ResultInfo loginCaptcha(CaptchaLoginDto captchaLoginDto) {
+        ResultInfo resultInfo = new ResultInfo();
+        String token = userService.loginCaptcha(captchaLoginDto);
         resultInfo.setData(token);
         return resultInfo;
     }

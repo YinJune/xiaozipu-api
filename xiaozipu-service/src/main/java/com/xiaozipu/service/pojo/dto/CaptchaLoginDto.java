@@ -12,7 +12,7 @@ public class CaptchaLoginDto {
     /**
      * 手机号
      */
-    private String mobile;
+    private String phone;
     /**
      * 验证码
      */

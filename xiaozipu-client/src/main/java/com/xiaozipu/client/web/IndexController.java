@@ -19,10 +19,15 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    @GetMapping("/index/all/data")
-    public ResultInfo getIndexData(){
-        ResultInfo resultInfo=new ResultInfo();
-        IndexVO indexVO =indexService.getIndexData();
+    /**
+     * 首页数据
+     *
+     * @return
+     */
+    @GetMapping("/anon/index/all/data")
+    public ResultInfo getIndexData() {
+        ResultInfo resultInfo = new ResultInfo();
+        IndexVO indexVO = indexService.getIndexData();
         resultInfo.setData(indexVO);
         return resultInfo;
     }

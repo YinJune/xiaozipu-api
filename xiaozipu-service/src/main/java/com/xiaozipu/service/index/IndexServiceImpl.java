@@ -45,11 +45,11 @@ public class IndexServiceImpl implements IndexService {
         List<ProductSummaryDO> recommendProducts = recommendProductService.listRecommendProduct(1);
         IndexVO indexVO = new IndexVO();
         indexVO.setBannerList(bannerVOList);
-        List<ProductSummaryVO> rankListProductSummaryVoList = null;
+        List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(rankingListProducts)) {
             BeanUtils.copyProperties(rankingListProducts, rankListProductSummaryVoList);
         }
-        List<ProductSummaryVO> recommendProductVoList = null;
+        List<ProductSummaryVO> recommendProductVoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(recommendProducts)) {
             BeanUtils.copyProperties(recommendProducts, recommendProductVoList);
         }

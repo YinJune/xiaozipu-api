@@ -1,4 +1,4 @@
-package com.xiaozipu.client.util;
+package com.xiaozipu.service.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

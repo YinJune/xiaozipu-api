@@ -1,5 +1,6 @@
 package com.xiaozipu.service.user;
 
+import com.xiaozipu.dao.entity.generator.TUser;
 import com.xiaozipu.service.pojo.dto.CaptchaLoginDto;
 
 /**
@@ -15,4 +16,11 @@ public interface UserService {
      * @return
      */
     String loginCaptcha(CaptchaLoginDto captchaLoginDto);
+
+    /**
+     * 根据手机号查询用户
+     * @param phone
+     * @return
+     */
+    TUser getUserByPhone(String phone);
 }
