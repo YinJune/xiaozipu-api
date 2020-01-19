@@ -1,4 +1,4 @@
-package com.xiaozipu.service.domain.vo;
+package com.xiaozipu.service.pojo.vo;
 
 import lombok.Data;
 

@@ -1,7 +1,6 @@
 package com.xiaozipu.client.banner;
 
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
-import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 import com.xiaozipu.service.product.RecommendProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

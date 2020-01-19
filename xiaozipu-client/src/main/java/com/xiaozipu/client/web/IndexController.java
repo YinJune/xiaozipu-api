@@ -1,7 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.domain.vo.IndexVO;
+import com.xiaozipu.service.pojo.vo.IndexVO;
 import com.xiaozipu.service.index.IndexService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

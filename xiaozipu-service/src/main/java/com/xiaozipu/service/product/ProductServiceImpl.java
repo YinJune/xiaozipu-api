@@ -4,11 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductMapper;
-import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 import com.xiaozipu.service.enums.RankingListTypeEnum;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;

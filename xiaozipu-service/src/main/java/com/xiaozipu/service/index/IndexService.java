@@ -1,6 +1,6 @@
 package com.xiaozipu.service.index;
 
-import com.xiaozipu.service.domain.vo.IndexVO;
+import com.xiaozipu.service.pojo.vo.IndexVO;
 
 /**
  * @author: YinJunJie

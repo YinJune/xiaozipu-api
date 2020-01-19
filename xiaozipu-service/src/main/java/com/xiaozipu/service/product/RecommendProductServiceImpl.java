@@ -4,7 +4,6 @@ import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TRecommendProduct;
 import com.xiaozipu.dao.entity.generator.TRecommendProductExample;
 import com.xiaozipu.dao.mapper.generator.TRecommendProductMapper;
-import com.xiaozipu.service.domain.vo.ProductSummaryVO;
 import com.xiaozipu.service.enums.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

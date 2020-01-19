@@ -1,7 +1,7 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.domain.dto.AddProductReqDto;
+import com.xiaozipu.service.pojo.dto.AddProductReqDto;
 import com.xiaozipu.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

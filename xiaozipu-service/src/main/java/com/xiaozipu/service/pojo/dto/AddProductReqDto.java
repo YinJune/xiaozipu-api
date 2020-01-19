@@ -1,4 +1,4 @@
-package com.xiaozipu.service.domain.dto;
+package com.xiaozipu.service.pojo.dto;
 
 /**
  * @author: YinJunJie
