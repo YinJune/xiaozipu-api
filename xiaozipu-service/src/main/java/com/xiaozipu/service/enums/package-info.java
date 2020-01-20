@@ -3,4 +3,4 @@
  * @author: Yin JunJie
  * @date: 2019/12/21 20:41
  */
-package com.xiaozipu.client.enums;
+package com.xiaozipu.service.enums;

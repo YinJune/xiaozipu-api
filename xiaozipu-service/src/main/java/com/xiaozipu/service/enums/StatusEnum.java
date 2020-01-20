@@ -6,7 +6,13 @@ package com.xiaozipu.service.enums;
  * @description:
  */
 public enum  StatusEnum {
+    /**
+     * 是
+     */
     VALID("1","生效"),
+    /**
+     * 否
+     */
     INVALID("2","失效");
     private String key;
     private String value;

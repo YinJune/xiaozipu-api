@@ -1,6 +1,7 @@
 package com.xiaozipu.service.product;
 
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.service.pojo.dto.product.AddProductReqDto;
 
 import java.util.List;
 
@@ -25,4 +26,18 @@ public interface ProductService {
      * @return
      */
     List<ProductSummaryDO> getRankingList(Integer currentPage, String type);
+
+    /**
+     * 添加商品
+     *
+     * @param addProductReqDto
+     */
+    void addProduct(AddProductReqDto addProductReqDto);
+
+    /**
+     * 更新商品状态
+     * @param productId
+     * @param status
+     */
+    void updateProductStatus(Integer productId, String status);
 }

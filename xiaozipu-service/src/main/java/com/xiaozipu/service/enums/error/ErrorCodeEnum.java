@@ -1,4 +1,4 @@
-package com.xiaozipu.client.enums;
+package com.xiaozipu.service.enums.error;
 
 /**
  * @description:
@@ -8,7 +8,7 @@ package com.xiaozipu.client.enums;
 public enum ErrorCodeEnum {
     /**
      * eg:001001001
-     * 前三位 模块 中间 功能 后三位 具体
+     * 前三位 系统 中间 模块 后三位 具体
      */
     SUCCESS("000000","请求成功"),
     SYS_ERROR("999999","系统异常"),
