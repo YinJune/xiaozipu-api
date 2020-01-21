@@ -1,5 +1,6 @@
 package com.xiaozipu.service.pojo.dto.product;
 
+import com.xiaozipu.service.pojo.dto.CommonKV;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.util.List;
  * @description:
  */
 @Data
-public class AddProductReqDto {
+public class AddProductReqDTO {
     /**
      * 商品名称
      */
@@ -31,5 +32,9 @@ public class AddProductReqDto {
     /**
      * 规格
      */
-    private List<AddSpecsReqDto> addSpecsReqDtoList;
+    private List<AddSpecsReqDTO> addSpecsReqDTOList;
+    /**
+     * 商品图片 k 是否主图 v url
+     */
+    private List<CommonKV> imageList;
 }

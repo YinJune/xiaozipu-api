@@ -5,7 +5,7 @@ import com.xiaozipu.dao.entity.generator.TUserExample;
 import com.xiaozipu.dao.mapper.generator.TUserMapper;
 import com.xiaozipu.service.constants.RedisKeyConstants;
 import com.xiaozipu.service.enums.StatusEnum;
-import com.xiaozipu.service.pojo.dto.CaptchaLoginDto;
+import com.xiaozipu.service.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.service.util.JwtUtils;
 import com.xiaozipu.service.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public String loginCaptcha(CaptchaLoginDto captchaLoginDto) {
+    public String loginCaptcha(CaptchaLoginDTO captchaLoginDto) {
         TUser user = getUserByPhone(captchaLoginDto.getPhone());
         if (user == null) {
             //注册

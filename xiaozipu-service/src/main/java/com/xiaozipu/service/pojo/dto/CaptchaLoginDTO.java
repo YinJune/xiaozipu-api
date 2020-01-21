@@ -8,7 +8,7 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class CaptchaLoginDto {
+public class CaptchaLoginDTO {
     /**
      * 手机号
      */

@@ -1,18 +1,23 @@
 package com.xiaozipu.service.product;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TProduct;
+import com.xiaozipu.dao.entity.generator.TProductImage;
 import com.xiaozipu.dao.entity.generator.TProductSpecs;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
+import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
 import com.xiaozipu.dao.mapper.generator.TProductMapper;
 import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
 import com.xiaozipu.service.enums.RankingListTypeEnum;
 import com.xiaozipu.service.enums.StatusEnum;
 import com.xiaozipu.service.enums.error.ErrorCodeEnum;
-import com.xiaozipu.service.pojo.dto.product.AddProductReqDto;
-import com.xiaozipu.service.pojo.dto.product.AddSpecsReqDto;
+import com.xiaozipu.service.enums.product.ProductImageTypeEnum;
+import com.xiaozipu.service.pojo.dto.CommonKV;
+import com.xiaozipu.service.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.service.pojo.dto.product.AddSpecsReqDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +39,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
     @Resource
     private TProductSpecsMapper specsMapper;
+    @Resource
+    private TProductImageMapper productImageMapper;
 
     /**
      * 根据商品id查询商品简要信息
@@ -79,27 +86,40 @@ public class ProductServiceImpl implements ProductService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void addProduct(AddProductReqDto addProductReqDto) {
+    public Integer addProduct(AddProductReqDTO addProductReqDto) {
         //插入商品
         TProduct product = new TProduct();
         product.setPrice(addProductReqDto.getPrice());
         product.setLineationPrice(addProductReqDto.getLineationPrice());
         product.setName(addProductReqDto.getName());
+        product.setCategoryId(addProductReqDto.getCategoryId());
         productMapper.insertSelective(product);
-        //插入规格
-        List<TProductSpecs> productSpecsList = new ArrayList<>();
-        for (AddSpecsReqDto addSpecsReqDto : addProductReqDto.getAddSpecsReqDtoList()) {
-            TProductSpecs productSpecs = new TProductSpecs();
-            productSpecs.setProductId(product.getId());
-            productSpecs.setName(addSpecsReqDto.getSpecName());
-            productSpecs.setPrice(addSpecsReqDto.getSpecPrice());
-            productSpecs.setStock(addSpecsReqDto.getStock());
-            productSpecs.setCostPrice(addSpecsReqDto.getCostPrice());
-            productSpecs.setStatus(StatusEnum.VALID.getKey());
-            productSpecs.setDeleted(StatusEnum.INVALID.getKey());
-            productSpecsList.add(productSpecs);
+        //插入图片
+        List<TProductImage> productImageList=new ArrayList<>();
+        for (CommonKV commonKV:addProductReqDto.getImageList()){
+            TProductImage productImage=new TProductImage();
+            productImage.setProductId(product.getId());
+            productImage.setStatus(StatusEnum.VALID.getKey());
+            productImage.setType(commonKV.getKey());
+            productImage.setImageUrl(commonKV.getValue());
+            productImageList.add(productImage);
         }
-        specsMapper.batchInsertSelective(productSpecsList);
+        productImageMapper.batchInsertSelective(productImageList);
+//        //插入规格
+//        List<TProductSpecs> productSpecsList = new ArrayList<>();
+//        for (AddSpecsReqDTO addSpecsReqDto : addProductReqDto.getAddSpecsReqDTOList()) {
+//            TProductSpecs productSpecs = new TProductSpecs();
+//            productSpecs.setProductId(product.getId());
+//            productSpecs.setName(addSpecsReqDto.getSpecName());
+//            productSpecs.setPrice(addSpecsReqDto.getSpecPrice());
+//            productSpecs.setStock(addSpecsReqDto.getStock());
+//            productSpecs.setCostPrice(addSpecsReqDto.getCostPrice());
+//            productSpecs.setStatus(StatusEnum.VALID.getKey());
+//            productSpecs.setDeleted(StatusEnum.INVALID.getKey());
+//            productSpecsList.add(productSpecs);
+//        }
+//        specsMapper.batchInsertSelective(productSpecsList);
+        return product.getId();
     }
 
     /**

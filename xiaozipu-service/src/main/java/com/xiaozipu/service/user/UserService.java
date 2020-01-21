@@ -1,7 +1,7 @@
 package com.xiaozipu.service.user;
 
 import com.xiaozipu.dao.entity.generator.TUser;
-import com.xiaozipu.service.pojo.dto.CaptchaLoginDto;
+import com.xiaozipu.service.pojo.dto.CaptchaLoginDTO;
 
 /**
  * @author: YinJunJie
@@ -15,7 +15,7 @@ public interface UserService {
      * @param captchaLoginDto
      * @return
      */
-    String loginCaptcha(CaptchaLoginDto captchaLoginDto);
+    String loginCaptcha(CaptchaLoginDTO captchaLoginDto);
 
     /**
      * 根据手机号查询用户

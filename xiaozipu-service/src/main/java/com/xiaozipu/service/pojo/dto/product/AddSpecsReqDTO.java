@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @description:
  */
 @Data
-public class AddSpecsReqDto {
+public class AddSpecsReqDTO {
     /**
      * 规格名称
      */

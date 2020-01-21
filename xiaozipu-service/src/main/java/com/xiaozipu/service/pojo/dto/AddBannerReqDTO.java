@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
  * @description:
  */
 @Data
-public class AddBannerReqDto {
+public class AddBannerReqDTO {
     @NotEmpty(message = "banner name不能为空")
     private String name;
     @NotEmpty(message = "banner position不能为空")

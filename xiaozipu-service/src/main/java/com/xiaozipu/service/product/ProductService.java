@@ -1,7 +1,7 @@
 package com.xiaozipu.service.product;
 
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
-import com.xiaozipu.service.pojo.dto.product.AddProductReqDto;
+import com.xiaozipu.service.pojo.dto.product.AddProductReqDTO;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public interface ProductService {
      *
      * @param addProductReqDto
      */
-    void addProduct(AddProductReqDto addProductReqDto);
+    Integer addProduct(AddProductReqDTO addProductReqDto);
 
     /**
      * 更新商品状态

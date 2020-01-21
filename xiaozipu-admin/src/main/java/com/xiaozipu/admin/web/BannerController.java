@@ -3,7 +3,7 @@ package com.xiaozipu.admin.web;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import com.xiaozipu.service.banner.BannerService;
-import com.xiaozipu.service.pojo.dto.AddBannerReqDto;
+import com.xiaozipu.service.pojo.dto.AddBannerReqDTO;
 import com.xiaozipu.service.enums.BannerStatusEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class BannerController {
     private BannerService bannerService;
 
     @PostMapping("/banner/add")
-    public ResultInfo insertBanner(@RequestBody AddBannerReqDto addBannerReqDto){
+    public ResultInfo insertBanner(@RequestBody AddBannerReqDTO addBannerReqDto){
         TBanner banner=new TBanner();
         BeanUtils.copyProperties(addBannerReqDto,banner);
         banner.setStatus(BannerStatusEnum.VALID.getKey());

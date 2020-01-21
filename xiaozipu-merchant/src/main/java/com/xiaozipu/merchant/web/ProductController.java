@@ -1,7 +1,7 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.pojo.dto.product.AddProductReqDto;
+import com.xiaozipu.service.pojo.dto.product.AddProductReqDTO;
 import com.xiaozipu.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +25,11 @@ public class ProductController {
      * @param addProductReqDto
      * @return
      */
-    @PostMapping("/product/add")
-    public ResultInfo addProduct(AddProductReqDto addProductReqDto) {
+    @PostMapping("/product/update")
+    public ResultInfo addProduct(AddProductReqDTO addProductReqDto) {
         ResultInfo resultInfo = new ResultInfo();
-        productService.addProduct(addProductReqDto);
+        Integer productId=productService.addProduct(addProductReqDto);
+        resultInfo.setData(productId);
         return resultInfo;
     }
     /**
