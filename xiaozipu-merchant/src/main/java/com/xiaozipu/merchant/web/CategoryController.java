@@ -2,7 +2,9 @@ package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.service.category.CategoryService;
+import com.xiaozipu.service.pojo.dto.category.AddCategoryReqDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,9 +17,10 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    public ResultInfo addCategory(AddCategoryReqDto addCategoryReqDto){
+    @PostMapping("/category/add")
+    public ResultInfo addCategory(AddCategoryReqDTO addCategoryReqDTO){
         ResultInfo resultInfo=new ResultInfo();
-        categoryService.addCategory();
+        categoryService.addCategory(addCategoryReqDTO);
         resultInfo.setData("");
         return resultInfo;
     }
