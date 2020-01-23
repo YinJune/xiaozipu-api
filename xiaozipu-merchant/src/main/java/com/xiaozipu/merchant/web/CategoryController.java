@@ -17,9 +17,15 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     * 添加分类
+     *
+     * @param addCategoryReqDTO
+     * @return
+     */
     @PostMapping("/category/add")
-    public ResultInfo addCategory(AddCategoryReqDTO addCategoryReqDTO){
-        ResultInfo resultInfo=new ResultInfo();
+    public ResultInfo addCategory(AddCategoryReqDTO addCategoryReqDTO) {
+        ResultInfo resultInfo = new ResultInfo();
         categoryService.addCategory(addCategoryReqDTO);
         resultInfo.setData("");
         return resultInfo;

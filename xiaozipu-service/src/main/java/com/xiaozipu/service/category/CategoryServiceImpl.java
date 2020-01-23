@@ -18,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
     @Resource
     private TCategoryMapper categoryMapper;
 
@@ -29,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void addCategory(AddCategoryReqDTO addCategoryReqDTO) {
         TCategory tCategory = new TCategory();
-        BeanUtils.copyProperties(addCategoryReqDTO,tCategory);
+        BeanUtils.copyProperties(addCategoryReqDTO, tCategory);
         categoryMapper.insertSelective(tCategory);
     }
 
