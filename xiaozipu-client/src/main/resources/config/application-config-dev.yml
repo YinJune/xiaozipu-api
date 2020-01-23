@@ -1,0 +1,18 @@
+wechat:
+  mp:
+    appid: 123
+    secret: 123
+    echo-token: 123
+interceptor:
+  patterns:
+    include: /**
+    exclude: /**
+#阿里云
+#短信服务
+aliyun:
+  sms:
+    access-key: LTAI4FmUG7wjzxuqD8KvWYc9
+    access-key-secret: FMiLTyiX2NAWT57kU1ngtfx66PKsLl
+    domain-name: dysmsapi.aliyuncs.com
+    region: cn-hangzhou
+    version: 2017-05-25

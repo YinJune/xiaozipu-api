@@ -18,8 +18,7 @@ spring:
     host: 47.102.208.223
     password:
     database: 0
-  profiles:
-    include: config/config-dev
+
 
 mybatis-plus:
   mapper-locations: classpath:/mappers/*/*.xml

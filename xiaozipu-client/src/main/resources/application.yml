@@ -7,3 +7,4 @@ spring:
     name: xiaozipu-client
   profiles:
     active: dev
+    include: config-dev
