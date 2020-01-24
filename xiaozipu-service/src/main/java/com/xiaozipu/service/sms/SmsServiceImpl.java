@@ -8,6 +8,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.service.pojo.dto.sms.SendSmsReqDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,7 @@ public class SmsServiceImpl implements SmsService {
             logger.info("阿里云短息返回：{}", JSONObject.toJSONString(response));
         } catch (ClientException e) {
             logger.error("发送短信异常");
+            throw new BusinessRuntimeException("","");
         }
     }
 }
