@@ -1,6 +1,6 @@
 package com.xiaozipu.service.sms;
 
-import com.xiaozipu.service.pojo.dto.sms.SendSmsReqDTO;
+import java.util.Map;
 
 /**
  * @author: YinJunJie
@@ -10,7 +10,8 @@ import com.xiaozipu.service.pojo.dto.sms.SendSmsReqDTO;
 public interface SmsService {
     /**
      * 发送短信
-     * @param sendSmsReqDTO
+     *
+     * @param code
      */
-    void sendSms(SendSmsReqDTO sendSmsReqDTO);
+    void sendSms(String code, String phone, Map paramMap);
 }

@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             user=saveUser(captchaLoginDto.getPhone());
         }
         Integer userId=user.getId();
-        String token=JwtUtils.generateToken(userId);
+        String token=JwtUtils.generateToken(userId,user.getPhone());
         redisUtils.set(RedisKeyConstants.USER_TOKEN+userId,token,JwtUtils.EXPIRATION);
         return token;
     }

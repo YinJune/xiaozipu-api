@@ -9,11 +9,12 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
-import com.xiaozipu.service.pojo.dto.sms.SendSmsReqDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * @author: YinJunJie
@@ -25,26 +26,24 @@ public class SmsServiceImpl implements SmsService {
 
     private static final Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
 
-    @Value("${aliyun.sms.domain-name}")
-    private String domainName;
+    private static final String domainName="dysmsapi.aliyuncs.com";
     @Value("${aliyun.sms.access-key-secret}")
     private String accessKeySecret;
     @Value("${aliyun.sms.access-key}")
     private String accessKey;
-    @Value("${aliyun.sms.region}")
-    private String region;
-    @Value("${aliyun.sms.version}")
-    private String version;
+    private static final String region="cn-hangzhou";
+    private static final String version="2017-05-25";
+    private static final String signName="小资街";
 
     private static final String action="SendSms";
 
     /**
      * 发送短信
      *
-     * @param sendSmsReqDTO
+     * @param code
      */
     @Override
-    public void sendSms(SendSmsReqDTO sendSmsReqDTO) {
+    public void sendSms(String code,String phone, Map paramMap) {
         DefaultProfile profile = DefaultProfile.getProfile(region, accessKey, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
@@ -53,11 +52,11 @@ public class SmsServiceImpl implements SmsService {
         request.setVersion(version);
         request.setAction(action);
         request.putQueryParameter("RegionId", region);
-        request.putQueryParameter("PhoneNumbers", sendSmsReqDTO.getPhone());
-        request.putQueryParameter("SignName", "小资街");
-        request.putQueryParameter("TemplateCode", "SMS_181740307");
-        request.putQueryParameter("TemplateParam", "123456");
-        request.putQueryParameter("OutId", "111");
+        request.putQueryParameter("PhoneNumbers", phone);
+        request.putQueryParameter("SignName", signName);
+        request.putQueryParameter("TemplateCode", code);
+        request.putQueryParameter("TemplateParam", JSONObject.toJSONString(paramMap));
+//        request.putQueryParameter("OutId", "11111");
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());

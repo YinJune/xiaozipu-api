@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class SendSmsReqDTO {
     private String phone;
-    private String type;
+    private String code;
 }

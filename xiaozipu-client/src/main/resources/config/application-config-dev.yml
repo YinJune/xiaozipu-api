@@ -7,12 +7,12 @@ interceptor:
   patterns:
     include: /**
     exclude: /**
-#°¢ÀïÔÆ
-#¶ÌĞÅ·şÎñ
+#é˜¿é‡Œäº‘
+#çŸ­ä¿¡æœåŠ¡
 aliyun:
   sms:
     access-key: LTAI4FmUG7wjzxuqD8KvWYc9
     access-key-secret: FMiLTyiX2NAWT57kU1ngtfx66PKsLl
-    domain-name: dysmsapi.aliyuncs.com
-    region: cn-hangzhou
-    version: 2017-05-25
+    domain-name:
+    region:
+    version:

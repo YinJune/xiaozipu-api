@@ -16,11 +16,12 @@ public class JwtUtils {
     public static final String SECRET = "xiaozipu";
     public static final String TOKEN_HEADER = "Authorization";
 
-    public static String generateToken(Integer userId) {
+    public static String generateToken(Integer userId,String phone) {
         return Jwts.builder()
                 //设置头部信息
                 .setHeaderParam("typ", "JWT")
                 .setAudience(String.valueOf(userId))
+                .claim("phone",phone)
                 //token过期时间 不设置过期时间不会校验过期
 //                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))
                 //设置签名算法
