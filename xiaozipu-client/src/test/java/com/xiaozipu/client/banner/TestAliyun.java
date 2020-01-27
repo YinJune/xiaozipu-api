@@ -33,7 +33,7 @@ public class TestAliyun {
         sendSmsReqDTO.setPhone("17513130886");
         sendSmsReqDTO.setCode("SMS_181740306");
         Map map = new HashMap();
-        map.put("code", "789456");
+        map.put("code", "789456");//service改成参数
         smsService.sendSms(sendSmsReqDTO.getCode(), sendSmsReqDTO.getPhone(), map);
     }
 }
