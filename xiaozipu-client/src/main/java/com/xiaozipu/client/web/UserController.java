@@ -37,4 +37,21 @@ public class UserController {
         resultInfo.setData(token);
         return resultInfo;
     }
+
+
+    /**
+     * 小程序绑定手机号
+     *
+     * @param captchaLoginDto
+     * @return
+     */
+    @PostMapping("/user/login/captcha")
+    public ResultInfo bindPhone() {
+        ResultInfo resultInfo = new ResultInfo();
+        String token = userService.loginCaptcha(captchaLoginDto);
+        resultInfo.setData(token);
+        return resultInfo;
+    }
+
+
 }

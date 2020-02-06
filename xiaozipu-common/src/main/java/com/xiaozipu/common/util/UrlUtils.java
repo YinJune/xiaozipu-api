@@ -1,11 +1,14 @@
 package com.xiaozipu.common.util;
 
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-@Slf4j
 public class UrlUtils {
+
+    private static final Logger log= LoggerFactory.getLogger(UrlUtils.class);
 
     /**
      * 拼接get请求url
