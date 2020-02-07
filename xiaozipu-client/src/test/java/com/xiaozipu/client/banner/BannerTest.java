@@ -1,6 +1,6 @@
 package com.xiaozipu.client.banner;
 
-import com.xiaozipu.service.banner.BannerService;
+import com.xiaozipu.client.service.banner.BannerService;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;

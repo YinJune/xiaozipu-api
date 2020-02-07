@@ -1,8 +1,8 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.pojo.vo.IndexVO;
+import com.xiaozipu.client.service.index.IndexService;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.pojo.vo.IndexVO;
-import com.xiaozipu.service.index.IndexService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +30,10 @@ public class IndexController {
         IndexVO indexVO = indexService.getIndexData();
         resultInfo.setData(indexVO);
         return resultInfo;
+    }
+
+    @GetMapping("/anon/test")
+    public ResultInfo test(){
+        return new ResultInfo();
     }
 }

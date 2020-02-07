@@ -1,11 +1,11 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
+import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
+import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.pojo.dto.CaptchaLoginDTO;
-import com.xiaozipu.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: YinJunJie
@@ -38,20 +38,47 @@ public class UserController {
         return resultInfo;
     }
 
+//
+//    /**
+//     * 小程序绑定手机号
+//     *
+//     * @param captchaLoginDto
+//     * @return
+//     */
+//    @PostMapping("/user/login/captcha")
+//    public ResultInfo bindPhone() {
+//        ResultInfo resultInfo = new ResultInfo();
+//        String token = userService.loginCaptcha(captchaLoginDto);
+//        resultInfo.setData(token);
+//        return resultInfo;
+//    }
 
     /**
-     * 小程序绑定手机号
+     * 第三方注册
      *
-     * @param captchaLoginDto
+     * @param thirdRegisterReqDTO
      * @return
      */
-    @PostMapping("/user/login/captcha")
-    public ResultInfo bindPhone() {
+    @PostMapping("/anon/user/register/third")
+    public ResultInfo thirdRegister(@RequestBody ThirdRegisterReqDTO thirdRegisterReqDTO) {
         ResultInfo resultInfo = new ResultInfo();
-        String token = userService.loginCaptcha(captchaLoginDto);
+        String token = userService.thirdRegister(thirdRegisterReqDTO);
         resultInfo.setData(token);
         return resultInfo;
     }
 
+    /**
+     * 第三方用户是否已存在
+     *
+     * @param thirdUniqueId
+     * @return
+     */
+    @GetMapping("/anon/user/third/exists")
+    public ResultInfo thirdExists(@RequestParam("thirdUniqueId") String thirdUniqueId) {
+        ResultInfo resultInfo = new ResultInfo();
+        boolean exists = userService.thirdExists(thirdUniqueId);
+        resultInfo.setData(exists);
+        return resultInfo;
+    }
 
 }

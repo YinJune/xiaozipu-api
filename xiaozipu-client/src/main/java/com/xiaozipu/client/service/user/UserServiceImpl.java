@@ -1,13 +1,18 @@
-package com.xiaozipu.service.user;
+package com.xiaozipu.client.service.user;
 
+import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
+import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
+import com.xiaozipu.client.util.JwtUtils;
+import com.xiaozipu.client.util.RedisUtils;
 import com.xiaozipu.dao.entity.generator.TUser;
 import com.xiaozipu.dao.entity.generator.TUserExample;
+import com.xiaozipu.dao.entity.generator.TUserThird;
+import com.xiaozipu.dao.entity.generator.TUserThirdExample;
 import com.xiaozipu.dao.mapper.generator.TUserMapper;
-import com.xiaozipu.service.constants.RedisKeyConstants;
-import com.xiaozipu.service.enums.StatusEnum;
-import com.xiaozipu.service.pojo.dto.CaptchaLoginDTO;
-import com.xiaozipu.service.util.JwtUtils;
-import com.xiaozipu.service.util.RedisUtils;
+import com.xiaozipu.dao.mapper.generator.TUserThirdMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private TUserMapper userMapper;
     @Autowired
     private RedisUtils redisUtils;
+    @Resource
+    private TUserThirdMapper userThirdMapper;
 
     /**
      * 验证码登陆
@@ -43,7 +50,7 @@ public class UserServiceImpl implements UserService {
         }
         Integer userId=user.getId();
         String token=JwtUtils.generateToken(userId,user.getPhone());
-        redisUtils.set(RedisKeyConstants.USER_TOKEN+userId,token,JwtUtils.EXPIRATION);
+        redisUtils.set(RedisKeyConstants.USER_TOKEN+userId,token, JwtUtils.EXPIRATION);
         return token;
     }
 
@@ -77,5 +84,40 @@ public class UserServiceImpl implements UserService {
             return userList.get(0);
         }
         return null;
+    }
+
+    /**
+     * 第三方注册
+     *
+     * @param thirdRegisterReqDTO
+     * @return
+     */
+    @Override
+    public String thirdRegister(ThirdRegisterReqDTO thirdRegisterReqDTO) {
+        TUser user=new TUser();
+        BeanUtils.copyProperties(thirdRegisterReqDTO,user);
+        user.setStatus(StatusEnum.VALID.getKey());
+        userMapper.insertSelective(user);
+        TUserThird userThird=new TUserThird();
+        BeanUtils.copyProperties(thirdRegisterReqDTO,userThird);
+        userThird.setUserId(user.getId());
+        //现没有unionid
+        userThird.setOpenId(thirdRegisterReqDTO.getUniqueId());
+        String token=JwtUtils.generateToken(user.getId(),user.getPhone());
+        return token;
+    }
+
+    /**
+     * 是否已注册
+     *
+     * @param thirdUniqueId
+     * @return
+     */
+    @Override
+    public boolean thirdExists(String thirdUniqueId) {
+        TUserThirdExample example=new TUserThirdExample();
+        example.createCriteria().andThirdUniqueIdEqualTo(thirdUniqueId);
+        long count=userThirdMapper.countByExample(example);
+        return count!=0;
     }
 }

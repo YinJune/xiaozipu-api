@@ -1,8 +1,8 @@
 package com.xiaozipu.client.interceptor;
 
-import com.xiaozipu.service.constants.RedisKeyConstants;
-import com.xiaozipu.service.util.JwtUtils;
-import com.xiaozipu.service.util.RedisUtils;
+import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.util.JwtUtils;
+import com.xiaozipu.client.util.RedisUtils;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("authorization");
         try {
-            logger.info("请求uri", request.getRequestURI());
+            logger.info("请求uri:{}", request.getRequestURI());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();
             request.setAttribute("userId", userId);

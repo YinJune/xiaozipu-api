@@ -6,10 +6,7 @@ import com.xiaozipu.third.service.MpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,5 +66,10 @@ public class MpController {
         // 区分小程序
 //        String wxChannel = request.getParameter("wxChannel");
 //        if (WechatSignUtils.checkSignature())
+    }
+
+    @GetMapping("/test")
+    public ResultInfo test(){
+        return new ResultInfo();
     }
 }
