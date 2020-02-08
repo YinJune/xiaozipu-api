@@ -39,5 +39,7 @@ public interface UserService {
      * @param thirdUniqueId
      * @return
      */
-    boolean thirdExists(String thirdUniqueId);
+    TUser findUserByThirdUniqueId(String thirdUniqueId);
+
+    TUser findUserById(Integer userId);
 }

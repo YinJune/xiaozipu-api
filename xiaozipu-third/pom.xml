@@ -37,5 +37,13 @@
             <classifier>jdk15</classifier>
         </dependency>
         <!-- 小程序解密数据需要的依赖 end -->
+
+        <!-- 阿里云sdk 短信要此依赖-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <!-- 阿里云sdk end -->
     </dependencies>
 </project>

@@ -1,11 +1,16 @@
 package com.xiaozipu.client.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.common.result.ResultInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author: YinJunJie
@@ -14,10 +19,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class UserController {
+    private static final Logger logger= LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/login/password")
+    @PostMapping("/anon/user/login/password")
     public ResultInfo loginPassword() {
         ResultInfo resultInfo = new ResultInfo();
 
@@ -30,8 +37,9 @@ public class UserController {
      * @param captchaLoginDto
      * @return
      */
-    @PostMapping("/user/login/captcha")
+    @PostMapping("/anon/user/login/captcha")
     public ResultInfo loginCaptcha(CaptchaLoginDTO captchaLoginDto) {
+        logger.info("验证码登陆:{}", JSONObject.toJSONString(captchaLoginDto));
         ResultInfo resultInfo = new ResultInfo();
         String token = userService.loginCaptcha(captchaLoginDto);
         resultInfo.setData(token);
@@ -61,6 +69,7 @@ public class UserController {
      */
     @PostMapping("/anon/user/register/third")
     public ResultInfo thirdRegister(@RequestBody ThirdRegisterReqDTO thirdRegisterReqDTO) {
+        logger.info("第三方注册:{}",JSONObject.toJSONString(thirdRegisterReqDTO));
         ResultInfo resultInfo = new ResultInfo();
         String token = userService.thirdRegister(thirdRegisterReqDTO);
         resultInfo.setData(token);
@@ -73,12 +82,12 @@ public class UserController {
      * @param thirdUniqueId
      * @return
      */
-    @GetMapping("/anon/user/third/exists")
-    public ResultInfo thirdExists(@RequestParam("thirdUniqueId") String thirdUniqueId) {
-        ResultInfo resultInfo = new ResultInfo();
-        boolean exists = userService.thirdExists(thirdUniqueId);
-        resultInfo.setData(exists);
-        return resultInfo;
-    }
+//    @GetMapping("/anon/user/third/exists")
+//    public ResultInfo thirdExists(@RequestParam("thirdUniqueId") String thirdUniqueId) {
+//        ResultInfo resultInfo = new ResultInfo();
+//       TUser user = userService.findUserByThirdUniqueId(thirdUniqueId);
+//        resultInfo.setData(user);
+//        return resultInfo;
+//    }
 
 }

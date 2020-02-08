@@ -1,4 +1,4 @@
-package com.xiaozipu.third.service;
+package com.xiaozipu.client.service.mp;
 
 import com.alibaba.fastjson.JSONObject;
 

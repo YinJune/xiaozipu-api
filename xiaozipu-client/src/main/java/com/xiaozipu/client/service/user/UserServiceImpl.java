@@ -94,15 +94,22 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String thirdRegister(ThirdRegisterReqDTO thirdRegisterReqDTO) {
-        TUser user=new TUser();
-        BeanUtils.copyProperties(thirdRegisterReqDTO,user);
-        user.setStatus(StatusEnum.VALID.getKey());
-        userMapper.insertSelective(user);
+        //先查询手机号是否在user表中存在（有可能在h5渠道注册）
+        TUser user=getUserByPhone(thirdRegisterReqDTO.getPhone());
+        //不为空表示该手机号已注册，但没有绑定第三方账号 只需要绑定一下
+        //支付宝用户和微信用户同用1个手机号，已绑定过微信，则只绑定支付宝，信息仍为首次绑定的信息
+        if (user==null){
+            user=new TUser();
+            BeanUtils.copyProperties(thirdRegisterReqDTO,user);
+            user.setStatus(StatusEnum.VALID.getKey());
+            userMapper.insertSelective(user);
+        }
         TUserThird userThird=new TUserThird();
         BeanUtils.copyProperties(thirdRegisterReqDTO,userThird);
         userThird.setUserId(user.getId());
         //现没有unionid
         userThird.setOpenId(thirdRegisterReqDTO.getUniqueId());
+        userThirdMapper.insertSelective(userThird);
         String token=JwtUtils.generateToken(user.getId(),user.getPhone());
         return token;
     }
@@ -114,10 +121,20 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean thirdExists(String thirdUniqueId) {
+    public TUser findUserByThirdUniqueId(String thirdUniqueId) {
         TUserThirdExample example=new TUserThirdExample();
         example.createCriteria().andThirdUniqueIdEqualTo(thirdUniqueId);
-        long count=userThirdMapper.countByExample(example);
-        return count!=0;
+        List<TUserThird> userThirds=userThirdMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(userThirds)){
+            return null;
+        }
+        TUser user=findUserById(userThirds.get(0).getUserId());
+        return user;
+    }
+
+    @Override
+    public TUser findUserById(Integer userId) {
+
+        return userMapper.selectByPrimaryKey(userId);
     }
 }

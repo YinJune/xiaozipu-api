@@ -2,7 +2,7 @@ package com.xiaozipu.third.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.third.service.MpService;
+import com.xiaozipu.third.service.mp.MpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.xiaozipu.third.service;
+package com.xiaozipu.third.service.mp;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.common.exception.BusinessRuntimeException;

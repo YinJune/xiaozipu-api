@@ -1,6 +1,7 @@
 package com.xiaozipu.common.util;
 
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -30,6 +31,7 @@ public class HttpUtils {
 
     //有参方式
     public static String getWithParams(String url, Map<String, Object> params) throws Exception {
+        logger.info("请求url:{},参数:{}",url, JSONObject.toJSONString(params));
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;
         try {
