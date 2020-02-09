@@ -2,10 +2,12 @@ package com.xiaozipu.client.service.user;
 
 import com.xiaozipu.client.constants.RedisKeyConstants;
 import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.client.enums.aliyun.SmsTypeEnum;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
 import com.xiaozipu.client.util.JwtUtils;
 import com.xiaozipu.client.util.RedisUtils;
+import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.generator.TUser;
 import com.xiaozipu.dao.entity.generator.TUserExample;
 import com.xiaozipu.dao.entity.generator.TUserThird;
@@ -43,14 +45,20 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String loginCaptcha(CaptchaLoginDTO captchaLoginDto) {
+        //校验验证码
+        String captcha = (String) redisUtils.get(RedisKeyConstants.USER_CAPTCHA + SmsTypeEnum.LOGIN.getType() + ":" + captchaLoginDto.getPhone());
+        if (!captchaLoginDto.getCaptcha().equals(captcha)) {
+
+            throw new BusinessRuntimeException("", "");//TODO
+        }
         TUser user = getUserByPhone(captchaLoginDto.getPhone());
         if (user == null) {
             //注册
-            user=saveUser(captchaLoginDto.getPhone());
+            user = saveUser(captchaLoginDto.getPhone());
         }
-        Integer userId=user.getId();
-        String token=JwtUtils.generateToken(userId,user.getPhone());
-        redisUtils.set(RedisKeyConstants.USER_TOKEN+userId,token, JwtUtils.EXPIRATION);
+        Integer userId = user.getId();
+        String token = JwtUtils.generateToken(userId, user.getPhone());
+        redisUtils.set(RedisKeyConstants.USER_TOKEN + userId, token, JwtUtils.EXPIRATION);
         return token;
     }
 

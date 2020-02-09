@@ -91,5 +91,10 @@
         <artifactId>pagehelper-spring-boot-starter</artifactId>
         <!--            <version>1.2.7</version>-->
     </dependency>
+    <dependency>
+        <groupId>com.xiaozipu</groupId>
+        <artifactId>xiaozipu-third</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
 </dependencies>
 </project>

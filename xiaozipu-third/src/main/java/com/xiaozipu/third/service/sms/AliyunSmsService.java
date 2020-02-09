@@ -7,7 +7,7 @@ import java.util.Map;
  * @date: 2020/1/23 17:36
  * @description:
  */
-public interface SmsService {
+public interface AliyunSmsService {
     /**
      * 发送短信
      *

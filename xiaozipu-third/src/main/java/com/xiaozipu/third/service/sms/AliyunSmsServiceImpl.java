@@ -22,17 +22,17 @@ import java.util.Map;
  * @description:
  */
 @Service
-public class SmsServiceImpl implements SmsService {
+public class AliyunSmsServiceImpl implements AliyunSmsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AliyunSmsServiceImpl.class);
 
-    private static final String domainName="dysmsapi.aliyuncs.com";
+    private static final String domainName = "dysmsapi.aliyuncs.com";
     @Value("${aliyun.sms.access-key-secret}")
     private String accessKeySecret;
     @Value("${aliyun.sms.access-key}")
     private String accessKey;
-    private static final String region="cn-hangzhou";
-    private static final String version="2017-05-25";
+    private static final String region = "cn-hangzhou";
+    private static final String version = "2017-05-25";
     private static final String signName="小资街";
 
     private static final String action="SendSms";
