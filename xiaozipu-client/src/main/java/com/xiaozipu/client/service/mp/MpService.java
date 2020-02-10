@@ -1,6 +1,8 @@
 package com.xiaozipu.client.service.mp;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.pojo.dto.mp.DecryptUserInfoReqDTO;
+import com.xiaozipu.client.pojo.vo.UserInfoVo;
 
 /**
  * @author: YinJunJie
@@ -17,7 +19,10 @@ public interface MpService {
     JSONObject miniLogin(String jsCode);
 
     /**
-     * 解密用户信息
+     * 解密
+     *
+     * @param decryptUserInfoReqDTO
+     * @return
      */
-    void decryptMpData(String encryptedData);
+    UserInfoVo decryptData(DecryptUserInfoReqDTO decryptUserInfoReqDTO);
 }

@@ -3,14 +3,20 @@ package com.xiaozipu.client.web;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
+import com.xiaozipu.client.pojo.vo.UserInfoVo;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.dao.entity.generator.TUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: YinJunJie
@@ -19,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class UserController {
-    private static final Logger logger= LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -69,7 +75,7 @@ public class UserController {
      */
     @PostMapping("/anon/user/register/third")
     public ResultInfo thirdRegister(@RequestBody ThirdRegisterReqDTO thirdRegisterReqDTO) {
-        logger.info("第三方注册:{}",JSONObject.toJSONString(thirdRegisterReqDTO));
+        logger.info("第三方注册:{}", JSONObject.toJSONString(thirdRegisterReqDTO));
         ResultInfo resultInfo = new ResultInfo();
         String token = userService.thirdRegister(thirdRegisterReqDTO);
         resultInfo.setData(token);
@@ -90,4 +96,20 @@ public class UserController {
 //        return resultInfo;
 //    }
 
+    /**
+     * 查询用户信息
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping("/user/info")
+    public ResultInfo getUserInfo(HttpServletRequest request) {
+        Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
+        TUser user = userService.findUserById(userId);
+        UserInfoVo userInfoVo = new UserInfoVo();
+        BeanUtils.copyProperties(user, userInfoVo);
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setData(userInfoVo);
+        return resultInfo;
+    }
 }

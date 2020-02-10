@@ -12,4 +12,6 @@ public interface RedisKeyConstants {
     String USER_CAPTCHA = "user:captcha:";
     //用户发送验证码次数
     String SEND_CAPTCHA_TIMES = "user:captcha:times:";
+    //小程序session_key
+    String MP_SESSION_KEY = "mp:sessionKey:";
 }

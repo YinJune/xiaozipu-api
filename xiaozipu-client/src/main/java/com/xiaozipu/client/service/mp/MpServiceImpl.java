@@ -3,12 +3,15 @@ package com.xiaozipu.client.service.mp;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.config.WxConfig;
 import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.pojo.dto.mp.DecryptUserInfoReqDTO;
+import com.xiaozipu.client.pojo.vo.UserInfoVo;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.client.util.JwtUtils;
 import com.xiaozipu.client.util.RedisUtils;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.HttpUtils;
 import com.xiaozipu.dao.entity.generator.TUser;
+import com.xiaozipu.third.util.mp.MpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +54,13 @@ public class MpServiceImpl implements MpService {
 //                throw new BusinessRuntimeException("","小程序登陆异常");
 //            }
             String openId = jsonObject.getString("openid");
+            String sessionKey = jsonObject.getString("session_key");
             if (StringUtils.isEmpty(openId)) {
                 logger.error("小程序登陆出错:{}", jsonObject);
                 throw new BusinessRuntimeException("", "小程序登陆异常");
             }
+            //过期时间微信不告知，前端可检查session_key是否过期
+            redisUtils.set(RedisKeyConstants.MP_SESSION_KEY + openId, sessionKey);
             //第三方表中是否存在该用户
             TUser user = userService.findUserByThirdUniqueId(openId);
             //如果存在则必有手机号 返回token
@@ -75,7 +81,11 @@ public class MpServiceImpl implements MpService {
      * 解密用户信息
      */
     @Override
-    public void decryptMpData(String encryptedData) {
-
+    public UserInfoVo decryptData(DecryptUserInfoReqDTO decryptUserInfoReqDTO) {
+        String sessionKey = redisUtils.get(RedisKeyConstants.MP_SESSION_KEY + decryptUserInfoReqDTO.getOpenId());
+        String decryptData = MpUtils.decrypt(wxConfig.getAppId(), decryptUserInfoReqDTO.getEncryptedData(), sessionKey, decryptUserInfoReqDTO.getIv());
+        UserInfoVo userInfoVo = JSONObject.parseObject(decryptData).toJavaObject(UserInfoVo.class);
+        //不是所有的解密数据都是userInfo 也不是所有的数据都需要保存
+        return userInfoVo;
     }
 }
