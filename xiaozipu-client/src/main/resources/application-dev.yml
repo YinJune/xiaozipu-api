@@ -19,7 +19,6 @@ spring:
     password:
     database: 0
 
-
 mybatis-plus:
   mapper-locations: classpath:/mappers/*/*.xml
   type-aliases-package: com.xiaozipu.dao.entity

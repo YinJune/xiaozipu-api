@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
      * @param thirdRegisterReqDTO
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String thirdRegister(ThirdRegisterReqDTO thirdRegisterReqDTO) {
         //先查询手机号是否在user表中存在（有可能在h5渠道注册）
@@ -116,7 +117,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(thirdRegisterReqDTO,userThird);
         userThird.setUserId(user.getId());
         //现没有unionid
-        userThird.setOpenId(thirdRegisterReqDTO.getUniqueId());
+//        userThird.setOpenId(thirdRegisterReqDTO.getOpenId());
         userThirdMapper.insertSelective(userThird);
         String token=JwtUtils.generateToken(user.getId(),user.getPhone());
         return token;

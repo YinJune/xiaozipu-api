@@ -14,7 +14,7 @@ public class ThirdRegisterReqDTO {
     /**
      * 唯一id
      */
-    @NotEmpty(message = "uniqueId不能为空")
+//    @NotEmpty(message = "uniqueId不能为空")
     private String uniqueId;
     /**
      * 手机号
@@ -41,4 +41,9 @@ public class ThirdRegisterReqDTO {
      */
     @NotEmpty(message = "头像不能为空")
     private String avatarUrl;
+
+    /**
+     * openId
+     */
+    private String openId;
 }

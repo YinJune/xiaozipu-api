@@ -8,7 +8,7 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class UserInfoVo {
+public class UserInfoVO {
     /**
      * 昵称
      */

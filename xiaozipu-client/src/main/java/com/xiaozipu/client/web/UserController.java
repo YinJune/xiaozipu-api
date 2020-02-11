@@ -3,7 +3,7 @@ package com.xiaozipu.client.web;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
-import com.xiaozipu.client.pojo.vo.UserInfoVo;
+import com.xiaozipu.client.pojo.vo.UserInfoVO;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.generator.TUser;
@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,7 +75,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/anon/user/register/third")
-    public ResultInfo thirdRegister(@RequestBody ThirdRegisterReqDTO thirdRegisterReqDTO) {
+    public ResultInfo thirdRegister(@RequestBody @Validated ThirdRegisterReqDTO thirdRegisterReqDTO) {
         logger.info("第三方注册:{}", JSONObject.toJSONString(thirdRegisterReqDTO));
         ResultInfo resultInfo = new ResultInfo();
         String token = userService.thirdRegister(thirdRegisterReqDTO);
@@ -106,7 +107,7 @@ public class UserController {
     public ResultInfo getUserInfo(HttpServletRequest request) {
         Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
         TUser user = userService.findUserById(userId);
-        UserInfoVo userInfoVo = new UserInfoVo();
+        UserInfoVO userInfoVo = new UserInfoVO();
         BeanUtils.copyProperties(user, userInfoVo);
         ResultInfo resultInfo = new ResultInfo();
         resultInfo.setData(userInfoVo);

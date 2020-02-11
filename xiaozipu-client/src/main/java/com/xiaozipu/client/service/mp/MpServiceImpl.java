@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.config.WxConfig;
 import com.xiaozipu.client.constants.RedisKeyConstants;
 import com.xiaozipu.client.pojo.dto.mp.DecryptUserInfoReqDTO;
-import com.xiaozipu.client.pojo.vo.UserInfoVo;
+import com.xiaozipu.client.pojo.dto.mp.MpLoginResDTO;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.client.util.JwtUtils;
 import com.xiaozipu.client.util.RedisUtils;
@@ -44,7 +44,7 @@ public class MpServiceImpl implements MpService {
      * @return
      */
     @Override
-    public JSONObject miniLogin(String jsCode) {
+    public MpLoginResDTO miniLogin(String jsCode) {
         String url = MINI_LOGIN_URL.replace("APPID", wxConfig.getAppId()).replace("SECRET", wxConfig.getSecret()).replace("JSCODE", jsCode);
         try {
             String result = HttpUtils.getForResult(url);
@@ -54,6 +54,8 @@ public class MpServiceImpl implements MpService {
 //                throw new BusinessRuntimeException("","小程序登陆异常");
 //            }
             String openId = jsonObject.getString("openid");
+            MpLoginResDTO mpLoginResDTO = new MpLoginResDTO();
+            mpLoginResDTO.setOpenId(openId);
             String sessionKey = jsonObject.getString("session_key");
             if (StringUtils.isEmpty(openId)) {
                 logger.error("小程序登陆出错:{}", jsonObject);
@@ -68,8 +70,10 @@ public class MpServiceImpl implements MpService {
                 String token = JwtUtils.generateToken(user.getId(), user.getPhone());
                 jsonObject.put("token", token);
                 redisUtils.set(RedisKeyConstants.USER_TOKEN + user.getId(), token, JwtUtils.EXPIRATION);
+                mpLoginResDTO.setToken(token);
             }
-            return jsonObject;
+
+            return mpLoginResDTO;
         } catch (Exception e) {
             logger.error("微信小程序登陆异常：{}", e);
             //TODO 异常
@@ -81,11 +85,11 @@ public class MpServiceImpl implements MpService {
      * 解密用户信息
      */
     @Override
-    public UserInfoVo decryptData(DecryptUserInfoReqDTO decryptUserInfoReqDTO) {
+    public JSONObject decryptData(DecryptUserInfoReqDTO decryptUserInfoReqDTO) {
         String sessionKey = redisUtils.get(RedisKeyConstants.MP_SESSION_KEY + decryptUserInfoReqDTO.getOpenId());
         String decryptData = MpUtils.decrypt(wxConfig.getAppId(), decryptUserInfoReqDTO.getEncryptedData(), sessionKey, decryptUserInfoReqDTO.getIv());
-        UserInfoVo userInfoVo = JSONObject.parseObject(decryptData).toJavaObject(UserInfoVo.class);
+//        UserInfoVO userInfoVo = JSONObject.parseObject(decryptData).toJavaObject(UserInfoVO.class);
         //不是所有的解密数据都是userInfo 也不是所有的数据都需要保存
-        return userInfoVo;
+        return JSONObject.parseObject(decryptData);
     }
 }
