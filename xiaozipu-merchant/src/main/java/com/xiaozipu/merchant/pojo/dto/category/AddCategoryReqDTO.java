@@ -1,4 +1,4 @@
-package com.xiaozipu.service.pojo.dto.category;
+package com.xiaozipu.merchant.pojo.dto.category;
 
 import lombok.Data;
 
@@ -28,5 +28,9 @@ public class AddCategoryReqDTO {
     /**
      * 状态
      */
-    private String status;
+    private String level;
+    /**
+     * 越大越靠前
+     */
+    private Integer sortNum;
 }

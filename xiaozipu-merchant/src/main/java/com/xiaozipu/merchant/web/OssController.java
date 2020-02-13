@@ -1,9 +1,8 @@
-package com.xiaozipu.admin.web;
+package com.xiaozipu.merchant.web;
 
-import com.xiaozipu.admin.service.oss.OssService;
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.service.oss.OssService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,10 +34,5 @@ public class OssController {
         String requestId = ossService.uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes());
         resultInfo.setData(requestId);
         return resultInfo;
-    }
-
-    @GetMapping("/anon/test")
-    public ResultInfo test() {
-        return new ResultInfo();
     }
 }

@@ -36,3 +36,6 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
   helper-dialect: mysql
+
+mybatis:
+  mapper-locations: classpath:mappers/*/*Mapper.xml #*可以表示任意目录

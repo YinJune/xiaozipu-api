@@ -1,10 +1,12 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.category.CategoryService;
-import com.xiaozipu.service.pojo.dto.category.AddCategoryReqDTO;
+import com.xiaozipu.merchant.pojo.dto.category.AddCategoryReqDTO;
+import com.xiaozipu.merchant.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,7 +26,7 @@ public class CategoryController {
      * @return
      */
     @PostMapping("/category/add")
-    public ResultInfo addCategory(AddCategoryReqDTO addCategoryReqDTO) {
+    public ResultInfo addCategory(@RequestBody @Validated AddCategoryReqDTO addCategoryReqDTO) {
         ResultInfo resultInfo = new ResultInfo();
         categoryService.addCategory(addCategoryReqDTO);
         resultInfo.setData("");

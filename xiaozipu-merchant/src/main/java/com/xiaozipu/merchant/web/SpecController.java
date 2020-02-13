@@ -1,9 +1,9 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.pojo.dto.spec.AddSpecNameReqDTO;
-import com.xiaozipu.service.pojo.dto.spec.AddSpecValueReqDTO;
-import com.xiaozipu.service.spec.SpecService;
+import com.xiaozipu.merchant.pojo.dto.spec.AddSpecNameReqDTO;
+import com.xiaozipu.merchant.pojo.dto.spec.AddSpecValueReqDTO;
+import com.xiaozipu.merchant.service.spec.SpecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

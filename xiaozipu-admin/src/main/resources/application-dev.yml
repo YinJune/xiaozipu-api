@@ -33,3 +33,10 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+mybatis:
+  mapper-locations: classpath:mappers/*/*Mapper.xml #*可以表示任意目录
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql

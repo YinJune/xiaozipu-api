@@ -1,7 +1,7 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.product.RecommendProductService;
+import com.xiaozipu.merchant.service.product.RecommendProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

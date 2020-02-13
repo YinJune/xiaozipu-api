@@ -1,7 +1,7 @@
 package com.xiaozipu.admin.banner;
 
+import com.xiaozipu.admin.service.banner.BannerService;
 import com.xiaozipu.dao.entity.generator.TBanner;
-import com.xiaozipu.service.banner.BannerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;

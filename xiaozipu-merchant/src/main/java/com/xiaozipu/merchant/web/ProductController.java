@@ -1,11 +1,13 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.service.pojo.dto.product.AddProductReqDTO;
-import com.xiaozipu.service.product.ProductService;
+import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,13 +27,14 @@ public class ProductController {
      * @param addProductReqDto
      * @return
      */
-    @PostMapping("/product/update")
-    public ResultInfo addProduct(AddProductReqDTO addProductReqDto) {
+    @PostMapping("/product/add")
+    public ResultInfo addProduct(@RequestBody @Validated AddProductReqDTO addProductReqDto) {
         ResultInfo resultInfo = new ResultInfo();
-        Integer productId=productService.addProduct(addProductReqDto);
+        Integer productId = productService.addProduct(addProductReqDto);
         resultInfo.setData(productId);
         return resultInfo;
     }
+
     /**
      * 添加商品
      *

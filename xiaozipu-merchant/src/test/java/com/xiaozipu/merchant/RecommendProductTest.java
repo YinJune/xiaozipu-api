@@ -1,6 +1,6 @@
 package com.xiaozipu.merchant;
 
-import com.xiaozipu.service.product.RecommendProductService;
+import com.xiaozipu.merchant.service.product.RecommendProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
