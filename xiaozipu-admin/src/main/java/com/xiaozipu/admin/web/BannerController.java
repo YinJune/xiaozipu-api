@@ -2,7 +2,7 @@ package com.xiaozipu.admin.web;
 
 import com.xiaozipu.admin.dto.req.AddBannerReqDTO;
 import com.xiaozipu.admin.service.banner.BannerService;
-import com.xiaozipu.common.enums.BannerStatusEnum;
+import com.xiaozipu.common.enums.banner.BannerStatusEnum;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import org.springframework.beans.BeanUtils;

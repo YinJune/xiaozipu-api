@@ -1,5 +1,6 @@
 package com.xiaozipu.merchant;
 
+import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 import com.xiaozipu.merchant.service.product.RecommendProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,12 +28,13 @@ public class RecommendProductTest {
     private RecommendProductService recommendProductService;
 
     @Test
-    public void batchInsert(){
-        List<Integer> productIds=new ArrayList<>();
+    public void batchInsert() {
+        AddRecommendProductReqDTO addRecommendProductReqDTO = new AddRecommendProductReqDTO();
+        List<Integer> productIds = new ArrayList<>();
         productIds.add(1);
         productIds.add(2);
         productIds.add(3);
-
-        recommendProductService.insertRecommendProduct(productIds);
+        addRecommendProductReqDTO.setProductIds(productIds);
+        recommendProductService.insertRecommendProduct(addRecommendProductReqDTO);
     }
 }

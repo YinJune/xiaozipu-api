@@ -5,6 +5,7 @@ import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TRecommendProduct;
 import com.xiaozipu.dao.entity.generator.TRecommendProductExample;
 import com.xiaozipu.dao.mapper.generator.TRecommendProductMapper;
+import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,20 +35,21 @@ public class RecommendProductServiceImpl implements RecommendProductService {
     /**
      * 插入
      *
-     * @param productIds
+     * @param addRecommendProductReqDTO
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void insertRecommendProduct(List<Integer> productIds) {
+    public void insertRecommendProduct(AddRecommendProductReqDTO addRecommendProductReqDTO) {
         List<TRecommendProduct> recommendProducts = new ArrayList<>();
-        for (Integer productId : productIds) {
+        for (Integer productId : addRecommendProductReqDTO.getProductIds()) {
             TRecommendProduct recommendProduct = new TRecommendProduct();
             recommendProduct.setProductId(productId);
-            recommendProduct.setDeleted("2");
-            recommendProduct.setStatus("1");
+            recommendProduct.setDeleted(StatusEnum.INVALID.getKey());
+            recommendProduct.setStatus(StatusEnum.VALID.getKey());
             recommendProducts.add(recommendProduct);
         }
-        recommendProductMapper.batchInsert(recommendProducts);
+        //insert 无需指定selective
+        recommendProductMapper.batchInsertSelective(recommendProducts, TRecommendProduct.Column.productId, TRecommendProduct.Column.deleted, TRecommendProduct.Column.status);
     }
 
     /**

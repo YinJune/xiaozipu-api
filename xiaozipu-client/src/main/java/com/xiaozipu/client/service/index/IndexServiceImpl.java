@@ -7,6 +7,7 @@ import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
 import com.xiaozipu.client.service.banner.BannerService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.RecommendProductService;
+import com.xiaozipu.common.enums.banner.BannerPositionEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import org.springframework.beans.BeanUtils;
@@ -40,20 +41,35 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public IndexVO getIndexData() {
         //banner
-        List<TBanner> banners = bannerService.listBannerByPosition("INDEX");
+        List<TBanner> banners = bannerService.listBannerByPosition(BannerPositionEnum.INDEX_TOP.getPosition());
         List<BannerVO> bannerVOList = new ArrayList<>();
-        BeanUtils.copyProperties(banners, bannerVOList);
+        for (TBanner banner : banners) {
+            BannerVO bannerVO = new BannerVO();
+            BeanUtils.copyProperties(banner, bannerVO);
+            bannerVOList.add(bannerVO);
+        }
+//        BeanUtils.copyProperties(banners, bannerVOList);
         //排行榜
         List<ProductSummaryDO> rankingListProducts = productService.getRankingList(1, RankingListTypeEnum.SALES_VOLUME.getKey());
+        List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
+        for (ProductSummaryDO productSummaryDO : rankingListProducts) {
+            ProductSummaryVO productSummaryVO = new ProductSummaryVO();
+            BeanUtils.copyProperties(productSummaryDO, productSummaryVO);
+            rankListProductSummaryVoList.add(productSummaryVO);
+        }
         //推荐商品
         List<ProductSummaryDO> recommendProducts = recommendProductService.listRecommendProduct(1);
+        List<ProductSummaryVO> recommendProductVoList = new ArrayList<>();
+        for (ProductSummaryDO productSummaryDO : recommendProducts) {
+            ProductSummaryVO productSummaryVO = new ProductSummaryVO();
+            BeanUtils.copyProperties(productSummaryDO, productSummaryVO);
+            recommendProductVoList.add(productSummaryVO);
+        }
         IndexVO indexVO = new IndexVO();
         indexVO.setBannerList(bannerVOList);
-        List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(rankingListProducts)) {
             BeanUtils.copyProperties(rankingListProducts, rankListProductSummaryVoList);
         }
-        List<ProductSummaryVO> recommendProductVoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(recommendProducts)) {
             BeanUtils.copyProperties(recommendProducts, recommendProductVoList);
         }

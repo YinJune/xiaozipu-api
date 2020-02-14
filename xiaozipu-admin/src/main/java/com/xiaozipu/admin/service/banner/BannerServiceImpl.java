@@ -1,6 +1,6 @@
 package com.xiaozipu.admin.service.banner;
 
-import com.xiaozipu.common.enums.BannerStatusEnum;
+import com.xiaozipu.common.enums.banner.BannerStatusEnum;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import com.xiaozipu.dao.entity.generator.TBannerExample;
 import com.xiaozipu.dao.mapper.generator.TBannerMapper;

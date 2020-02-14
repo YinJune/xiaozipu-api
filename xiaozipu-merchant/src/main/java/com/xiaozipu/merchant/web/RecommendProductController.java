@@ -1,13 +1,12 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 import com.xiaozipu.merchant.service.product.RecommendProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -20,9 +19,9 @@ public class RecommendProductController {
     private RecommendProductService recommendProductService;
 
     @PostMapping("/product/recommend/add")
-    public ResultInfo addRecommendProduct(@RequestParam("productIds") List<Integer> productIds){
-        ResultInfo resultInfo=new ResultInfo();
-        recommendProductService.insertRecommendProduct(productIds);
-       return resultInfo;
+    public ResultInfo addRecommendProduct(@RequestBody AddRecommendProductReqDTO addRecommendProductReqDTO) {
+        ResultInfo resultInfo = new ResultInfo();
+        recommendProductService.insertRecommendProduct(addRecommendProductReqDTO);
+        return resultInfo;
     }
 }

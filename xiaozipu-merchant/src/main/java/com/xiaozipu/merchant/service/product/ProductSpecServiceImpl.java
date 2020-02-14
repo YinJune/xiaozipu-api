@@ -1,6 +1,7 @@
 package com.xiaozipu.merchant.service.product;
 
 import com.xiaozipu.common.enums.StatusEnum;
+import com.xiaozipu.common.util.MoneyUtils;
 import com.xiaozipu.dao.entity.generator.TProductSpecs;
 import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
@@ -34,14 +35,15 @@ public class ProductSpecServiceImpl implements ProductSpecService {
         for (AddSpecsReqDTO addSpecsReqDTO : addProductSpecReqDTO.getSpecsReqDTOList()) {
             TProductSpecs productSpecs = new TProductSpecs();
             productSpecs.setProductId(addProductSpecReqDTO.getProductId());
-            productSpecs.setCostPrice(addSpecsReqDTO.getCostPrice());
-            productSpecs.setPrice(addSpecsReqDTO.getPrice());
-            productSpecs.setDeleted(StatusEnum.INVALID.getKey());
-            productSpecs.setStatus(StatusEnum.VALID.getKey());
+            productSpecs.setSpec(addSpecsReqDTO.getSpecs());
+            productSpecs.setPrice(addSpecsReqDTO.getPrice().multiply(MoneyUtils.UNIT));
+            productSpecs.setCostPrice(addSpecsReqDTO.getCostPrice().multiply(MoneyUtils.UNIT));
             productSpecs.setStock(addSpecsReqDTO.getStock());
-//            productSpecs.setName();
+            productSpecs.setStatus(StatusEnum.VALID.getKey());
+            productSpecs.setDeleted(StatusEnum.INVALID.getKey());
+            productSpecs.setSpecImageUrl(addSpecsReqDTO.getSpecImageUrl());
             productSpecsList.add(productSpecs);
         }
-        productSpecsMapper.batchInsertSelective(productSpecsList);
+        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpecs.Column.price, TProductSpecs.Column.productId, TProductSpecs.Column.spec, TProductSpecs.Column.costPrice, TProductSpecs.Column.stock, TProductSpecs.Column.status, TProductSpecs.Column.deleted, TProductSpecs.Column.specImageUrl);
     }
 }

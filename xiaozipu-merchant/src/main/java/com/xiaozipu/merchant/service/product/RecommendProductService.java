@@ -1,6 +1,7 @@
 package com.xiaozipu.merchant.service.product;
 
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface RecommendProductService {
     /**
      * 插入
      *
-     * @param productIds
+     * @param addRecommendProductReqDTO
      */
-    void insertRecommendProduct(List<Integer> productIds);
+    void insertRecommendProduct(AddRecommendProductReqDTO addRecommendProductReqDTO);
 }

@@ -1,4 +1,4 @@
-package com.xiaozipu.common.enums;
+package com.xiaozipu.common.enums.banner;
 
 /**
  * @author: YinJunJie
