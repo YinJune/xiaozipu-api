@@ -10,7 +10,6 @@
         <module>xiaozipu-merchant</module>
         <module>xiaozipu-admin</module>
         <module>xiaozipu-client</module>
-        <module>xiaozipu-service</module>
         <module>xiaozipu-dao</module>
         <module>xiaozipu-common</module>
         <module>xiaozipu-third</module>
