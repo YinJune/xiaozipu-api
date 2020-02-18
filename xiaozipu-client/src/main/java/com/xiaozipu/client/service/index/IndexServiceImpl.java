@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.index;
 
-import com.xiaozipu.client.enums.RankingListTypeEnum;
+import com.xiaozipu.client.enums.ProductListSortTypeEnum;
 import com.xiaozipu.client.pojo.vo.BannerVO;
 import com.xiaozipu.client.pojo.vo.IndexVO;
 import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
@@ -50,7 +50,7 @@ public class IndexServiceImpl implements IndexService {
         }
 //        BeanUtils.copyProperties(banners, bannerVOList);
         //排行榜
-        List<ProductSummaryDO> rankingListProducts = productService.getRankingList(1, RankingListTypeEnum.SALES_VOLUME.getKey());
+        List<ProductSummaryDO> rankingListProducts = productService.getProductList(1, ProductListSortTypeEnum.SALES_VOLUME.getKey());
         List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
         for (ProductSummaryDO productSummaryDO : rankingListProducts) {
             ProductSummaryVO productSummaryVO = new ProductSummaryVO();

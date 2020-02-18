@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -28,16 +28,20 @@ public class CategoryController {
     /**
      * 分类列表
      *
-     * @param categoryId
+     * @param categoryId 不传 查全部一级分类
      * @return
      */
-    @GetMapping("/category/list/{categoryId}")
-    public ResultInfo getCategoryList(@PathVariable("categoryId") Integer categoryId) {
+    @GetMapping("/anon/category/list")
+    public ResultInfo getCategoryList(@RequestParam(value = "categoryId", required = false) Integer categoryId) {
         ResultInfo resultInfo = new ResultInfo();
         List<TCategory> categoryList = categoryService.getCategoryList(categoryId);
         if (!CollectionUtils.isEmpty(categoryList)) {
             List<CategoryVO> categoryVOList = new ArrayList<>();
-            BeanUtils.copyProperties(categoryList, categoryVOList);
+            for (TCategory category : categoryList) {
+                CategoryVO categoryVO = new CategoryVO();
+                BeanUtils.copyProperties(category, categoryVO);
+                categoryVOList.add(categoryVO);
+            }
             resultInfo.setData(categoryVOList);
         }
         return resultInfo;

@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.category;
 
 import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.CategoryLevelEnum;
 import com.xiaozipu.dao.entity.generator.TCategory;
 import com.xiaozipu.dao.entity.generator.TCategoryExample;
 import com.xiaozipu.dao.mapper.generator.TCategoryMapper;
@@ -31,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<TCategory> categoryList = null;
         TCategoryExample categoryExample = new TCategoryExample();
         if (categoryId == null) {
-            categoryExample.createCriteria().andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+            categoryExample.createCriteria().andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey()).andLevelEqualTo(CategoryLevelEnum.ONE.getKey());
         } else {
             categoryExample.createCriteria().andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey()).andParentIdEqualTo(categoryId);
         }

@@ -19,11 +19,11 @@ public interface ProductService {
     ProductSummaryDO getProductSummaryBoById(Integer productId);
 
     /**
-     * 排行榜
+     * 商品列表
      *
+     * @param currentPage
      * @param type
      * @return
      */
-    List<ProductSummaryDO> getRankingList(Integer currentPage, String type);
-
+    List<ProductSummaryDO> getProductList(Integer currentPage, String type);
 }

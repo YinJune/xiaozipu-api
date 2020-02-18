@@ -15,9 +15,11 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
   redis:
-    host: 118.190.134.0
+    host: 127.0.0.1
     password:
     database: 0
+  profiles:
+    include: config-test
 
 mybatis-plus:
   mapper-locations: classpath:/mappers/*/*.xml

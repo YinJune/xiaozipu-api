@@ -1,10 +1,13 @@
 package com.xiaozipu.client.pojo.vo;
 
+import lombok.Data;
+
 /**
  * @author: YinJunJie
  * @date: 2020/1/22 15:43
  * @description:
  */
+@Data
 public class CategoryVO {
     private Integer id;
     /**

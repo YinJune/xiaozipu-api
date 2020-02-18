@@ -5,13 +5,13 @@ package com.xiaozipu.client.enums;
  * @date: 2020/1/13 13:51
  * @description:
  */
-public enum RankingListTypeEnum {
-    TIME("1","时间"),
-    SALES_VOLUME("2","销量");
+public enum ProductListSortTypeEnum {
+    TIME("1", "时间"),
+    SALES_VOLUME("2", "销量");
     private String key;
     private String value;
 
-    RankingListTypeEnum(String key, String value) {
+    ProductListSortTypeEnum(String key, String value) {
         this.key = key;
         this.value = value;
     }

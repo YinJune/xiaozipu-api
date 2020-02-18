@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(thirdRegisterReqDTO,userThird);
         userThird.setUserId(user.getId());
         //现没有unionid
-//        userThird.setOpenId(thirdRegisterReqDTO.getOpenId());
+        userThird.setThirdUniqueId(thirdRegisterReqDTO.getOpenId());
         userThirdMapper.insertSelective(userThird);
         String token=JwtUtils.generateToken(user.getId(),user.getPhone());
         return token;

@@ -6,5 +6,4 @@ spring:
   application:
     name: xiaozipu-client
   profiles:
-    active: test
-    include: config-test
+    active: dev

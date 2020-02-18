@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.client.enums.RankingListTypeEnum;
+import com.xiaozipu.client.enums.ProductListSortTypeEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
@@ -44,18 +44,19 @@ public class ProductServiceImpl implements ProductService {
 //        return productSummaryVO;
     }
 
+
     /**
-     * 排行榜
+     * 商品列表
      *
      * @param currentPage
      * @param type
      * @return
      */
     @Override
-    public List<ProductSummaryDO> getRankingList(Integer currentPage, String type) {
+    public List<ProductSummaryDO> getProductList(Integer currentPage, String type) {
         PageHelper.startPage(currentPage, 10);
         List<ProductSummaryDO> productSummaryDOList = null;
-        if (RankingListTypeEnum.TIME.getKey().equals(type)) {
+        if (ProductListSortTypeEnum.TIME.getKey().equals(type)) {
             productSummaryDOList = productDao.getProductList("create_time");
         } else {
             //TODO 销量排名
@@ -64,5 +65,4 @@ public class ProductServiceImpl implements ProductService {
 
         return productSummaryDOList;
     }
-
 }

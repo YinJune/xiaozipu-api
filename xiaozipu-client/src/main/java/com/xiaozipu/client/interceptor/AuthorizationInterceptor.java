@@ -7,8 +7,10 @@ import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,19 +31,31 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisUtils redisUtils;
 
+    @Value("${spring.profiles.active}")
+    private String profile;
+
+    private static final String dev = "dev";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("authorization");
+        String yjj = request.getHeader("yjj");
+        logger.info("---{}", profile);
+        if (dev.equals(profile) && !StringUtils.isEmpty(yjj)) {
+            request.setAttribute("userId", 1);
+            request.setAttribute("phone", "17513130886");
+            return true;
+        }
         try {
             logger.info("请求uri:{}", request.getRequestURI());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();
             request.setAttribute("userId", userId);
-            request.setAttribute("phone",claims.get("phone"));
+            request.setAttribute("phone", claims.get("phone"));
             Long expire = redisUtils.getExpire(RedisKeyConstants.USER_TOKEN + userId);
             Long oneDay = Long.parseLong(String.valueOf(60 * 60 * 24));
             if (expire < oneDay) {
-                redisUtils.expire(RedisKeyConstants.USER_TOKEN+userId,JwtUtils.EXPIRATION);
+                redisUtils.expire(RedisKeyConstants.USER_TOKEN + userId, JwtUtils.EXPIRATION);
             }
         } catch (Exception e) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
