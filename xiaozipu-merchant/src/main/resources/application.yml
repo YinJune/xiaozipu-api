@@ -6,4 +6,4 @@ spring:
   application:
     name: xiaozipu-merchant
   profiles:
-    active: dev
+    active: test
