@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.product;
 
+import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TRecommendProduct;
@@ -58,17 +59,16 @@ public class RecommendProductServiceImpl implements RecommendProductService {
      */
     @Override
     public List<ProductSummaryDO> listRecommendProduct(Integer currentPage) {
-//        PageHelper.startPage(currentPage,2);
-        TRecommendProductExample recommendProductExample=new TRecommendProductExample();
+        PageHelper.startPage(currentPage, 10);
+        PageHelper.orderBy("");
+        TRecommendProductExample recommendProductExample = new TRecommendProductExample();
         recommendProductExample.createCriteria().andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey());
-        List<TRecommendProduct> recommendProductList=recommendProductMapper.selectByExample(recommendProductExample);
-//        PageInfo pageInfo=new PageInfo(recommendProductList);
-//        logger.info("---page:{}",pageInfo.getTotal());
 
-        List<ProductSummaryDO> productSummaryDOList =new ArrayList<>();
-        if (!CollectionUtils.isEmpty(recommendProductList)){
-            for (TRecommendProduct recommendProduct:recommendProductList){
-                ProductSummaryDO productSummaryDO =productService.getProductSummaryBoById(recommendProduct.getProductId());
+        List<TRecommendProduct> recommendProductList = recommendProductMapper.selectByExample(recommendProductExample);
+        List<ProductSummaryDO> productSummaryDOList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(recommendProductList)) {
+            for (TRecommendProduct recommendProduct : recommendProductList) {
+                ProductSummaryDO productSummaryDO = productService.getProductSummaryBoById(recommendProduct.getProductId());
                 productSummaryDOList.add(productSummaryDO);
             }
         }

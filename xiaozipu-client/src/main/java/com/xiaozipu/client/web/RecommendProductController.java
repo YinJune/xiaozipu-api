@@ -4,6 +4,8 @@ import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
 import com.xiaozipu.client.service.product.RecommendProductService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -22,6 +24,9 @@ import java.util.List;
 //@Api(tags = "推荐商品接口")
 @RestController
 public class RecommendProductController {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecommendProductController.class);
+
     @Autowired
     private RecommendProductService recommendProductService;
 
@@ -33,6 +38,7 @@ public class RecommendProductController {
     @GetMapping("/product/recommend/list")
     public ResultInfo listRecommendProduct(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage) {
         ResultInfo resultInfo = new ResultInfo();
+        logger.info("推荐商品列表:{}", currentPage);
         List<ProductSummaryDO> productSummaryDOS = recommendProductService.listRecommendProduct(currentPage);
         List<ProductSummaryVO> productSummaryVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(productSummaryDOS)) {

@@ -1,6 +1,5 @@
 package com.xiaozipu.client.service.index;
 
-import com.xiaozipu.client.enums.ProductListSortTypeEnum;
 import com.xiaozipu.client.pojo.vo.BannerVO;
 import com.xiaozipu.client.pojo.vo.IndexVO;
 import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
@@ -8,6 +7,8 @@ import com.xiaozipu.client.service.banner.BannerService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.RecommendProductService;
 import com.xiaozipu.common.enums.banner.BannerPositionEnum;
+import com.xiaozipu.common.enums.product.OrderTypeEnum;
+import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import org.springframework.beans.BeanUtils;
@@ -50,7 +51,7 @@ public class IndexServiceImpl implements IndexService {
         }
 //        BeanUtils.copyProperties(banners, bannerVOList);
         //排行榜
-        List<ProductSummaryDO> rankingListProducts = productService.getProductList(1, ProductListSortTypeEnum.SALES_VOLUME.getKey());
+        List<ProductSummaryDO> rankingListProducts = productService.getProductList(1, SortTypeEnum.SALES_VOLUME.getType(), OrderTypeEnum.DESC.getKey());
         List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
         for (ProductSummaryDO productSummaryDO : rankingListProducts) {
             ProductSummaryVO productSummaryVO = new ProductSummaryVO();

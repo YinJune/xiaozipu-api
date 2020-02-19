@@ -22,8 +22,8 @@ public interface ProductService {
      * 商品列表
      *
      * @param currentPage
-     * @param type
+     * @param sortType
      * @return
      */
-    List<ProductSummaryDO> getProductList(Integer currentPage, String type);
+    List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType);
 }

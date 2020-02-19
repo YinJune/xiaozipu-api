@@ -1,7 +1,7 @@
 package com.xiaozipu.merchant.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.common.enums.RankingListTypeEnum;
+import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.MoneyUtils;
@@ -38,43 +38,6 @@ public class ProductServiceImpl implements ProductService {
     private TProductSpecsMapper specsMapper;
     @Resource
     private TProductImageMapper productImageMapper;
-
-    /**
-     * 根据商品id查询商品简要信息
-     *
-     * @param productId
-     * @return
-     */
-    @Override
-    public ProductSummaryDO getProductSummaryBoById(Integer productId) {
-        return productDao.getProductSummaryById(productId);
-//        ProductSummaryVO productSummaryVO =new ProductSummaryVO();
-//        if (productSummaryDO!=null){
-//            BeanUtils.copyProperties(productSummaryDO, productSummaryVO);
-//        }
-//        return productSummaryVO;
-    }
-
-    /**
-     * 排行榜
-     *
-     * @param currentPage
-     * @param type
-     * @return
-     */
-    @Override
-    public List<ProductSummaryDO> getRankingList(Integer currentPage, String type) {
-        PageHelper.startPage(currentPage, 10);
-        List<ProductSummaryDO> productSummaryDOList = null;
-        if (RankingListTypeEnum.TIME.getKey().equals(type)) {
-            productSummaryDOList = productDao.getProductList("create_time");
-        } else {
-            //TODO 销量排名
-            productSummaryDOList = productDao.getProductList("create_time");
-        }
-
-        return productSummaryDOList;
-    }
 
     /**
      * 添加商品

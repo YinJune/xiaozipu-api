@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.client.enums.ProductListSortTypeEnum;
+import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
@@ -37,11 +37,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductSummaryDO getProductSummaryBoById(Integer productId) {
         return productDao.getProductSummaryById(productId);
-//        ProductSummaryVO productSummaryVO =new ProductSummaryVO();
-//        if (productSummaryDO!=null){
-//            BeanUtils.copyProperties(productSummaryDO, productSummaryVO);
-//        }
-//        return productSummaryVO;
     }
 
 
@@ -49,18 +44,19 @@ public class ProductServiceImpl implements ProductService {
      * 商品列表
      *
      * @param currentPage
-     * @param type
+     * @param sortType
      * @return
      */
     @Override
-    public List<ProductSummaryDO> getProductList(Integer currentPage, String type) {
+    public List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType) {
         PageHelper.startPage(currentPage, 10);
         List<ProductSummaryDO> productSummaryDOList = null;
-        if (ProductListSortTypeEnum.TIME.getKey().equals(type)) {
+        SortTypeEnum sortTypeEnum = SortTypeEnum.getEnumByType(sortType);
+        if (sortTypeEnum.getColumn().equals("volume")) {
+            //TODO 销量 查订单
             productSummaryDOList = productDao.getProductList("create_time");
         } else {
-            //TODO 销量排名
-            productSummaryDOList = productDao.getProductList("create_time");
+            productSummaryDOList = productDao.getProductList(sortTypeEnum.getColumn());
         }
 
         return productSummaryDOList;

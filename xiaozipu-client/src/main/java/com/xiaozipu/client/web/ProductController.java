@@ -27,13 +27,23 @@ public class ProductController {
 
     //    @ApiOperation(value = "排行榜")
 //    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "type", value = "排序类型 1：时间，2：销量", required = true, paramType = "form")
+//            @ApiImplicitParam(name = "sortType", value = "排序类型 1：时间，2：销量", required = true, paramType = "form")
 //    })
+
+    /**
+     * 商品列表
+     *
+     * @param sortType    排序字段 时间 销量 价格
+     * @param currentPage 当前页
+     * @param orderType   排序类型 正序 倒叙
+     * @return
+     */
     @GetMapping("/product/list")
-    public ResultInfo getRankingList(@RequestParam(value = "sortType", defaultValue = "1") String type,
-                                     @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage) {
+    public ResultInfo getRankingList(@RequestParam(value = "sortType", defaultValue = "1") String sortType,
+                                     @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+                                     @RequestParam(value = "orderType", defaultValue = "1") String orderType) {
         ResultInfo resultInfo = new ResultInfo();
-        List<ProductSummaryDO> productSummaryDOS = productService.getProductList(currentPage, type);
+        List<ProductSummaryDO> productSummaryDOS = productService.getProductList(currentPage, sortType, orderType);
         List<ProductSummaryVO> productSummaryResDTOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(productSummaryDOS)) {
             for (ProductSummaryDO productSummaryDO : productSummaryDOS) {
