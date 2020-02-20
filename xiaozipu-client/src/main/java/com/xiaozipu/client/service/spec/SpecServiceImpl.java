@@ -1,12 +1,16 @@
 package com.xiaozipu.client.service.spec;
 
+import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.dao.entity.generator.TSpecName;
+import com.xiaozipu.dao.entity.generator.TSpecNameExample;
 import com.xiaozipu.dao.entity.generator.TSpecValue;
+import com.xiaozipu.dao.entity.generator.TSpecValueExample;
 import com.xiaozipu.dao.mapper.generator.TSpecNameMapper;
 import com.xiaozipu.dao.mapper.generator.TSpecValueMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -40,5 +44,31 @@ public class SpecServiceImpl implements SpecService {
     @Override
     public TSpecValue getSpecValueById(Integer valueId) {
         return specValueMapper.selectByPrimaryKey(valueId);
+    }
+
+    /**
+     * 根据商品id查询规格名
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public List<TSpecName> getSpecNameByProductId(Integer productId) {
+        TSpecNameExample example = new TSpecNameExample();
+        example.createCriteria().andProductIdEqualTo(productId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        return specNameMapper.selectByExample(example);
+    }
+
+    /**
+     * 根据规格名id查询规格值
+     *
+     * @param specNameId
+     * @return
+     */
+    @Override
+    public List<TSpecValue> getSpecValueBySpecNameId(Integer specNameId) {
+        TSpecValueExample example = new TSpecValueExample();
+        example.createCriteria().andSpecIdEqualTo(specNameId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        return specValueMapper.selectByExample(example);
     }
 }

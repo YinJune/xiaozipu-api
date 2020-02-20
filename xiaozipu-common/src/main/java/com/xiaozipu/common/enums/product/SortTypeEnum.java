@@ -8,7 +8,7 @@ package com.xiaozipu.common.enums.product;
 public enum SortTypeEnum {
     TIME("1", "create_time", "时间"),
     SALES_VOLUME("2", "volume", "销量"),
-    PRICE("3", "price", "销量");
+    PRICE("3", "price", "价格");
     private String type;
     private String column;
     private String desc;

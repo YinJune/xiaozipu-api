@@ -1,9 +1,12 @@
 package com.xiaozipu.merchant.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecNameReqDTO;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecValueReqDTO;
 import com.xiaozipu.merchant.service.spec.SpecService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class SpecController {
+    private static final Logger logger = LoggerFactory.getLogger(SpecController.class);
     @Autowired
     private SpecService specService;
 
@@ -28,6 +32,7 @@ public class SpecController {
      */
     @PostMapping("/spec/add/name")
     public ResultInfo addSpecName(@RequestBody AddSpecNameReqDTO addSpecNameReqDto) {
+        logger.info("添加规格名:{}", JSONObject.toJSONString(addSpecNameReqDto));
         ResultInfo resultInfo = new ResultInfo();
         Integer specId = specService.addSpecName(addSpecNameReqDto);
         resultInfo.setData(specId);

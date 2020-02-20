@@ -17,11 +17,13 @@ public interface ProductDao {
      * @param productId
      * @return
      */
-    ProductSummaryDO getProductSummaryById(@Param("productId") Integer productId);    /**
+    ProductSummaryDO getProductSummaryById(@Param("productId") Integer productId);
+
+    /**
      * 根据商品id查询商品简要信息
      *
-     * @param orderColumn
+     * @param
      * @return
      */
-    List<ProductSummaryDO> getProductList(@Param("orderColumn") String orderColumn);
+    List<ProductSummaryDO> getProductList(@Param("categoryId") Integer categoryId);
 }

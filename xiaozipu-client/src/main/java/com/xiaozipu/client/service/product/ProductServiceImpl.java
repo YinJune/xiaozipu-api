@@ -1,15 +1,22 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
+import com.xiaozipu.client.pojo.vo.product.ProductDetailVo;
+import com.xiaozipu.client.pojo.vo.product.ProductImageVo;
+import com.xiaozipu.client.pojo.vo.product.ProductSpecVo;
+import com.xiaozipu.client.service.spec.SpecService;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.dao.entity.generator.*;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
 import com.xiaozipu.dao.mapper.generator.TProductMapper;
-import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
     private TProductMapper productMapper;
     @Resource
     private ProductDao productDao;
-    @Resource
-    private TProductSpecsMapper specsMapper;
+    @Autowired
+    private SpecService specService;
     @Resource
     private TProductImageMapper productImageMapper;
 
@@ -45,20 +52,75 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param currentPage
      * @param sortType
+     * @param orderType   asc desc
      * @return
      */
     @Override
-    public List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType) {
+    public List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType, Integer categoryId) {
         PageHelper.startPage(currentPage, 10);
         List<ProductSummaryDO> productSummaryDOList = null;
         SortTypeEnum sortTypeEnum = SortTypeEnum.getEnumByType(sortType);
         if (sortTypeEnum.getColumn().equals("volume")) {
             //TODO 销量 查订单
-            productSummaryDOList = productDao.getProductList("create_time");
+            productSummaryDOList = productDao.getProductList(categoryId);
         } else {
-            productSummaryDOList = productDao.getProductList(sortTypeEnum.getColumn());
+            PageHelper.orderBy("p." + sortTypeEnum.getColumn() + " " + orderType);
+            productSummaryDOList = productDao.getProductList(categoryId);
         }
 
         return productSummaryDOList;
+    }
+
+    /**
+     * 查询商品详情
+     *
+     * @param productId
+     */
+    @Override
+    public ProductDetailVo getProductDetail(Integer productId) {
+        ProductDetailVo productDetailVo = new ProductDetailVo();
+        //商品信息
+        TProduct product = findProductById(productId);
+        //图片信息
+        List<TProductImage> imageList = findImagesByProductId(productId);
+        List<ProductImageVo> productImageVos = new ArrayList<>();
+        for (TProductImage image : imageList) {
+            ProductImageVo productImageVo = new ProductImageVo();
+            productImageVo.setImageUrl(image.getImageUrl());
+            productImageVo.setType(image.getType());
+            productImageVos.add(productImageVo);
+        }
+        //规格信息
+        List<ProductSpecVo> specVos = new ArrayList<>();
+        List<TSpecName> specNames = specService.getSpecNameByProductId(productId);
+        for (TSpecName name : specNames) {
+            List<TSpecValue> specValues = specService.getSpecValueBySpecNameId(name.getId());
+            ProductSpecVo specVo = new ProductSpecVo();
+            specVo.setName(name.getName());
+            List<String> specValueVos = new ArrayList<>();
+            for (TSpecValue specValue : specValues) {
+                specValueVos.add(specValue.getValue());
+            }
+            specVo.setValues(specValueVos);
+            specVos.add(specVo);
+        }
+        productDetailVo.setProductId(product.getId());
+        productDetailVo.setName(product.getName());
+        productDetailVo.setSummary(product.getName());
+        productDetailVo.setPrice(product.getPrice());
+        productDetailVo.setLineationPrice(product.getLineationPrice());
+        productDetailVo.setProductImageVos(productImageVos);
+        productDetailVo.setProductSpecVos(specVos);
+        return productDetailVo;
+    }
+
+    public TProduct findProductById(Integer productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+
+    public List<TProductImage> findImagesByProductId(Integer productId) {
+        TProductImageExample imageExample = new TProductImageExample();
+        imageExample.createCriteria().andProductIdEqualTo(productId).andStatusEqualTo(StatusEnum.VALID.getKey());
+        return productImageMapper.selectByExample(imageExample);
     }
 }

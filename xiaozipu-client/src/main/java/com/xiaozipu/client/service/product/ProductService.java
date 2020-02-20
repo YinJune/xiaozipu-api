@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.product;
 
+import com.xiaozipu.client.pojo.vo.product.ProductDetailVo;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 
 import java.util.List;
@@ -25,5 +26,12 @@ public interface ProductService {
      * @param sortType
      * @return
      */
-    List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType);
+    List<ProductSummaryDO> getProductList(Integer currentPage, String sortType, String orderType, Integer categoryId);
+
+    /**
+     * 查询商品详情
+     *
+     * @param productId
+     */
+    ProductDetailVo getProductDetail(Integer productId);
 }

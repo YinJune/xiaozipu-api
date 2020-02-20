@@ -51,7 +51,7 @@ public class IndexServiceImpl implements IndexService {
         }
 //        BeanUtils.copyProperties(banners, bannerVOList);
         //排行榜
-        List<ProductSummaryDO> rankingListProducts = productService.getProductList(1, SortTypeEnum.SALES_VOLUME.getType(), OrderTypeEnum.DESC.getKey());
+        List<ProductSummaryDO> rankingListProducts = productService.getProductList(1, SortTypeEnum.SALES_VOLUME.getType(), OrderTypeEnum.DESC.getType(), null);
         List<ProductSummaryVO> rankListProductSummaryVoList = new ArrayList<>();
         for (ProductSummaryDO productSummaryDO : rankingListProducts) {
             ProductSummaryVO productSummaryVO = new ProductSummaryVO();

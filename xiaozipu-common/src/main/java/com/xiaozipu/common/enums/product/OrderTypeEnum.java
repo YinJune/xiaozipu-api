@@ -6,18 +6,27 @@ package com.xiaozipu.common.enums.product;
  * @description:
  */
 public enum OrderTypeEnum {
-    ASC("1", "正序"),
-    DESC("2", "倒序");
-    private String key;
+    ASC("asc", "正序"),
+    DESC("desc", "倒序");
+    private String type;
     private String value;
 
-    OrderTypeEnum(String key, String value) {
-        this.key = key;
+    public static OrderTypeEnum getOrderTypeEnumByType(String type) {
+        for (OrderTypeEnum orderTypeEnum : OrderTypeEnum.values()) {
+            if (orderTypeEnum.getType().equals(type)) {
+                return orderTypeEnum;
+            }
+        }
+        return null;
+    }
+
+    OrderTypeEnum(String type, String value) {
+        this.type = type;
         this.value = value;
     }
 
-    public String getKey() {
-        return key;
+    public String getType() {
+        return type;
     }
 
     public String getValue() {

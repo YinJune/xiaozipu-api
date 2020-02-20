@@ -1,5 +1,6 @@
 package com.xiaozipu.merchant.service.spec;
 
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.dao.entity.generator.TSpecName;
 import com.xiaozipu.dao.entity.generator.TSpecValue;
 import com.xiaozipu.dao.mapper.generator.TSpecNameMapper;
@@ -33,6 +34,7 @@ public class SpecServiceImpl implements SpecService {
         TSpecName specName = new TSpecName();
         specName.setProductId(addSpecNameReqDto.getProductId());
         specName.setName(addSpecNameReqDto.getName());
+        specName.setDeleted(StatusEnum.INVALID.getKey());
         specNameMapper.insertSelective(specName);
         return specName.getId();
     }
@@ -48,6 +50,7 @@ public class SpecServiceImpl implements SpecService {
         TSpecValue specValue = new TSpecValue();
         specValue.setValue(addSpecValueReqDto.getValue());
         specValue.setSpecId(addSpecValueReqDto.getSpecId());
+        specValue.setDeleted(StatusEnum.INVALID.getKey());
         specValueMapper.insertSelective(specValue);
         return specValue.getId();
     }

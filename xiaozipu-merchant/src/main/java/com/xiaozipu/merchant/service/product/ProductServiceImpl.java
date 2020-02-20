@@ -1,7 +1,5 @@
 package com.xiaozipu.merchant.service.product;
 
-import com.github.pagehelper.PageHelper;
-import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.MoneyUtils;
@@ -40,6 +38,17 @@ public class ProductServiceImpl implements ProductService {
     private TProductImageMapper productImageMapper;
 
     /**
+     * 根据商品id查询商品简要信息
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductSummaryDO getProductSummaryBoById(Integer productId) {
+        return productDao.getProductSummaryById(productId);
+    }
+
+    /**
      * 添加商品
      *
      * @param addProductReqDto
@@ -55,6 +64,9 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setName(addProductReqDto.getName());
         product.setCategoryId(addProductReqDto.getCategoryId());
+        product.setStatus(StatusEnum.VALID.getKey());
+        product.setReviewStatus(StatusEnum.INVALID.getKey());
+        product.setDeleted(StatusEnum.INVALID.getKey());
         productMapper.insertSelective(product);
         //插入图片
         List<TProductImage> productImageList = new ArrayList<>();
@@ -66,7 +78,8 @@ public class ProductServiceImpl implements ProductService {
             productImage.setImageUrl(commonKV.getValue());
             productImageList.add(productImage);
         }
-        productImageMapper.batchInsertSelective(productImageList);
+        productImageMapper.batchInsertSelective(productImageList, TProductImage.Column.productId, TProductImage.Column.status,
+                TProductImage.Column.type, TProductImage.Column.imageUrl);
 //        //插入规格
 //        List<TProductSpecs> productSpecsList = new ArrayList<>();
 //        for (AddSpecsReqDTO addSpecsReqDto : addProductReqDto.getAddSpecsReqDTOList()) {

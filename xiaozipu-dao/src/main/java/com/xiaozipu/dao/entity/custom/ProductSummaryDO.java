@@ -16,4 +16,8 @@ public class ProductSummaryDO {
     private String productImageUrl;
     private BigDecimal productPrice;
     private BigDecimal lineationPrice;
+    /**
+     * 商品简介
+     */
+    private String summary;
 }
