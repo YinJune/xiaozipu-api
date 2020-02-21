@@ -34,6 +34,10 @@ public class ProductDetailVo {
      */
     private String summary;
     /**
+     * 描述
+     */
+    private String description;
+    /**
      * 商品规格
      */
     private List<ProductSpecVo> productSpecVos;

@@ -40,9 +40,8 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("authorization");
         String yjj = request.getHeader("yjj");
-        logger.info("---{}", profile);
         if (dev.equals(profile) && !StringUtils.isEmpty(yjj)) {
-            request.setAttribute("userId", 1);
+            request.setAttribute("userId", Integer.parseInt(yjj));
             request.setAttribute("phone", "17513130886");
             return true;
         }

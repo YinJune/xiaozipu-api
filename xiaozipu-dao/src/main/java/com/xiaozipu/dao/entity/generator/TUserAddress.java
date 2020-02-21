@@ -1,34 +1,33 @@
 package com.xiaozipu.dao.entity.generator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class TProduct {
+public class TUserAddress {
     private Integer id;
 
-    private String name;
+    private Integer userId;
 
-    private BigDecimal price;
+    private String recipientMobile;
 
-    private BigDecimal lineationPrice;
+    private String recipientName;
 
-    private String summary;
+    private String province;
 
-    private Integer categoryId;
+    private String city;
 
-    private String status;
+    private String district;
 
-    private String reviewStatus;
+    private String addressDetail;
+
+    private String isDefault;
 
     private String deleted;
 
     private Date createTime;
 
     private Date updateTime;
-
-    private String description;
 
     public Integer getId() {
         return id;
@@ -38,60 +37,68 @@ public class TProduct {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getRecipientMobile() {
+        return recipientMobile;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setRecipientMobile(String recipientMobile) {
+        this.recipientMobile = recipientMobile == null ? null : recipientMobile.trim();
     }
 
-    public BigDecimal getLineationPrice() {
-        return lineationPrice;
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setLineationPrice(BigDecimal lineationPrice) {
-        this.lineationPrice = lineationPrice;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName == null ? null : recipientName.trim();
     }
 
-    public String getSummary() {
-        return summary;
+    public String getProvince() {
+        return province;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setDistrict(String district) {
+        this.district = district == null ? null : district.trim();
     }
 
-    public String getReviewStatus() {
-        return reviewStatus;
+    public String getAddressDetail() {
+        return addressDetail;
     }
 
-    public void setReviewStatus(String reviewStatus) {
-        this.reviewStatus = reviewStatus == null ? null : reviewStatus.trim();
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail == null ? null : addressDetail.trim();
+    }
+
+    public String getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(String isDefault) {
+        this.isDefault = isDefault == null ? null : isDefault.trim();
     }
 
     public String getDeleted() {
@@ -118,27 +125,19 @@ public class TProduct {
         this.updateTime = updateTime;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
     public enum Column {
         id("id", "id", "INTEGER", false),
-        name("name", "name", "VARCHAR", false),
-        price("price", "price", "DECIMAL", false),
-        lineationPrice("lineation_price", "lineationPrice", "DECIMAL", false),
-        summary("summary", "summary", "VARCHAR", false),
-        categoryId("category_id", "categoryId", "INTEGER", false),
-        status("status", "status", "VARCHAR", false),
-        reviewStatus("review_status", "reviewStatus", "VARCHAR", false),
+        userId("user_id", "userId", "INTEGER", false),
+        recipientMobile("recipient_mobile", "recipientMobile", "VARCHAR", false),
+        recipientName("recipient_name", "recipientName", "VARCHAR", false),
+        province("province", "province", "VARCHAR", false),
+        city("city", "city", "VARCHAR", false),
+        district("district", "district", "VARCHAR", false),
+        addressDetail("address_detail", "addressDetail", "VARCHAR", false),
+        isDefault("is_default", "isDefault", "VARCHAR", false),
         deleted("deleted", "deleted", "VARCHAR", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
-        updateTime("update_time", "updateTime", "TIMESTAMP", false),
-        description("description", "description", "LONGVARCHAR", false);
+        updateTime("update_time", "updateTime", "TIMESTAMP", false);
 
         private static final String BEGINNING_DELIMITER = "\"";
 
@@ -183,7 +182,7 @@ public class TProduct {
             return this.getEscapedColumnName() + " ASC";
         }
 
-        public static Column[] excludes(Column ... excludes) {
+        public static Column[] excludes(Column... excludes) {
             ArrayList<Column> columns = new ArrayList<>(Arrays.asList(Column.values()));
             if (excludes != null && excludes.length > 0) {
                 columns.removeAll(new ArrayList<>(Arrays.asList(excludes)));
