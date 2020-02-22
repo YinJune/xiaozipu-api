@@ -17,7 +17,7 @@ public class OssUtils {
     private static final String ACCESS_KEY_ID = "LTAI4Fipvg9bzUaU3W8E8gu1";
     private static final String ACCESS_KEY_SECRET = "O3RZbt0XNK9J01LiFmXNWRIeASBFkl";
     private static final String BUCKET_NAME = "yinjune-ceshi";
-    private static final String PREFIX="http://yinjune-ceshi.oss-cn-beijing.aliyuncs.com/";
+    private static final String PREFIX = "https://yinjune-ceshi.oss-cn-beijing.aliyuncs.com/";
 
     /**
      * @param objectName 上传文件到OSS时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
