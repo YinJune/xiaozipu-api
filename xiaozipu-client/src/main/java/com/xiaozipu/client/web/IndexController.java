@@ -31,9 +31,4 @@ public class IndexController {
         resultInfo.setData(indexVO);
         return resultInfo;
     }
-
-    @GetMapping("/anon/test")
-    public ResultInfo test(){
-        return new ResultInfo();
-    }
 }

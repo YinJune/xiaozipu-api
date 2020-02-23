@@ -59,6 +59,12 @@ public class ProductController {
         return resultInfo;
     }
 
+    /**
+     * 商品详情
+     *
+     * @param productId
+     * @return
+     */
     @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();
