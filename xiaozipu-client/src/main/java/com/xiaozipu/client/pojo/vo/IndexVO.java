@@ -1,5 +1,6 @@
 package com.xiaozipu.client.pojo.vo;
 
+import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import lombok.Data;
 
 import java.util.List;

@@ -8,7 +8,7 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class AddressVo {
+public class AddressVO {
     private Integer id;
     private String recipientName;
     private String recipientMobile;

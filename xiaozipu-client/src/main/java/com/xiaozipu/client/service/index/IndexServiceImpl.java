@@ -2,7 +2,7 @@ package com.xiaozipu.client.service.index;
 
 import com.xiaozipu.client.pojo.vo.BannerVO;
 import com.xiaozipu.client.pojo.vo.IndexVO;
-import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
+import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.service.banner.BannerService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.RecommendProductService;

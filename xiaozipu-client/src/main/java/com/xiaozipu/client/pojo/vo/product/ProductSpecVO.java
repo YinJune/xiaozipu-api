@@ -10,7 +10,7 @@ import java.util.List;
  * @description:
  */
 @Data
-public class ProductSpecVo {
+public class ProductSpecVO {
     /**
      * 规格名
      */

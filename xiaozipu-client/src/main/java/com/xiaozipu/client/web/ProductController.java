@@ -1,7 +1,7 @@
 package com.xiaozipu.client.web;
 
-import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
-import com.xiaozipu.client.pojo.vo.product.ProductDetailVo;
+import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
+import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
@@ -62,7 +62,7 @@ public class ProductController {
     @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();
-        ProductDetailVo productDetailVo = productService.getProductDetail(productId);
+        ProductDetailVO productDetailVo = productService.getProductDetail(productId);
         resultInfo.setData(productDetailVo);
         return resultInfo;
     }

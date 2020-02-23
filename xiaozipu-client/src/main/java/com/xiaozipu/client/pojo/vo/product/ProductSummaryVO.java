@@ -1,4 +1,4 @@
-package com.xiaozipu.client.pojo.vo;
+package com.xiaozipu.client.pojo.vo.product;
 
 import lombok.Data;
 

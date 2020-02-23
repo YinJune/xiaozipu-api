@@ -1,6 +1,6 @@
 package com.xiaozipu.client.web;
 
-import com.xiaozipu.client.pojo.vo.ProductSummaryVO;
+import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.service.product.RecommendProductService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;

@@ -1,9 +1,9 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.client.pojo.vo.product.ProductDetailVo;
-import com.xiaozipu.client.pojo.vo.product.ProductImageVo;
-import com.xiaozipu.client.pojo.vo.product.ProductSpecVo;
+import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
+import com.xiaozipu.client.pojo.vo.product.ProductImageVO;
+import com.xiaozipu.client.pojo.vo.product.ProductSpecVO;
 import com.xiaozipu.client.service.spec.SpecService;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.product.SortTypeEnum;
@@ -77,25 +77,25 @@ public class ProductServiceImpl implements ProductService {
      * @param productId
      */
     @Override
-    public ProductDetailVo getProductDetail(Integer productId) {
-        ProductDetailVo productDetailVo = new ProductDetailVo();
+    public ProductDetailVO getProductDetail(Integer productId) {
+        ProductDetailVO productDetailVo = new ProductDetailVO();
         //商品信息
         TProduct product = findProductById(productId);
         //图片信息
         List<TProductImage> imageList = findImagesByProductId(productId);
-        List<ProductImageVo> productImageVos = new ArrayList<>();
+        List<ProductImageVO> productImageVOS = new ArrayList<>();
         for (TProductImage image : imageList) {
-            ProductImageVo productImageVo = new ProductImageVo();
+            ProductImageVO productImageVo = new ProductImageVO();
             productImageVo.setImageUrl(image.getImageUrl());
             productImageVo.setType(image.getType());
-            productImageVos.add(productImageVo);
+            productImageVOS.add(productImageVo);
         }
         //规格信息
-        List<ProductSpecVo> specVos = new ArrayList<>();
+        List<ProductSpecVO> specVos = new ArrayList<>();
         List<TSpecName> specNames = specService.getSpecNameByProductId(productId);
         for (TSpecName name : specNames) {
             List<TSpecValue> specValues = specService.getSpecValueBySpecNameId(name.getId());
-            ProductSpecVo specVo = new ProductSpecVo();
+            ProductSpecVO specVo = new ProductSpecVO();
             specVo.setName(name.getName());
             List<String> specValueVos = new ArrayList<>();
             for (TSpecValue specValue : specValues) {
@@ -110,8 +110,8 @@ public class ProductServiceImpl implements ProductService {
         productDetailVo.setPrice(product.getPrice());
         productDetailVo.setLineationPrice(product.getLineationPrice());
         productDetailVo.setDescription(product.getDescription());
-        productDetailVo.setProductImageVos(productImageVos);
-        productDetailVo.setProductSpecVos(specVos);
+        productDetailVo.setProductImageVOS(productImageVOS);
+        productDetailVo.setProductSpecVOS(specVos);
         return productDetailVo;
     }
 

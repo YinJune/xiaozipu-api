@@ -11,7 +11,7 @@ import java.util.List;
  * @description:
  */
 @Data
-public class ProductDetailVo {
+public class ProductDetailVO {
     private Integer productId;
     /**
      * 商品名称
@@ -20,7 +20,7 @@ public class ProductDetailVo {
     /**
      * 商品图片
      */
-    private List<ProductImageVo> productImageVos;
+    private List<ProductImageVO> productImageVOS;
     /**
      * 商品价格
      */
@@ -40,5 +40,5 @@ public class ProductDetailVo {
     /**
      * 商品规格
      */
-    private List<ProductSpecVo> productSpecVos;
+    private List<ProductSpecVO> productSpecVOS;
 }

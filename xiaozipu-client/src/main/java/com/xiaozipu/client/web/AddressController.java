@@ -2,7 +2,7 @@ package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.AddressDTO;
-import com.xiaozipu.client.pojo.vo.AddressVo;
+import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.client.service.address.AddressService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
@@ -42,8 +42,8 @@ public class AddressController {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("收货地址列表:{}", userId);
         List<TUserAddress> addressList = addressService.getAddressesByUserId(userId);
-        List<AddressVo> addressVos = BeanCopyUtils.copyListProperties(addressList, AddressVo::new);
-        resultInfo.setData(addressVos);
+        List<AddressVO> addressVOS = BeanCopyUtils.copyListProperties(addressList, AddressVO::new);
+        resultInfo.setData(addressVOS);
         return resultInfo;
     }
 

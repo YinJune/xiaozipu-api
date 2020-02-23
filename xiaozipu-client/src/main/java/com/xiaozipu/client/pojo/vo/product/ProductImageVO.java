@@ -8,7 +8,7 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class ProductImageVo {
+public class ProductImageVO {
     /**
      * 1:主图 2:普通图
      */

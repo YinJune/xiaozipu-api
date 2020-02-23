@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.product;
 
-import com.xiaozipu.client.pojo.vo.product.ProductDetailVo;
+import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 
 import java.util.List;
@@ -33,5 +33,5 @@ public interface ProductService {
      *
      * @param productId
      */
-    ProductDetailVo getProductDetail(Integer productId);
+    ProductDetailVO getProductDetail(Integer productId);
 }
