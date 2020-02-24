@@ -1,14 +1,19 @@
 package com.xiaozipu.client.web;
 
+import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.common.result.ResultInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
 /**
  * @author: YinJunJie
@@ -24,15 +29,36 @@ public class OrderController {
     private OrderService orderService;
 
     /**
-     * 下单
+     * 计算金额
      *
      * @param request
      * @return
      */
     @PostMapping("/order/amount/calculate")
-    public ResultInfo placeOrder(HttpServletRequest request) {
+    public ResultInfo calculateAmount(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
+        logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
         ResultInfo resultInfo = new ResultInfo();
-//        orderService.createOrder();
+        BigDecimal amount = orderService.calculateAmount(calculateAmountDTO);
+        resultInfo.setData(amount);
         return resultInfo;
     }
+
+
+    /**
+     * 下单
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("/order/place")
+    public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
+        Integer userId = (Integer) request.getAttribute("userId");
+        logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
+        ResultInfo resultInfo = new ResultInfo();
+        Integer orderId = orderService.placeOrder(userId, calculateAmountDTO);
+        resultInfo.setData(orderId);
+        return resultInfo;
+    }
+
+
 }
