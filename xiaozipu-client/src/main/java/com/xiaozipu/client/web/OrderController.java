@@ -2,6 +2,7 @@ package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
+import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.common.result.ResultInfo;
 import org.slf4j.Logger;
@@ -51,14 +52,29 @@ public class OrderController {
      * @return
      */
     @PostMapping("/order/place")
-    public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
+    public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
         Integer userId = (Integer) request.getAttribute("userId");
-        logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
+        logger.info("计算商品金额:{}", JSONObject.toJSONString(placeOrderDTO));
         ResultInfo resultInfo = new ResultInfo();
-        Integer orderId = orderService.placeOrder(userId, calculateAmountDTO);
+        Integer orderId = orderService.placeOrder(userId, placeOrderDTO);
         resultInfo.setData(orderId);
         return resultInfo;
     }
 
+    /**
+     * 支付
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("/order/pay")
+    public ResultInfo payOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
+        Integer userId = (Integer) request.getAttribute("userId");
+        logger.info("订单支付:{}", JSONObject.toJSONString(placeOrderDTO));
+        ResultInfo resultInfo = new ResultInfo();
+        Integer orderId = orderService.placeOrder(userId, placeOrderDTO);
+        resultInfo.setData(orderId);
+        return resultInfo;
+    }
 
 }

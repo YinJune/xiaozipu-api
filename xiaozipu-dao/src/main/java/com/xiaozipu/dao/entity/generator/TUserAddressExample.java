@@ -225,73 +225,73 @@ public class TUserAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIsNull() {
-            addCriterion("recipient_mobile is null");
+        public Criteria andRecipientPhoneIsNull() {
+            addCriterion("recipient_phone is null");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIsNotNull() {
-            addCriterion("recipient_mobile is not null");
+        public Criteria andRecipientPhoneIsNotNull() {
+            addCriterion("recipient_phone is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileEqualTo(String value) {
-            addCriterion("recipient_mobile =", value, "recipientMobile");
+        public Criteria andRecipientPhoneEqualTo(String value) {
+            addCriterion("recipient_phone =", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotEqualTo(String value) {
-            addCriterion("recipient_mobile <>", value, "recipientMobile");
+        public Criteria andRecipientPhoneNotEqualTo(String value) {
+            addCriterion("recipient_phone <>", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileGreaterThan(String value) {
-            addCriterion("recipient_mobile >", value, "recipientMobile");
+        public Criteria andRecipientPhoneGreaterThan(String value) {
+            addCriterion("recipient_phone >", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileGreaterThanOrEqualTo(String value) {
-            addCriterion("recipient_mobile >=", value, "recipientMobile");
+        public Criteria andRecipientPhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("recipient_phone >=", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLessThan(String value) {
-            addCriterion("recipient_mobile <", value, "recipientMobile");
+        public Criteria andRecipientPhoneLessThan(String value) {
+            addCriterion("recipient_phone <", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLessThanOrEqualTo(String value) {
-            addCriterion("recipient_mobile <=", value, "recipientMobile");
+        public Criteria andRecipientPhoneLessThanOrEqualTo(String value) {
+            addCriterion("recipient_phone <=", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLike(String value) {
-            addCriterion("recipient_mobile like", value, "recipientMobile");
+        public Criteria andRecipientPhoneLike(String value) {
+            addCriterion("recipient_phone like", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotLike(String value) {
-            addCriterion("recipient_mobile not like", value, "recipientMobile");
+        public Criteria andRecipientPhoneNotLike(String value) {
+            addCriterion("recipient_phone not like", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIn(List<String> values) {
-            addCriterion("recipient_mobile in", values, "recipientMobile");
+        public Criteria andRecipientPhoneIn(List<String> values) {
+            addCriterion("recipient_phone in", values, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotIn(List<String> values) {
-            addCriterion("recipient_mobile not in", values, "recipientMobile");
+        public Criteria andRecipientPhoneNotIn(List<String> values) {
+            addCriterion("recipient_phone not in", values, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileBetween(String value1, String value2) {
-            addCriterion("recipient_mobile between", value1, value2, "recipientMobile");
+        public Criteria andRecipientPhoneBetween(String value1, String value2) {
+            addCriterion("recipient_phone between", value1, value2, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotBetween(String value1, String value2) {
-            addCriterion("recipient_mobile not between", value1, value2, "recipientMobile");
+        public Criteria andRecipientPhoneNotBetween(String value1, String value2) {
+            addCriterion("recipient_phone not between", value1, value2, "recipientPhone");
             return (Criteria) this;
         }
 

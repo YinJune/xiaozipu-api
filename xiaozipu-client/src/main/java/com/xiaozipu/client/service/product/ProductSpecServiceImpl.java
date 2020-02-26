@@ -1,15 +1,17 @@
 package com.xiaozipu.client.service.product;
 
+import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
-import com.xiaozipu.dao.entity.generator.TProductSpecs;
-import com.xiaozipu.dao.entity.generator.TProductSpecsExample;
-import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
+import com.xiaozipu.dao.entity.generator.TProductSpec;
+import com.xiaozipu.dao.entity.generator.TProductSpecExample;
+import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: YinJunJie
@@ -19,7 +21,7 @@ import java.util.List;
 @Service
 public class ProductSpecServiceImpl implements ProductSpecService {
     @Resource
-    private TProductSpecsMapper productSpecsMapper;
+    private TProductSpecMapper productSpecsMapper;
 
     /**
      * 根据商品id查询商品属性
@@ -28,28 +30,39 @@ public class ProductSpecServiceImpl implements ProductSpecService {
      * @return
      */
     @Override
-    public List<TProductSpecs> findSpecByProductId(Integer productId) {
+    public List<TProductSpec> getSpecsByProductId(Integer productId) {
         return null;
     }
 
     /**
      * 计算商品集合金额
      *
-     * @param productSpecIds
+     * @param productSpecQuantities
      * @return
      */
     @Override
-    public BigDecimal calculateAmount(List<Integer> productSpecIds) {
-        TProductSpecsExample example = new TProductSpecsExample();
-        example.createCriteria().andIdIn(productSpecIds);
-        List<TProductSpecs> productSpecsList = productSpecsMapper.selectByExample(example);
-        if (productSpecsList.size() != productSpecIds.size() || CollectionUtils.isEmpty(productSpecsList)) {
+    public BigDecimal calculateAmount(List<ProductSpecQuantity> productSpecQuantities) {
+        TProductSpecExample example = new TProductSpecExample();
+        example.createCriteria().andIdIn(productSpecQuantities.stream().map(p -> p.getProductSpecId()).collect(Collectors.toList()));
+        List<TProductSpec> productSpecsList = productSpecsMapper.selectByExample(example);
+        if (productSpecsList.size() != productSpecQuantities.size() || CollectionUtils.isEmpty(productSpecsList)) {
             throw new BusinessRuntimeException("", "存在无效商品");//TODO
         }
         BigDecimal amount = BigDecimal.ZERO;
-        for (TProductSpecs productSpecs : productSpecsList) {
+        for (TProductSpec productSpecs : productSpecsList) {
             amount = amount.add(productSpecs.getPrice());
         }
         return amount;
+    }
+
+    /**
+     * 获取商品规格byid
+     *
+     * @param productSpecId
+     * @return
+     */
+    @Override
+    public TProductSpec getProductSpecById(Integer productSpecId) {
+        return productSpecsMapper.selectByPrimaryKey(productSpecId);
     }
 }

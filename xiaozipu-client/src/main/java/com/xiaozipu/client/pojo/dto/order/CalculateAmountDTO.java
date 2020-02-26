@@ -14,5 +14,5 @@ public class CalculateAmountDTO {
     /**
      * 商品规格id
      */
-    private List<Integer> productSpecIds;
+    private List<ProductSpecQuantity> productSpecQuantityList;
 }

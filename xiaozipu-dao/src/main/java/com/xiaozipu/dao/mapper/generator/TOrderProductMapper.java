@@ -2,9 +2,7 @@ package com.xiaozipu.dao.mapper.generator;
 
 import com.xiaozipu.dao.entity.generator.TOrderProduct;
 import com.xiaozipu.dao.entity.generator.TOrderProductExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface TOrderProductMapper {

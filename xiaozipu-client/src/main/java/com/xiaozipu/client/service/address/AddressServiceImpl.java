@@ -55,7 +55,7 @@ public class AddressServiceImpl implements AddressService {
     public void addAddress(Integer userId, AddressDTO addressDTO) {
         TUserAddress address = new TUserAddress();
         address.setUserId(userId);
-        address.setRecipientMobile(addressDTO.getRecipientMobile());
+        address.setRecipientPhone(addressDTO.getRecipientMobile());
         address.setRecipientName(addressDTO.getRecipientName());
         address.setProvince(convertProvince(addressDTO.getProvince()));
         address.setCity(convertCity(addressDTO.getCity()));
@@ -75,7 +75,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void updateAddress(AddressDTO addressDTO) {
         TUserAddress address = addressMapper.selectByPrimaryKey(addressDTO.getId());
-        address.setRecipientMobile(addressDTO.getRecipientMobile());
+        address.setRecipientPhone(addressDTO.getRecipientMobile());
         address.setRecipientName(addressDTO.getRecipientName());
         address.setProvince(convertProvince(addressDTO.getProvince()));
         address.setCity(convertCity(addressDTO.getCity()));
@@ -84,6 +84,17 @@ public class AddressServiceImpl implements AddressService {
         address.setIsDefault(addressDTO.getIsDefault());
         address.setDeleted(StatusEnum.INVALID.getKey());
         addressMapper.updateByPrimaryKey(address);
+    }
+
+    /**
+     * 根据id查询地址
+     *
+     * @param addressId
+     * @return
+     */
+    @Override
+    public TUserAddress getAddressById(Integer addressId) {
+        return addressMapper.selectByPrimaryKey(addressId);
     }
 
     /**

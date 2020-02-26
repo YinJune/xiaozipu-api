@@ -2,8 +2,6 @@ package com.xiaozipu.merchant.service.product;
 
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.util.MoneyUtils;
-import com.xiaozipu.dao.entity.generator.TProductSpecs;
-import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
 import com.xiaozipu.merchant.pojo.dto.product.AddSpecsReqDTO;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ import java.util.List;
 @Service
 public class ProductSpecServiceImpl implements ProductSpecService {
     @Resource
-    private TProductSpecsMapper productSpecsMapper;
+    private TProductSpecMapper productSpecsMapper;
 
     /**
      * 添加商品规格
@@ -31,9 +29,9 @@ public class ProductSpecServiceImpl implements ProductSpecService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void addProductSpec(AddProductSpecReqDTO addProductSpecReqDTO) {
-        List<TProductSpecs> productSpecsList = new ArrayList<>();
+        List<TProductSpec> productSpecsList = new ArrayList<>();
         for (AddSpecsReqDTO addSpecsReqDTO : addProductSpecReqDTO.getSpecsReqDTOList()) {
-            TProductSpecs productSpecs = new TProductSpecs();
+            TProductSpec productSpecs = new TProductSpec();
             productSpecs.setProductId(addProductSpecReqDTO.getProductId());
             productSpecs.setSpec(addSpecsReqDTO.getSpecs());
             productSpecs.setPrice(addSpecsReqDTO.getPrice().multiply(MoneyUtils.UNIT));
@@ -44,6 +42,6 @@ public class ProductSpecServiceImpl implements ProductSpecService {
             productSpecs.setSpecImageUrl(addSpecsReqDTO.getSpecImageUrl());
             productSpecsList.add(productSpecs);
         }
-        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpecs.Column.price, TProductSpecs.Column.productId, TProductSpecs.Column.spec, TProductSpecs.Column.costPrice, TProductSpecs.Column.stock, TProductSpecs.Column.status, TProductSpecs.Column.deleted, TProductSpecs.Column.specImageUrl);
+        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.spec, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.specImageUrl);
     }
 }

@@ -2,6 +2,7 @@ package com.xiaozipu.client.service.cart;
 
 import com.xiaozipu.client.pojo.dto.AddCartDTO;
 import com.xiaozipu.client.pojo.dto.DeleteCartDTO;
+import com.xiaozipu.dao.entity.custom.CartProductDO;
 import com.xiaozipu.dao.entity.generator.TShoppingCartProduct;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface ShoppingCartService {
      * @param userId
      * @return
      */
-    List<TShoppingCartProduct> getCartProducts(Integer userId, Integer currentPage);
+    List<CartProductDO> getCartProducts(Integer userId, Integer currentPage);
 
     /**
      * 删除购物车商品

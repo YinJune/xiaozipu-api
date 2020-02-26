@@ -1,27 +1,27 @@
-package com.xiaozipu.client.service.payment;
+package com.xiaozipu.client.service.wechat;
 
-import com.xiaozipu.client.service.wechat.WeChatPayService;
 import com.xiaozipu.dao.entity.generator.TOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author: YinJunJie
- * @date: 2020/2/24 20:51
+ * @date: 2020/2/26 23:10
  * @description:
  */
 @Service
-public class PaymentServiceImpl implements PaymentService {
+public class WeChatPayServiceImpl implements WeChatPayService {
     @Autowired
-    private WeChatPayService weChatPayService;
+    private RestTemplate restTemplate;
 
     /**
-     * 统一下单
+     * 微信支付统一下单
      *
      * @param order
      */
     @Override
     public void unifiedOrder(TOrder order) {
-        weChatPayService.unifiedOrder(order);
+//        restTemplate.postForEntity();
     }
 }

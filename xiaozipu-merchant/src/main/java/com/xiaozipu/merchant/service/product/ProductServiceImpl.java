@@ -9,7 +9,6 @@ import com.xiaozipu.dao.entity.generator.TProductImage;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
 import com.xiaozipu.dao.mapper.generator.TProductMapper;
-import com.xiaozipu.dao.mapper.generator.TProductSpecsMapper;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
@@ -33,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductDao productDao;
     @Resource
-    private TProductSpecsMapper specsMapper;
+    private TProductSpecMapper specsMapper;
     @Resource
     private TProductImageMapper productImageMapper;
 
@@ -81,9 +80,9 @@ public class ProductServiceImpl implements ProductService {
         productImageMapper.batchInsertSelective(productImageList, TProductImage.Column.productId, TProductImage.Column.status,
                 TProductImage.Column.type, TProductImage.Column.imageUrl);
 //        //插入规格
-//        List<TProductSpecs> productSpecsList = new ArrayList<>();
+//        List<TProductSpec> productSpecsList = new ArrayList<>();
 //        for (AddSpecsReqDTO addSpecsReqDto : addProductReqDto.getAddSpecsReqDTOList()) {
-//            TProductSpecs productSpecs = new TProductSpecs();
+//            TProductSpec productSpecs = new TProductSpec();
 //            productSpecs.setProductId(product.getId());
 //            productSpecs.setName(addSpecsReqDto.getSpecName());
 //            productSpecs.setPrice(addSpecsReqDto.getSpecPrice());

@@ -226,6 +226,66 @@ public class TOrderProductExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrderIdIsNull() {
+            addCriterion("order_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdIsNotNull() {
+            addCriterion("order_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdEqualTo(Integer value) {
+            addCriterion("order_id =", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdNotEqualTo(Integer value) {
+            addCriterion("order_id <>", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdGreaterThan(Integer value) {
+            addCriterion("order_id >", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_id >=", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdLessThan(Integer value) {
+            addCriterion("order_id <", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdLessThanOrEqualTo(Integer value) {
+            addCriterion("order_id <=", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdIn(List<Integer> values) {
+            addCriterion("order_id in", values, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdNotIn(List<Integer> values) {
+            addCriterion("order_id not in", values, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdBetween(Integer value1, Integer value2) {
+            addCriterion("order_id between", value1, value2, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_id not between", value1, value2, "orderId");
+            return (Criteria) this;
+        }
+
         public Criteria andProductSpecIdIsNull() {
             addCriterion("product_spec_id is null");
             return (Criteria) this;
@@ -356,62 +416,52 @@ public class TOrderProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuantityEqualTo(String value) {
+        public Criteria andQuantityEqualTo(Integer value) {
             addCriterion("quantity =", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotEqualTo(String value) {
+        public Criteria andQuantityNotEqualTo(Integer value) {
             addCriterion("quantity <>", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityGreaterThan(String value) {
+        public Criteria andQuantityGreaterThan(Integer value) {
             addCriterion("quantity >", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityGreaterThanOrEqualTo(String value) {
+        public Criteria andQuantityGreaterThanOrEqualTo(Integer value) {
             addCriterion("quantity >=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityLessThan(String value) {
+        public Criteria andQuantityLessThan(Integer value) {
             addCriterion("quantity <", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityLessThanOrEqualTo(String value) {
+        public Criteria andQuantityLessThanOrEqualTo(Integer value) {
             addCriterion("quantity <=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityLike(String value) {
-            addCriterion("quantity like", value, "quantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuantityNotLike(String value) {
-            addCriterion("quantity not like", value, "quantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuantityIn(List<String> values) {
+        public Criteria andQuantityIn(List<Integer> values) {
             addCriterion("quantity in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotIn(List<String> values) {
+        public Criteria andQuantityNotIn(List<Integer> values) {
             addCriterion("quantity not in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityBetween(String value1, String value2) {
+        public Criteria andQuantityBetween(Integer value1, Integer value2) {
             addCriterion("quantity between", value1, value2, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotBetween(String value1, String value2) {
+        public Criteria andQuantityNotBetween(Integer value1, Integer value2) {
             addCriterion("quantity not between", value1, value2, "quantity");
             return (Criteria) this;
         }

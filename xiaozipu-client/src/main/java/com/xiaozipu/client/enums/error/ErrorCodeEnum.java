@@ -15,6 +15,7 @@ public enum ErrorCodeEnum {
      * 01公共
      */
     ARGUMENT_INVALID("010000", "参数非法"),
+    METHOD_NOT_SUPPORTED("010001", "参数非法"),
     SYS_ERROR("999999", "系统异常"),
     ;
 

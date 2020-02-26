@@ -12,19 +12,21 @@ public class TOrder {
 
     private Integer userId;
 
-    private BigDecimal amount;
+    private BigDecimal orderAmount;
 
     private BigDecimal payAmount;
 
     private String recipientName;
 
-    private String recipientMobile;
+    private String recipientPhone;
 
     private String recipientAddress;
 
     private String status;
 
     private String payStatus;
+
+    private Date payTime;
 
     private String deleted;
 
@@ -56,12 +58,12 @@ public class TOrder {
         this.userId = userId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getOrderAmount() {
+        return orderAmount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setOrderAmount(BigDecimal orderAmount) {
+        this.orderAmount = orderAmount;
     }
 
     public BigDecimal getPayAmount() {
@@ -80,12 +82,12 @@ public class TOrder {
         this.recipientName = recipientName == null ? null : recipientName.trim();
     }
 
-    public String getRecipientMobile() {
-        return recipientMobile;
+    public String getRecipientPhone() {
+        return recipientPhone;
     }
 
-    public void setRecipientMobile(String recipientMobile) {
-        this.recipientMobile = recipientMobile == null ? null : recipientMobile.trim();
+    public void setRecipientPhone(String recipientPhone) {
+        this.recipientPhone = recipientPhone == null ? null : recipientPhone.trim();
     }
 
     public String getRecipientAddress() {
@@ -110,6 +112,14 @@ public class TOrder {
 
     public void setPayStatus(String payStatus) {
         this.payStatus = payStatus == null ? null : payStatus.trim();
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 
     public String getDeleted() {
@@ -140,13 +150,14 @@ public class TOrder {
         id("id", "id", "INTEGER", false),
         orderCode("order_code", "orderCode", "VARCHAR", false),
         userId("user_id", "userId", "INTEGER", false),
-        amount("amount", "amount", "DECIMAL", false),
+        orderAmount("order_amount", "orderAmount", "DECIMAL", false),
         payAmount("pay_amount", "payAmount", "DECIMAL", false),
         recipientName("recipient_name", "recipientName", "VARCHAR", false),
-        recipientMobile("recipient_mobile", "recipientMobile", "VARCHAR", false),
+        recipientPhone("recipient_phone", "recipientPhone", "VARCHAR", false),
         recipientAddress("recipient_address", "recipientAddress", "VARCHAR", false),
         status("status", "status", "VARCHAR", false),
         payStatus("pay_status", "payStatus", "VARCHAR", false),
+        payTime("pay_time", "payTime", "TIMESTAMP", false),
         deleted("deleted", "deleted", "VARCHAR", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false);

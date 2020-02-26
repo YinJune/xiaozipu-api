@@ -10,11 +10,13 @@ public class TOrderProduct {
 
     private Integer userId;
 
+    private Integer orderId;
+
     private Integer productSpecId;
 
     private BigDecimal price;
 
-    private String quantity;
+    private Integer quantity;
 
     private BigDecimal payPrice;
 
@@ -38,6 +40,14 @@ public class TOrderProduct {
         this.userId = userId;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     public Integer getProductSpecId() {
         return productSpecId;
     }
@@ -54,12 +64,12 @@ public class TOrderProduct {
         this.price = price;
     }
 
-    public String getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity == null ? null : quantity.trim();
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public BigDecimal getPayPrice() {
@@ -89,9 +99,10 @@ public class TOrderProduct {
     public enum Column {
         id("id", "id", "INTEGER", false),
         userId("user_id", "userId", "INTEGER", false),
+        orderId("order_id", "orderId", "INTEGER", false),
         productSpecId("product_spec_id", "productSpecId", "INTEGER", false),
         price("price", "price", "DECIMAL", false),
-        quantity("quantity", "quantity", "VARCHAR", false),
+        quantity("quantity", "quantity", "INTEGER", false),
         payPrice("pay_price", "payPrice", "DECIMAL", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false);

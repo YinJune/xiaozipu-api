@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.product;
 
-import com.xiaozipu.dao.entity.generator.TProductSpecs;
+import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
+import com.xiaozipu.dao.entity.generator.TProductSpec;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,13 +19,21 @@ public interface ProductSpecService {
      * @param productId
      * @return
      */
-    List<TProductSpecs> findSpecByProductId(Integer productId);
+    List<TProductSpec> getSpecsByProductId(Integer productId);
 
     /**
      * 计算商品集合金额
      *
-     * @param productSpecIds
+     * @param productSpecQuantities
      * @return
      */
-    BigDecimal calculateAmount(List<Integer> productSpecIds);
+    BigDecimal calculateAmount(List<ProductSpecQuantity> productSpecQuantities);
+
+    /**
+     * 获取商品规格byid
+     *
+     * @param productSpecId
+     * @return
+     */
+    TProductSpec getProductSpecById(Integer productSpecId);
 }

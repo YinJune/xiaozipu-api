@@ -33,4 +33,12 @@ public interface AddressService {
      * @param addressDTO
      */
     void updateAddress(AddressDTO addressDTO);
+
+    /**
+     * 根据id查询地址
+     *
+     * @param addressId
+     * @return
+     */
+    TUserAddress getAddressById(Integer addressId);
 }

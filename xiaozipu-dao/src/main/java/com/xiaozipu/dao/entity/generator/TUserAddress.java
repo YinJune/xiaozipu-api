@@ -9,7 +9,7 @@ public class TUserAddress {
 
     private Integer userId;
 
-    private String recipientMobile;
+    private String recipientPhone;
 
     private String recipientName;
 
@@ -45,12 +45,12 @@ public class TUserAddress {
         this.userId = userId;
     }
 
-    public String getRecipientMobile() {
-        return recipientMobile;
+    public String getRecipientPhone() {
+        return recipientPhone;
     }
 
-    public void setRecipientMobile(String recipientMobile) {
-        this.recipientMobile = recipientMobile == null ? null : recipientMobile.trim();
+    public void setRecipientPhone(String recipientPhone) {
+        this.recipientPhone = recipientPhone == null ? null : recipientPhone.trim();
     }
 
     public String getRecipientName() {
@@ -128,7 +128,7 @@ public class TUserAddress {
     public enum Column {
         id("id", "id", "INTEGER", false),
         userId("user_id", "userId", "INTEGER", false),
-        recipientMobile("recipient_mobile", "recipientMobile", "VARCHAR", false),
+        recipientPhone("recipient_phone", "recipientPhone", "VARCHAR", false),
         recipientName("recipient_name", "recipientName", "VARCHAR", false),
         province("province", "province", "VARCHAR", false),
         city("city", "city", "VARCHAR", false),

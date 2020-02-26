@@ -4,9 +4,10 @@
     <resultMap id="BaseResultMap" type="com.xiaozipu.dao.entity.generator.TOrderProduct">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
         <result column="product_spec_id" jdbcType="INTEGER" property="productSpecId"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
-        <result column="quantity" jdbcType="VARCHAR" property="quantity"/>
+        <result column="quantity" jdbcType="INTEGER" property="quantity"/>
         <result column="pay_price" jdbcType="DECIMAL" property="payPrice"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
@@ -72,7 +73,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, user_id, product_spec_id, price, quantity, pay_price, create_time, update_time
+    id, user_id, order_id, product_spec_id, price, quantity, pay_price, create_time, 
+    update_time
   </sql>
     <select id="selectByExample" parameterType="com.xiaozipu.dao.entity.generator.TOrderProductExample"
             resultMap="BaseResultMap">
@@ -110,12 +112,12 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into t_order_product (user_id, product_spec_id, price,
-        quantity, pay_price, create_time,
-        update_time)
-        values (#{userId,jdbcType=INTEGER}, #{productSpecId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL},
-        #{quantity,jdbcType=VARCHAR}, #{payPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP},
-        #{updateTime,jdbcType=TIMESTAMP})
+        insert into t_order_product (user_id, order_id, product_spec_id,
+        price, quantity, pay_price,
+        create_time, update_time)
+        values (#{userId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{productSpecId,jdbcType=INTEGER},
+        #{price,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{payPrice,jdbcType=DECIMAL},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.xiaozipu.dao.entity.generator.TOrderProduct">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -125,6 +127,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 user_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
             </if>
             <if test="productSpecId != null">
                 product_spec_id,
@@ -149,6 +154,9 @@
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
             </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
             <if test="productSpecId != null">
                 #{productSpecId,jdbcType=INTEGER},
             </if>
@@ -156,7 +164,7 @@
                 #{price,jdbcType=DECIMAL},
             </if>
             <if test="quantity != null">
-                #{quantity,jdbcType=VARCHAR},
+                #{quantity,jdbcType=INTEGER},
             </if>
             <if test="payPrice != null">
                 #{payPrice,jdbcType=DECIMAL},
@@ -185,6 +193,9 @@
             <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=INTEGER},
             </if>
+            <if test="record.orderId != null">
+                order_id = #{record.orderId,jdbcType=INTEGER},
+            </if>
             <if test="record.productSpecId != null">
                 product_spec_id = #{record.productSpecId,jdbcType=INTEGER},
             </if>
@@ -192,7 +203,7 @@
                 price = #{record.price,jdbcType=DECIMAL},
             </if>
             <if test="record.quantity != null">
-                quantity = #{record.quantity,jdbcType=VARCHAR},
+                quantity = #{record.quantity,jdbcType=INTEGER},
             </if>
             <if test="record.payPrice != null">
                 pay_price = #{record.payPrice,jdbcType=DECIMAL},
@@ -212,9 +223,10 @@
         update t_order_product
         set id = #{record.id,jdbcType=INTEGER},
         user_id = #{record.userId,jdbcType=INTEGER},
+        order_id = #{record.orderId,jdbcType=INTEGER},
         product_spec_id = #{record.productSpecId,jdbcType=INTEGER},
         price = #{record.price,jdbcType=DECIMAL},
-        quantity = #{record.quantity,jdbcType=VARCHAR},
+        quantity = #{record.quantity,jdbcType=INTEGER},
         pay_price = #{record.payPrice,jdbcType=DECIMAL},
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
         update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -228,6 +240,9 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
             </if>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
             <if test="productSpecId != null">
                 product_spec_id = #{productSpecId,jdbcType=INTEGER},
             </if>
@@ -235,7 +250,7 @@
                 price = #{price,jdbcType=DECIMAL},
             </if>
             <if test="quantity != null">
-                quantity = #{quantity,jdbcType=VARCHAR},
+                quantity = #{quantity,jdbcType=INTEGER},
             </if>
             <if test="payPrice != null">
                 pay_price = #{payPrice,jdbcType=DECIMAL},
@@ -252,9 +267,10 @@
     <update id="updateByPrimaryKey" parameterType="com.xiaozipu.dao.entity.generator.TOrderProduct">
     update t_order_product
     set user_id = #{userId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
       product_spec_id = #{productSpecId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
-      quantity = #{quantity,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
       pay_price = #{payPrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
@@ -262,12 +278,13 @@
   </update>
     <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
         insert into t_order_product
-        (user_id, product_spec_id, price, quantity, pay_price, create_time, update_time)
+        (user_id, order_id, product_spec_id, price, quantity, pay_price, create_time, update_time
+        )
         values
         <foreach collection="list" item="item" separator=",">
-            (#{item.userId,jdbcType=INTEGER}, #{item.productSpecId,jdbcType=INTEGER}, #{item.price,jdbcType=DECIMAL},
-            #{item.quantity,jdbcType=VARCHAR}, #{item.payPrice,jdbcType=DECIMAL}, #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP})
+            (#{item.userId,jdbcType=INTEGER}, #{item.orderId,jdbcType=INTEGER}, #{item.productSpecId,jdbcType=INTEGER},
+            #{item.price,jdbcType=DECIMAL}, #{item.quantity,jdbcType=INTEGER}, #{item.payPrice,jdbcType=DECIMAL},
+            #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
         </foreach>
     </insert>
     <insert id="batchInsertSelective" keyColumn="id" keyProperty="list.id" parameterType="map" useGeneratedKeys="true">
@@ -283,6 +300,9 @@
                 <if test="'user_id'.toString() == column.value">
                     #{item.userId,jdbcType=INTEGER}
                 </if>
+                <if test="'order_id'.toString() == column.value">
+                    #{item.orderId,jdbcType=INTEGER}
+                </if>
                 <if test="'product_spec_id'.toString() == column.value">
                     #{item.productSpecId,jdbcType=INTEGER}
                 </if>
@@ -290,7 +310,7 @@
                     #{item.price,jdbcType=DECIMAL}
                 </if>
                 <if test="'quantity'.toString() == column.value">
-                    #{item.quantity,jdbcType=VARCHAR}
+                    #{item.quantity,jdbcType=INTEGER}
                 </if>
                 <if test="'pay_price'.toString() == column.value">
                     #{item.payPrice,jdbcType=DECIMAL}

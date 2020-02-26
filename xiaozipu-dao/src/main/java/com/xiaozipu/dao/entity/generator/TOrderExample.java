@@ -296,63 +296,63 @@ public class TOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andAmountIsNull() {
-            addCriterion("amount is null");
+        public Criteria andOrderAmountIsNull() {
+            addCriterion("order_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andAmountIsNotNull() {
-            addCriterion("amount is not null");
+        public Criteria andOrderAmountIsNotNull() {
+            addCriterion("order_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAmountEqualTo(BigDecimal value) {
-            addCriterion("amount =", value, "amount");
+        public Criteria andOrderAmountEqualTo(BigDecimal value) {
+            addCriterion("order_amount =", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotEqualTo(BigDecimal value) {
-            addCriterion("amount <>", value, "amount");
+        public Criteria andOrderAmountNotEqualTo(BigDecimal value) {
+            addCriterion("order_amount <>", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThan(BigDecimal value) {
-            addCriterion("amount >", value, "amount");
+        public Criteria andOrderAmountGreaterThan(BigDecimal value) {
+            addCriterion("order_amount >", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("amount >=", value, "amount");
+        public Criteria andOrderAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("order_amount >=", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThan(BigDecimal value) {
-            addCriterion("amount <", value, "amount");
+        public Criteria andOrderAmountLessThan(BigDecimal value) {
+            addCriterion("order_amount <", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("amount <=", value, "amount");
+        public Criteria andOrderAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("order_amount <=", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountIn(List<BigDecimal> values) {
-            addCriterion("amount in", values, "amount");
+        public Criteria andOrderAmountIn(List<BigDecimal> values) {
+            addCriterion("order_amount in", values, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotIn(List<BigDecimal> values) {
-            addCriterion("amount not in", values, "amount");
+        public Criteria andOrderAmountNotIn(List<BigDecimal> values) {
+            addCriterion("order_amount not in", values, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("amount between", value1, value2, "amount");
+        public Criteria andOrderAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("order_amount between", value1, value2, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("amount not between", value1, value2, "amount");
+        public Criteria andOrderAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("order_amount not between", value1, value2, "orderAmount");
             return (Criteria) this;
         }
 
@@ -486,73 +486,73 @@ public class TOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIsNull() {
-            addCriterion("recipient_mobile is null");
+        public Criteria andRecipientPhoneIsNull() {
+            addCriterion("recipient_phone is null");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIsNotNull() {
-            addCriterion("recipient_mobile is not null");
+        public Criteria andRecipientPhoneIsNotNull() {
+            addCriterion("recipient_phone is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileEqualTo(String value) {
-            addCriterion("recipient_mobile =", value, "recipientMobile");
+        public Criteria andRecipientPhoneEqualTo(String value) {
+            addCriterion("recipient_phone =", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotEqualTo(String value) {
-            addCriterion("recipient_mobile <>", value, "recipientMobile");
+        public Criteria andRecipientPhoneNotEqualTo(String value) {
+            addCriterion("recipient_phone <>", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileGreaterThan(String value) {
-            addCriterion("recipient_mobile >", value, "recipientMobile");
+        public Criteria andRecipientPhoneGreaterThan(String value) {
+            addCriterion("recipient_phone >", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileGreaterThanOrEqualTo(String value) {
-            addCriterion("recipient_mobile >=", value, "recipientMobile");
+        public Criteria andRecipientPhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("recipient_phone >=", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLessThan(String value) {
-            addCriterion("recipient_mobile <", value, "recipientMobile");
+        public Criteria andRecipientPhoneLessThan(String value) {
+            addCriterion("recipient_phone <", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLessThanOrEqualTo(String value) {
-            addCriterion("recipient_mobile <=", value, "recipientMobile");
+        public Criteria andRecipientPhoneLessThanOrEqualTo(String value) {
+            addCriterion("recipient_phone <=", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileLike(String value) {
-            addCriterion("recipient_mobile like", value, "recipientMobile");
+        public Criteria andRecipientPhoneLike(String value) {
+            addCriterion("recipient_phone like", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotLike(String value) {
-            addCriterion("recipient_mobile not like", value, "recipientMobile");
+        public Criteria andRecipientPhoneNotLike(String value) {
+            addCriterion("recipient_phone not like", value, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileIn(List<String> values) {
-            addCriterion("recipient_mobile in", values, "recipientMobile");
+        public Criteria andRecipientPhoneIn(List<String> values) {
+            addCriterion("recipient_phone in", values, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotIn(List<String> values) {
-            addCriterion("recipient_mobile not in", values, "recipientMobile");
+        public Criteria andRecipientPhoneNotIn(List<String> values) {
+            addCriterion("recipient_phone not in", values, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileBetween(String value1, String value2) {
-            addCriterion("recipient_mobile between", value1, value2, "recipientMobile");
+        public Criteria andRecipientPhoneBetween(String value1, String value2) {
+            addCriterion("recipient_phone between", value1, value2, "recipientPhone");
             return (Criteria) this;
         }
 
-        public Criteria andRecipientMobileNotBetween(String value1, String value2) {
-            addCriterion("recipient_mobile not between", value1, value2, "recipientMobile");
+        public Criteria andRecipientPhoneNotBetween(String value1, String value2) {
+            addCriterion("recipient_phone not between", value1, value2, "recipientPhone");
             return (Criteria) this;
         }
 
@@ -763,6 +763,66 @@ public class TOrderExample {
 
         public Criteria andPayStatusNotBetween(String value1, String value2) {
             addCriterion("pay_status not between", value1, value2, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIsNull() {
+            addCriterion("pay_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIsNotNull() {
+            addCriterion("pay_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeEqualTo(Date value) {
+            addCriterion("pay_time =", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotEqualTo(Date value) {
+            addCriterion("pay_time <>", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThan(Date value) {
+            addCriterion("pay_time >", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("pay_time >=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThan(Date value) {
+            addCriterion("pay_time <", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThanOrEqualTo(Date value) {
+            addCriterion("pay_time <=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIn(List<Date> values) {
+            addCriterion("pay_time in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotIn(List<Date> values) {
+            addCriterion("pay_time not in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeBetween(Date value1, Date value2) {
+            addCriterion("pay_time between", value1, value2, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotBetween(Date value1, Date value2) {
+            addCriterion("pay_time not between", value1, value2, "payTime");
             return (Criteria) this;
         }
 

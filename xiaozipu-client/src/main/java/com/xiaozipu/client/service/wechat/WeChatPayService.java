@@ -1,15 +1,15 @@
-package com.xiaozipu.client.service.payment;
+package com.xiaozipu.client.service.wechat;
 
 import com.xiaozipu.dao.entity.generator.TOrder;
 
 /**
  * @author: YinJunJie
- * @date: 2020/2/24 20:50
+ * @date: 2020/2/26 23:09
  * @description:
  */
-public interface PaymentService {
+public interface WeChatPayService {
     /**
-     * 统一下单
+     * 微信支付统一下单
      *
      * @param order
      */

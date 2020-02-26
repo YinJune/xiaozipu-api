@@ -12,7 +12,7 @@ public class CartProductVO extends ProductSummaryVO {
     /**
      * 购物车的id
      */
-    private Integer id;
+    private Integer cartId;
     /**
      * 商品规格id
      */

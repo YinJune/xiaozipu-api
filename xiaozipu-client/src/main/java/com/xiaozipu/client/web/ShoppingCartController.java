@@ -7,7 +7,7 @@ import com.xiaozipu.client.pojo.vo.product.CartProductVO;
 import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
-import com.xiaozipu.dao.entity.generator.TShoppingCartProduct;
+import com.xiaozipu.dao.entity.custom.CartProductDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +52,8 @@ public class ShoppingCartController {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("购物车商品列表:{}", userId);
         ResultInfo resultInfo = new ResultInfo();
-        List<TShoppingCartProduct> products = shoppingCartService.getCartProducts(userId, currentPage);
-        List<CartProductVO> productVOS = BeanCopyUtils.copyListProperties(products, CartProductVO::new);
+        List<CartProductDO> productDOS = shoppingCartService.getCartProducts(userId, currentPage);
+        List<CartProductVO> productVOS = BeanCopyUtils.copyListProperties(productDOS, CartProductVO::new);
         resultInfo.setData(productVOS);
         return resultInfo;
     }

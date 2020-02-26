@@ -3,8 +3,10 @@ package com.xiaozipu.client.service.cart;
 import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.pojo.dto.AddCartDTO;
 import com.xiaozipu.client.pojo.dto.DeleteCartDTO;
+import com.xiaozipu.dao.entity.custom.CartProductDO;
 import com.xiaozipu.dao.entity.generator.TShoppingCartProduct;
 import com.xiaozipu.dao.entity.generator.TShoppingCartProductExample;
+import com.xiaozipu.dao.mapper.custom.ShoppingCartDao;
 import com.xiaozipu.dao.mapper.generator.TShoppingCartProductMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,8 @@ import java.util.List;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Resource
     private TShoppingCartProductMapper cartMapper;
+    @Resource
+    private ShoppingCartDao shoppingCartDao;
 
     /**
      * 根据商品id查询购物车记录
@@ -72,11 +76,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * @return
      */
     @Override
-    public List<TShoppingCartProduct> getCartProducts(Integer userId, Integer currentPage) {
+    public List<CartProductDO> getCartProducts(Integer userId, Integer currentPage) {
         PageHelper.startPage(currentPage, 10);
-        TShoppingCartProductExample example = new TShoppingCartProductExample();
-        example.createCriteria().andUserIdEqualTo(userId);
-        return cartMapper.selectByExample(example);
+        List<CartProductDO> cartProductVOS = shoppingCartDao.getCartProducts(userId);
+        return cartProductVOS;
     }
 
     /**

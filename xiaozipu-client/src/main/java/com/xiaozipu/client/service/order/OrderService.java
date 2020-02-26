@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.order;
 
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
+import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 
 import java.math.BigDecimal;
 
@@ -21,8 +22,8 @@ public interface OrderService {
     /**
      * 下单
      *
-     * @param calculateAmountDTO
+     * @param placeOrderDTO
      * @return
      */
-    Integer placeOrder(Integer userId, CalculateAmountDTO calculateAmountDTO);
+    Integer placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO);
 }
