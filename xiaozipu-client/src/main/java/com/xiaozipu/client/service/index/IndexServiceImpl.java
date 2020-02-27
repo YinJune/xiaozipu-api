@@ -6,7 +6,6 @@ import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.service.banner.BannerService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.RecommendProductService;
-import com.xiaozipu.common.enums.banner.BannerPositionEnum;
 import com.xiaozipu.common.enums.product.OrderTypeEnum;
 import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.common.util.BeanCopyUtils;
@@ -42,7 +41,7 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public IndexVO getIndexData() {
         //banner
-        List<TBanner> banners = bannerService.listBannerByPosition(BannerPositionEnum.INDEX_TOP.getPosition());
+        List<TBanner> banners = bannerService.listIndexBanner();
         List<BannerVO> bannerVOList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(banners)) {
             bannerVOList = BeanCopyUtils.copyListProperties(banners, BannerVO::new);

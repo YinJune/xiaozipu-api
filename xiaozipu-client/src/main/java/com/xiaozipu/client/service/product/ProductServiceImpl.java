@@ -1,12 +1,11 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
-import com.xiaozipu.client.pojo.vo.product.ProductImageVO;
-import com.xiaozipu.client.pojo.vo.product.ProductSpecVO;
+import com.xiaozipu.client.pojo.vo.product.*;
 import com.xiaozipu.client.service.spec.SpecService;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.product.SortTypeEnum;
+import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.dao.entity.generator.*;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
@@ -34,6 +33,8 @@ public class ProductServiceImpl implements ProductService {
     private SpecService specService;
     @Resource
     private TProductImageMapper productImageMapper;
+    @Autowired
+    private ProductSpecService productSpecService;
 
     /**
      * 根据商品id查询商品简要信息
@@ -91,19 +92,19 @@ public class ProductServiceImpl implements ProductService {
             productImageVOS.add(productImageVo);
         }
         //规格信息
-        List<ProductSpecVO> specVos = new ArrayList<>();
+        List<SpecNameValueVO> specVos = new ArrayList<>();
         List<TSpecName> specNames = specService.getSpecNameByProductId(productId);
         for (TSpecName name : specNames) {
             List<TSpecValue> specValues = specService.getSpecValueBySpecNameId(name.getId());
-            ProductSpecVO specVo = new ProductSpecVO();
+            SpecNameValueVO specVo = new SpecNameValueVO();
             specVo.setName(name.getName());
-            List<String> specValueVos = new ArrayList<>();
-            for (TSpecValue specValue : specValues) {
-                specValueVos.add(specValue.getValue());
-            }
+            List<SpecValueVO> specValueVos = BeanCopyUtils.copyListProperties(specValues, SpecValueVO::new);
             specVo.setValues(specValueVos);
             specVos.add(specVo);
         }
+        //商品规格列表
+        List<TProductSpec> productSpecs = productSpecService.getSpecsByProductId(productId);
+        List<ProductSpecVO> productSpecVOS = BeanCopyUtils.copyListProperties(productSpecs, ProductSpecVO::new);
         productDetailVo.setProductId(product.getId());
         productDetailVo.setName(product.getName());
         productDetailVo.setSummary(product.getName());
@@ -111,7 +112,8 @@ public class ProductServiceImpl implements ProductService {
         productDetailVo.setLineationPrice(product.getLineationPrice());
         productDetailVo.setDescription(product.getDescription());
         productDetailVo.setProductImageVOS(productImageVOS);
-        productDetailVo.setProductSpecVOS(specVos);
+        productDetailVo.setSpecNameValueVOS(specVos);
+        productDetailVo.setProductSpecVOS(productSpecVOS);
         return productDetailVo;
     }
 

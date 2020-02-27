@@ -68,7 +68,7 @@ public class SpecServiceImpl implements SpecService {
     @Override
     public List<TSpecValue> getSpecValueBySpecNameId(Integer specNameId) {
         TSpecValueExample example = new TSpecValueExample();
-        example.createCriteria().andSpecIdEqualTo(specNameId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        example.createCriteria().andNameIdEqualTo(specNameId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
         return specValueMapper.selectByExample(example);
     }
 }

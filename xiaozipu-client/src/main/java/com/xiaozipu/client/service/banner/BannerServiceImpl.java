@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.banner;
 
 import com.xiaozipu.client.enums.BannerStatusEnum;
+import com.xiaozipu.common.enums.banner.BannerPositionEnum;
 import com.xiaozipu.dao.entity.generator.TBanner;
 import com.xiaozipu.dao.entity.generator.TBannerExample;
 import com.xiaozipu.dao.mapper.generator.TBannerMapper;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,5 +44,21 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public void insertBanner(TBanner banner) {
         bannerMapper.insertSelective(banner);
+    }
+
+    /**
+     * 首页所有banner
+     *
+     * @return
+     */
+    @Override
+    public List<TBanner> listIndexBanner() {
+        List<String> positions = new ArrayList<>();
+        positions.add(BannerPositionEnum.INDEX_TOP.getPosition());
+        positions.add(BannerPositionEnum.RANK.getPosition());
+        positions.add(BannerPositionEnum.HOT.getPosition());
+        TBannerExample example = new TBannerExample();
+        example.createCriteria().andPositionIn(positions).andStatusEqualTo(BannerStatusEnum.VALID.getKey());
+        return bannerMapper.selectByExample(example);
     }
 }

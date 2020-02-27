@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.product;
 
+import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.generator.TProductSpec;
@@ -31,7 +32,9 @@ public class ProductSpecServiceImpl implements ProductSpecService {
      */
     @Override
     public List<TProductSpec> getSpecsByProductId(Integer productId) {
-        return null;
+        TProductSpecExample example = new TProductSpecExample();
+        example.createCriteria().andProductIdEqualTo(productId).andStatusEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        return productSpecsMapper.selectByExample(example);
     }
 
     /**

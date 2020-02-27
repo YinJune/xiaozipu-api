@@ -2,21 +2,33 @@ package com.xiaozipu.client.pojo.vo.product;
 
 import lombok.Data;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * @author: YinJunJie
- * @date: 2020/2/20 18:20
+ * @date: 2020/2/27 17:57
  * @description:
  */
 @Data
 public class ProductSpecVO {
     /**
-     * 规格名
+     * 商品规格id
      */
-    private String name;
+    private Integer id;
     /**
-     * 规格值
+     * 规格组合
      */
-    private List<String> values;
+    private String spec;
+    /**
+     * 规格图片
+     */
+    private String specImageUrl;
+    /**
+     * 库存
+     */
+    private Integer stock;
+    /**
+     * 商品规格单价
+     */
+    private BigDecimal price;
 }

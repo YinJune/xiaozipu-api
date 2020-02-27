@@ -40,5 +40,9 @@ public class ProductDetailVO {
     /**
      * 商品规格
      */
+    private List<SpecNameValueVO> specNameValueVOS;
+    /**
+     * 商品规格
+     */
     private List<ProductSpecVO> productSpecVOS;
 }

@@ -25,4 +25,11 @@ public interface BannerService {
      * @param banner
      */
     void insertBanner(TBanner banner);
+
+    /**
+     * 首页所有banner
+     *
+     * @return
+     */
+    List<TBanner> listIndexBanner();
 }

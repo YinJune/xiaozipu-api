@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class WxConfig {
     private String appId;
     private String secret;
+    private String mchId;
 
     public String getAppId() {
         return appId;
@@ -28,5 +29,13 @@ public class WxConfig {
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public String getMchId() {
+        return mchId;
+    }
+
+    public void setMchId(String mchId) {
+        this.mchId = mchId;
     }
 }
