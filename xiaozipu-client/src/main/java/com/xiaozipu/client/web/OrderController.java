@@ -5,16 +5,19 @@ import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.dao.entity.custom.OrderListDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -74,6 +77,22 @@ public class OrderController {
         ResultInfo resultInfo = new ResultInfo();
         Integer orderId = orderService.placeOrder(userId, placeOrderDTO);
         resultInfo.setData(orderId);
+        return resultInfo;
+    }
+
+    /**
+     * 订单列表
+     *
+     * @param status 订单状态
+     * @return
+     */
+    @PostMapping("/order/list")
+    public ResultInfo orderList(HttpServletRequest request, @RequestParam(value = "status", required = false) String status, @RequestParam("currentPage") Integer currentPage) {
+        Integer userId = (Integer) request.getAttribute("userId");
+        logger.info("订单列表userId={} status={}", userId, status);
+        ResultInfo resultInfo = new ResultInfo();
+        List<OrderListDO> orderListDOS = orderService.getOrderList(userId, status, currentPage);
+        resultInfo.setData("");
         return resultInfo;
     }
 

@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.order;
 
+import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
@@ -10,10 +11,12 @@ import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
 import com.xiaozipu.common.util.SerialNoUtils;
+import com.xiaozipu.dao.entity.custom.OrderListDO;
 import com.xiaozipu.dao.entity.generator.TOrder;
 import com.xiaozipu.dao.entity.generator.TOrderProduct;
 import com.xiaozipu.dao.entity.generator.TProductSpec;
 import com.xiaozipu.dao.entity.generator.TUserAddress;
+import com.xiaozipu.dao.mapper.custom.OrderDao;
 import com.xiaozipu.dao.mapper.generator.TOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +47,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderProductService orderProductService;
     @Autowired
     private PaymentService paymentService;
+    @Resource
+    private OrderDao orderDao;
 
     /**
      * 计算金额
@@ -97,5 +102,19 @@ public class OrderServiceImpl implements OrderService {
         //
         paymentService.unifiedOrder(order);
         return order.getId();
+    }
+
+    /**
+     * 订单列表
+     *
+     * @param userId
+     * @param status
+     * @param currentPage
+     * @return
+     */
+    @Override
+    public List<OrderListDO> getOrderList(Integer userId, String status, Integer currentPage) {
+        PageHelper.startPage(currentPage, 10);
+        return orderDao.getOrderList(userId, status);
     }
 }

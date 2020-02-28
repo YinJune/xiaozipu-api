@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaozipu.dao.mapper.custom.ProductDao">
+
+    <resultMap id="orderListDO" type="com.xiaozipu.dao.entity.custom.ProductSummaryDO">
+        <id column="id" property="productId"/>
+        <result column="price" property="productPrice"/>
+        <result column="name" property="productName"/>
+        <result column="lineation_price" property="lineationPrice"/>
+        <result column="image_url" property="productImageUrl"/>
+        <result column="summary" property="summary"/>
+    </resultMap>
+
+    <select id="getOrderList" resultMap="orderListDO">
+
+    </select>
+</mapper>

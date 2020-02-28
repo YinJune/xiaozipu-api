@@ -16,6 +16,8 @@ public class IndexVO {
      * banner
      */
     private List<BannerVO> bannerList;
+    private BannerVO hotBanner;
+    private BannerVO rankBanner;
     /**
      * 排行榜商品
      */
