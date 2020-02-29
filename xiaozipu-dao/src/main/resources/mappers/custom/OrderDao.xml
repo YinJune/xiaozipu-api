@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaozipu.dao.mapper.custom.ProductDao">
 
-    <resultMap id="orderListDO" type="com.xiaozipu.dao.entity.custom.ProductSummaryDO">
+    <resultMap id="orderListDO" type="com.xiaozipu.dao.entity.custom.OrderListDO">
         <id column="id" property="productId"/>
         <result column="price" property="productPrice"/>
         <result column="name" property="productName"/>
@@ -12,6 +12,7 @@
     </resultMap>
 
     <select id="getOrderList" resultMap="orderListDO">
-
+SELECT o.* from t_order o LEFT JOIN t_order_product op on op.order_id=o.id LEFT JOIN t_product_spec ps on op.product_spec_id=ps.id
+LEFT JOIN t_product p on ps.product_id = p.id LEFT JOIN t_product_image pi on pi.product_id=p.id and pi.type='1'
     </select>
 </mapper>
