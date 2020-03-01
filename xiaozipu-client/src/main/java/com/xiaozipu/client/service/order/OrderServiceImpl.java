@@ -72,6 +72,9 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
+        //校验库存
+        // 减库存 TODO
+
         TUserAddress address = addressService.getAddressById(placeOrderDTO.getAddressId());
         TOrder order = new TOrder();
         order.setOrderCode(SerialNoUtils.generateSerialNo(SerialNoTypeEnum.SHOP_ORDER));
@@ -99,7 +102,6 @@ public class OrderServiceImpl implements OrderService {
             orderProducts.add(orderProduct);
         }
         orderProductService.batchInsert(orderProducts);
-        //
         paymentService.unifiedOrder(order);
         return order.getId();
     }

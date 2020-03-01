@@ -21,4 +21,5 @@ public class CartProductVO extends ProductSummaryVO {
      * 数量
      */
     private Integer quantity;
+    private Integer stock;
 }

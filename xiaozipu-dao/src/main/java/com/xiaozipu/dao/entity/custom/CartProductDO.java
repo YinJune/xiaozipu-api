@@ -39,4 +39,5 @@ public class CartProductDO {
      * 数量
      */
     private Integer quantity;
+    private Integer stock;
 }

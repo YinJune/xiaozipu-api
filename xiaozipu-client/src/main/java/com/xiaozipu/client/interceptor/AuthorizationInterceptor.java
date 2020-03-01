@@ -49,7 +49,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             logger.info("请求uri:{}", request.getRequestURI());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();
-            request.setAttribute("userId", userId);
+            request.setAttribute("userId", Integer.parseInt(userId));
             request.setAttribute("phone", claims.get("phone"));
             Long expire = redisUtils.getExpire(RedisKeyConstants.USER_TOKEN + userId);
             Long oneDay = Long.parseLong(String.valueOf(60 * 60 * 24));
