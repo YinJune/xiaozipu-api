@@ -9,6 +9,7 @@ import com.xiaozipu.dao.entity.generator.TProductImage;
 import com.xiaozipu.dao.mapper.custom.ProductDao;
 import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
 import com.xiaozipu.dao.mapper.generator.TProductMapper;
+import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;

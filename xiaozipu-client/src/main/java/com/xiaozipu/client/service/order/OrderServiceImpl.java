@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
+import com.xiaozipu.client.pojo.vo.order.OrderDetailVO;
 import com.xiaozipu.client.service.address.AddressService;
 import com.xiaozipu.client.service.payment.PaymentService;
 import com.xiaozipu.client.service.product.ProductSpecService;
@@ -11,6 +12,7 @@ import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
 import com.xiaozipu.common.util.SerialNoUtils;
+import com.xiaozipu.dao.entity.custom.OrderDetailDO;
 import com.xiaozipu.dao.entity.custom.OrderListDO;
 import com.xiaozipu.dao.entity.generator.TOrder;
 import com.xiaozipu.dao.entity.generator.TOrderProduct;
@@ -118,5 +120,18 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderListDO> getOrderList(Integer userId, String status, Integer currentPage) {
         PageHelper.startPage(currentPage, 10);
         return orderDao.getOrderList(userId, status);
+    }
+
+    /**
+     * 订单详情
+     *
+     * @param orderId
+     * @return
+     */
+    @Override
+    public OrderDetailVO getOrderDetail(Integer orderId) {
+        OrderDetailVO orderDetailVO = new OrderDetailVO();
+        OrderDetailDO orderDetailDO = orderDao.getOrderDetail(orderId);
+        return null;
     }
 }

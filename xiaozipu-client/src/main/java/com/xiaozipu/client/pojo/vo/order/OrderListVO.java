@@ -1,5 +1,6 @@
-package com.xiaozipu.dao.entity.custom;
+package com.xiaozipu.client.pojo.vo.order;
 
+import com.xiaozipu.client.pojo.vo.product.CartProductVO;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,11 +9,11 @@ import java.util.List;
 
 /**
  * @author: YinJunJie
- * @date: 2020/2/28 14:24
+ * @date: 2020/3/2 20:40
  * @description:
  */
 @Data
-public class OrderListDO {
+public class OrderListVO {
     /**
      * 订单id
      */
@@ -28,7 +29,7 @@ public class OrderListDO {
     /**
      * 订单商品列表 里边的cartid为空
      */
-    private List<CartProductDO> products;
+    private List<CartProductVO> products;
     /**
      * 订单金额
      */

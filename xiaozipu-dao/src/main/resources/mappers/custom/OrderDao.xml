@@ -3,16 +3,19 @@
 <mapper namespace="com.xiaozipu.dao.mapper.custom.ProductDao">
 
     <resultMap id="orderListDO" type="com.xiaozipu.dao.entity.custom.OrderListDO">
-        <id column="id" property="productId"/>
-        <result column="price" property="productPrice"/>
+        <id column="id" property="orderId"/>
+        <result column="order_code" property="orderCode"/>
         <result column="name" property="productName"/>
-        <result column="lineation_price" property="lineationPrice"/>
-        <result column="image_url" property="productImageUrl"/>
-        <result column="summary" property="summary"/>
+        <result column="order_amount" property="orderAmount"/>
+        <result column="status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <collection property="products" ofType="com.xiaozipu.dao.entity.custom.CartProductDO">
+            <id column="productSpecId" property="productSpecId"/>
+            <result column="image_url" property="productImageUrl"/>
+        </collection>
     </resultMap>
 
     <select id="getOrderList" resultMap="orderListDO">
-SELECT o.* from t_order o LEFT JOIN t_order_product op on op.order_id=o.id LEFT JOIN t_product_spec ps on op.product_spec_id=ps.id
-LEFT JOIN t_product p on ps.product_id = p.id LEFT JOIN t_product_image pi on pi.product_id=p.id and pi.type='1'
+
     </select>
 </mapper>

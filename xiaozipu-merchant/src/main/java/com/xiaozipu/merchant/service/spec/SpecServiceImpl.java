@@ -49,7 +49,7 @@ public class SpecServiceImpl implements SpecService {
     public Integer addSpecValue(AddSpecValueReqDTO addSpecValueReqDto) {
         TSpecValue specValue = new TSpecValue();
         specValue.setValue(addSpecValueReqDto.getValue());
-        specValue.setSpecId(addSpecValueReqDto.getSpecId());
+        specValue.setNameId(addSpecValueReqDto.getNameId());
         specValue.setDeleted(StatusEnum.INVALID.getKey());
         specValueMapper.insertSelective(specValue);
         return specValue.getId();

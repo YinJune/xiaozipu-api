@@ -16,5 +16,5 @@ public class AddSpecValueReqDTO {
     /**
      * 规格id
      */
-    private Integer specId;
+    private Integer nameId;
 }

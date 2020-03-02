@@ -2,6 +2,8 @@ package com.xiaozipu.merchant.service.product;
 
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.util.MoneyUtils;
+import com.xiaozipu.dao.entity.generator.TProductSpec;
+import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
 import com.xiaozipu.merchant.pojo.dto.product.AddSpecsReqDTO;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class ProductSpecServiceImpl implements ProductSpecService {
             TProductSpec productSpecs = new TProductSpec();
             productSpecs.setProductId(addProductSpecReqDTO.getProductId());
             productSpecs.setSpec(addSpecsReqDTO.getSpecs());
+            productSpecs.setName(addSpecsReqDTO.getName());
             productSpecs.setPrice(addSpecsReqDTO.getPrice().multiply(MoneyUtils.UNIT));
             productSpecs.setCostPrice(addSpecsReqDTO.getCostPrice().multiply(MoneyUtils.UNIT));
             productSpecs.setStock(addSpecsReqDTO.getStock());
