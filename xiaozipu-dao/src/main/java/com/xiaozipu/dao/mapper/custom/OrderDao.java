@@ -27,5 +27,5 @@ public interface OrderDao {
      * @param orderId
      * @return
      */
-    OrderDetailDO getOrderDetail(Integer orderId);
+    OrderDetailDO getOrderDetail(@Param("orderId") Integer orderId);
 }

@@ -1,7 +1,8 @@
 package com.xiaozipu.client.pojo.vo.order;
 
-import com.xiaozipu.client.pojo.vo.AddressVO;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 /**
  * @author: YinJunJie
@@ -11,7 +12,17 @@ import lombok.Data;
 @Data
 public class OrderDetailVO extends OrderListVO {
     /**
+     * 支付方式
+     */
+    private String payType;
+    /**
+     * 实付款
+     */
+    private BigDecimal payAmount;
+    /**
      * 地址信息
      */
-    private AddressVO addressVO;
+    private String recipientName;
+    private String recipientMobile;
+    private String addressDetail;
 }

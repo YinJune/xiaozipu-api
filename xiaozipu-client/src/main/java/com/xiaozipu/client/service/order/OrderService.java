@@ -2,7 +2,7 @@ package com.xiaozipu.client.service.order;
 
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
-import com.xiaozipu.client.pojo.vo.order.OrderDetailVO;
+import com.xiaozipu.dao.entity.custom.OrderDetailDO;
 import com.xiaozipu.dao.entity.custom.OrderListDO;
 
 import java.math.BigDecimal;
@@ -46,5 +46,5 @@ public interface OrderService {
      * @param orderId
      * @return
      */
-    OrderDetailVO getOrderDetail(Integer orderId);
+    OrderDetailDO getOrderDetail(Integer orderId);
 }

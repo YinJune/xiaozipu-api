@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @description:
  */
 @Data
-public class OrderDetailDO {
+public class OrderDetailDO extends OrderListDO{
     /**
      * 支付方式
      */
@@ -19,4 +19,7 @@ public class OrderDetailDO {
      * 实付款
      */
     private BigDecimal payAmount;
+    private String recipientName;
+    private String recipientMobile;
+    private String addressDetail;
 }

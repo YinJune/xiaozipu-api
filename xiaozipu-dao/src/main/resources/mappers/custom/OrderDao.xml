@@ -16,6 +16,34 @@
     </resultMap>
 
     <select id="getOrderList" resultMap="orderListDO">
+           SELECT     c.ct,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,     ps.id as productSpecId
+        FROM     t_order o
+         LEFT JOIN t_order_product op ON op.order_id = o.id and o.user_id=#{userId}
+         LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
+         LEFT JOIN t_product p ON ps.product_id = p.id
+         LEFT JOIN (
+             SELECT      count( b.order_id ) ct,      b.order_id
+             FROM      t_order a,      t_order_product b
+             WHERE      a.id = b.order_id
+             GROUP BY     b.order_id
+         ) c ON c.order_id = o.id
+    </select>
 
+    <resultMap id="orderDetailDO" type="com.xiaozipu.dao.entity.custom.OrderDetailDO" extends="orderListDO">
+    <result column="pay_type" property="payType"/>
+    <result column="pay_amount" property="payAmount"/>
+    <result column="recipient_name" property="recipientName"/>
+    <result column="recipient_phone" property="recipientMobile"/>
+    <result column="recipient_address" property="addressDetail"/>
+    </resultMap>
+
+    <select id="getOrderDetail" resultMap="orderDetailDO">
+         SELECT     o.order_code,     o.`status`,     o.order_amount,    o.pay_time,o.pay_type,o.pay_amount
+         o.recipient_name,o.recipient_phone ,o.recipient_address
+          ps.spec_image_url ,     ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
+        FROM     t_order o
+         LEFT JOIN t_order_product op ON op.order_id = o.id
+         LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
+         LEFT JOIN t_product p ON ps.product_id = p.id and o.id=#{orderId}
     </select>
 </mapper>

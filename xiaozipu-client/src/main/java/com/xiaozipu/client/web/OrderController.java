@@ -8,9 +8,11 @@ import com.xiaozipu.client.pojo.vo.order.OrderListVO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
+import com.xiaozipu.dao.entity.custom.OrderDetailDO;
 import com.xiaozipu.dao.entity.custom.OrderListDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -108,7 +110,9 @@ public class OrderController {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("订单详情userId={} orderId={}", userId, orderId);
         ResultInfo resultInfo = new ResultInfo();
-        OrderDetailVO orderDetail = orderService.getOrderDetail(orderId);
+        OrderDetailDO orderDetailDO = orderService.getOrderDetail(orderId);
+        OrderDetailVO orderDetail= new OrderDetailVO();
+        BeanUtils.copyProperties(orderDetailDO,orderDetail);
         resultInfo.setData(orderDetail);
         return resultInfo;
     }

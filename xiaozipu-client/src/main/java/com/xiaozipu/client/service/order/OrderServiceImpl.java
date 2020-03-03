@@ -129,9 +129,8 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public OrderDetailVO getOrderDetail(Integer orderId) {
-        OrderDetailVO orderDetailVO = new OrderDetailVO();
+    public OrderDetailDO getOrderDetail(Integer orderId) {
         OrderDetailDO orderDetailDO = orderDao.getOrderDetail(orderId);
-        return null;
+        return orderDetailDO;
     }
 }
