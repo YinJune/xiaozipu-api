@@ -105,7 +105,7 @@ public class OrderController {
      * @param orderId 订单id
      * @return
      */
-    @PostMapping("/order/detail/#{orderId}")
+    @GetMapping("/order/detail/{orderId}")
     public ResultInfo getOrderDetail(HttpServletRequest request, @PathVariable("orderId") Integer orderId) {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("订单详情userId={} orderId={}", userId, orderId);
