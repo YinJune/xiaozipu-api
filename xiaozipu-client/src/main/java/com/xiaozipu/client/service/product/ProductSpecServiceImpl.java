@@ -46,7 +46,8 @@ public class ProductSpecServiceImpl implements ProductSpecService {
     @Override
     public BigDecimal calculateAmount(List<ProductSpecQuantity> productSpecQuantities) {
         TProductSpecExample example = new TProductSpecExample();
-        example.createCriteria().andIdIn(productSpecQuantities.stream().map(p -> p.getProductSpecId()).collect(Collectors.toList()));
+        List<Integer> ids=productSpecQuantities.stream().map(p -> p.getProductSpecId()).collect(Collectors.toList());
+        example.createCriteria().andIdIn(ids);
         List<TProductSpec> productSpecsList = productSpecsMapper.selectByExample(example);
         if (productSpecsList.size() != productSpecQuantities.size() || CollectionUtils.isEmpty(productSpecsList)) {
             throw new BusinessRuntimeException("", "存在无效商品");//TODO
