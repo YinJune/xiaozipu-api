@@ -1,4 +1,4 @@
-package com.xiaozipu.merchant.shop;
+package com.xiaozipu.merchant.web;
 
 /**
  * @author: YinJunJie

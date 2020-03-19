@@ -31,8 +31,8 @@ public class OssController {
     @PostMapping("/aliyun/oss/file/upload")
     public ResultInfo uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         ResultInfo resultInfo = new ResultInfo();
-        String requestId = ossService.uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes());
-        resultInfo.setData(requestId);
+        String url = ossService.uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes());
+        resultInfo.setData(url);
         return resultInfo;
     }
 }
