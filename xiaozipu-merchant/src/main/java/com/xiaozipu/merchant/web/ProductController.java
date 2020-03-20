@@ -47,4 +47,16 @@ public class ProductController {
         productService.updateProductStatus(productId,status);
         return resultInfo;
     }
+    /**
+     * 商品列表
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("/product/update/status/{productId}/{status}")
+    public ResultInfo getProductList(@PathVariable("productId") Integer productId,@PathVariable("status")String status) {
+        ResultInfo resultInfo = new ResultInfo();
+        productService.updateProductStatus(productId,status);
+        return resultInfo;
+    }
 }

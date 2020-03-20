@@ -27,7 +27,7 @@ public class MerchantController {
     @PostMapping("/register")
     public ResultInfo register(RegisterDTO registerDTO){
         ResultInfo resultInfo=new ResultInfo();
-        merchantService.register(registerDTO);
+//        merchantService.register(registerDTO);
         return resultInfo;
     }
     /**

@@ -12,5 +12,5 @@ public interface MerchantService {
      * 注册
      * @param registerDTO
      */
-    void register(RegisterDTO registerDTO);
+    void register(RegisterDTO registerDTO) throws Exception;
 }
