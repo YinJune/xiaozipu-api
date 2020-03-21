@@ -2,13 +2,13 @@ package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
 import com.xiaozipu.merchant.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -53,10 +53,11 @@ public class ProductController {
      * @param
      * @return
      */
-    @PostMapping("/product/update/status/{productId}/{status}")
-    public ResultInfo getProductList(@PathVariable("productId") Integer productId,@PathVariable("status")String status) {
+    @PostMapping("/product/list")
+    public ResultInfo getProductList(@RequestParam("currentPage")Integer currentPage,@RequestParam("status")String status) {
         ResultInfo resultInfo = new ResultInfo();
-        productService.updateProductStatus(productId,status);
+        List<ProductListVO> productListVOList=productService.getProductList(status);
+        resultInfo.setData(productListVOList);
         return resultInfo;
     }
 }

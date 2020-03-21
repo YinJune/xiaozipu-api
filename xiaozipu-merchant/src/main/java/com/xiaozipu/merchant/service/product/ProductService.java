@@ -2,6 +2,9 @@ package com.xiaozipu.merchant.service.product;
 
 import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
+
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -31,4 +34,11 @@ public interface ProductService {
      * @param status
      */
     void updateProductStatus(Integer productId, String status);
+
+    /**
+     *
+     * @param status
+     * @return
+     */
+    List<ProductListVO> getProductList(String status);
 }

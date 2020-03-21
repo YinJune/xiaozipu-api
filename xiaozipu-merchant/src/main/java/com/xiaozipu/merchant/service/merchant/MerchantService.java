@@ -13,4 +13,11 @@ public interface MerchantService {
      * @param registerDTO
      */
     void register(RegisterDTO registerDTO) throws Exception;
+
+    /**
+     * 登陆
+     * @param registerDTO
+     * @return
+     */
+    String login(RegisterDTO registerDTO);
 }

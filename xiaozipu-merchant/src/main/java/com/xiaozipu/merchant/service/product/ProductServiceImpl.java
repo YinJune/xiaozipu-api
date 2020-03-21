@@ -13,6 +13,7 @@ import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -113,5 +114,15 @@ public class ProductServiceImpl implements ProductService {
         product.setStatus(status);
         product.setUpdateTime(new Date());
         productMapper.updateByPrimaryKeySelective(product);
+    }
+
+    /**
+     * @param status
+     * @return
+     */
+    @Override
+    public List<ProductListVO> getProductList(String status) {
+        productDao.getProductList()
+        return null;
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaozipu.dao.mapper.custom.ShoppingCartDao">
+
+    <resultMap id="productSummaryResult" type="com.xiaozipu.dao.entity.custom.CartProductDO">
+        <id column="cartId" property="cartId"/>
+        <id column="productSpecId" property="productSpecId"/>
+        <result column="productPrice" property="productPrice"/>
+        <result column="productName" property="productName"/>
+        <!--        <result column="lineationPrice" property="lineationPrice"/>-->
+        <result column="productImageUrl" property="productImageUrl"/>
+        <result column="summary" property="summary"/>
+        <result column="quantity" property="quantity"/>
+        <result column="stock" property="stock"/>
+    </resultMap>
+
+    <select id="getCartProducts" resultMap="productSummaryResult">
+    select cart.id as cartId, cart.product_spec_id as productSpecId,ps.price as productPrice,p.name as productName,
+    ps.spec_image_url  as productImageUrl,p.summary,cart.quantity,ps.stock as stock
+     from t_shopping_cart_product cart ,t_product_spec ps,t_product p
+    where cart.product_spec_id=ps.id and ps.product_id=p.id
+     and cart.user_id=#{userId}
+  </select>
+
+</mapper>

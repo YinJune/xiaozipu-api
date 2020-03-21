@@ -25,9 +25,9 @@ public class MerchantController {
      * @return
      */
     @PostMapping("/register")
-    public ResultInfo register(RegisterDTO registerDTO){
+    public ResultInfo register(RegisterDTO registerDTO) throws Exception {
         ResultInfo resultInfo=new ResultInfo();
-//        merchantService.register(registerDTO);
+        merchantService.register(registerDTO);
         return resultInfo;
     }
     /**
@@ -35,8 +35,10 @@ public class MerchantController {
      * @return
      */
     @PostMapping("/login")
-    public ResultInfo login(){
+    public ResultInfo login(RegisterDTO registerDTO){
         ResultInfo resultInfo=new ResultInfo();
+        String token=merchantService.login(registerDTO);
+        resultInfo.setData(token);
         return resultInfo;
     }
 }
