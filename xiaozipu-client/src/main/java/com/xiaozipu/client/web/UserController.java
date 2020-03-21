@@ -6,7 +6,7 @@ import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
 import com.xiaozipu.client.pojo.vo.UserInfoVO;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.dao.entity.generator.TUser;
+import com.xiaozipu.dao.entity.TUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

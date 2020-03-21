@@ -12,12 +12,13 @@ import java.math.BigDecimal;
 @Data
 public class ProductListVO {
     private Integer id;
+    private String name;
     private String code;
     /**
      * 简介
      */
     private String summary;
-    private BigDecimal price;
+    private BigDecimal productPrice;
     private String imageUrl;
     private String status;
 }

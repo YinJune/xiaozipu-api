@@ -1,7 +1,7 @@
 package com.xiaozipu.client.dao.mapper;
 
-import com.xiaozipu.dao.entity.custom.OrderDetailDO;
-import com.xiaozipu.dao.entity.custom.OrderListDO;
+import com.xiaozipu.client.dao.entity.OrderDetailDO;
+import com.xiaozipu.client.dao.entity.OrderListDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

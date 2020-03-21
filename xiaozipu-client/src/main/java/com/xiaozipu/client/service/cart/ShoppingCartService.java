@@ -1,10 +1,11 @@
 package com.xiaozipu.client.service.cart;
 
+import com.xiaozipu.client.dao.entity.CartProductDO;
 import com.xiaozipu.client.pojo.dto.AddCartDTO;
 import com.xiaozipu.client.pojo.dto.DeleteCartDTO;
-import com.xiaozipu.dao.entity.custom.CartProductDO;
-import com.xiaozipu.dao.entity.generator.TShoppingCartProduct;
+import com.xiaozipu.dao.entity.TShoppingCartProduct;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -43,4 +44,19 @@ public interface ShoppingCartService {
      * @param deleteCartDTO
      */
     void deleteProducts(DeleteCartDTO deleteCartDTO);
+
+    /**
+     * 计算购物车金额
+     *
+     * @param cartId
+     * @return
+     */
+    BigDecimal calculateAmount(List<Integer> cartId);
+
+    /**
+     *
+     * @param cartIds
+     * @return
+     */
+    List<CartProductDO> batchGetProductSummary(List<Integer> cartIds);
 }

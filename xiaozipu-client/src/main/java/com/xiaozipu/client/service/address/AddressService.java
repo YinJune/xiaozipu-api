@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.address;
 
 import com.xiaozipu.client.pojo.dto.AddressDTO;
-import com.xiaozipu.dao.entity.generator.TUserAddress;
+import com.xiaozipu.dao.entity.TUserAddress;
 
 import java.util.List;
 
@@ -41,4 +41,11 @@ public interface AddressService {
      * @return
      */
     TUserAddress getAddressById(Integer addressId);
+
+    /**
+     * 默认地址
+     * @param userId
+     * @return
+     */
+    TUserAddress getDefaultAddress(Integer userId);
 }

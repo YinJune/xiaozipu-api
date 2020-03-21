@@ -3,7 +3,7 @@ package com.xiaozipu.client.web;
 import com.xiaozipu.client.pojo.vo.CategoryVO;
 import com.xiaozipu.client.service.category.CategoryService;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.dao.entity.generator.TCategory;
+import com.xiaozipu.dao.entity.TCategory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;

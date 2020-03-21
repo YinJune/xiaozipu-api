@@ -2,7 +2,7 @@ package com.xiaozipu.client.service.user;
 
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
-import com.xiaozipu.dao.entity.generator.TUser;
+import com.xiaozipu.dao.entity.TUser;
 
 /**
  * @author: YinJunJie

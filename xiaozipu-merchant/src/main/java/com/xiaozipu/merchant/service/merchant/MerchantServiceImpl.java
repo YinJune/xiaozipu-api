@@ -2,9 +2,9 @@ package com.xiaozipu.merchant.service.merchant;
 
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.MD5Utils;
-import com.xiaozipu.dao.entity.generator.TMerchant;
-import com.xiaozipu.dao.entity.generator.TMerchantExample;
-import com.xiaozipu.dao.mapper.generator.TMerchantMapper;
+import com.xiaozipu.dao.entity.TMerchant;
+import com.xiaozipu.dao.entity.TMerchantExample;
+import com.xiaozipu.dao.mapper.TMerchantMapper;
 import com.xiaozipu.merchant.pojo.dto.merchant.RegisterDTO;
 import com.xiaozipu.merchant.util.JwtUtils;
 import org.springframework.stereotype.Service;

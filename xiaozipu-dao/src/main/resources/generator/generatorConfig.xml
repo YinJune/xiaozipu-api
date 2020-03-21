@@ -34,22 +34,22 @@
 <!--            <property name="useJSR310Types" value="true"/>-->
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.xiaozipu.dao.entity.generator" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xiaozipu.dao.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置       mapper.xml-->
-        <sqlMapGenerator targetPackage="mappers.generator" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xiaozipu.dao.mapper.generator"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xiaozipu.dao.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
         <!--        <table tableName="t_user" domainObjectName="TUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="t_merchant" enableCountByExample="true" enableUpdateByExample="true"
+        <table tableName="t_product" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>

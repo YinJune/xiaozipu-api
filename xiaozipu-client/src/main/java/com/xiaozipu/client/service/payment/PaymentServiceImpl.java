@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.payment;
 
 import com.xiaozipu.client.service.wechat.WeChatPayService;
-import com.xiaozipu.dao.entity.generator.TOrder;
+import com.xiaozipu.dao.entity.TOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -56,7 +56,7 @@ public class ProductController {
     @PostMapping("/product/list")
     public ResultInfo getProductList(@RequestParam("currentPage")Integer currentPage,@RequestParam("status")String status) {
         ResultInfo resultInfo = new ResultInfo();
-        List<ProductListVO> productListVOList=productService.getProductList(status);
+        List<ProductListVO> productListVOList=productService.getProductList(currentPage,status);
         resultInfo.setData(productListVOList);
         return resultInfo;
     }

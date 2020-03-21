@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.order;
 
-import com.xiaozipu.dao.entity.generator.TOrderProduct;
-import com.xiaozipu.dao.mapper.generator.TOrderProductMapper;
+import com.xiaozipu.dao.entity.TOrderProduct;
+import com.xiaozipu.dao.mapper.TOrderProductMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

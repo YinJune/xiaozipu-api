@@ -3,13 +3,14 @@ package com.xiaozipu.client.web;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
+import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
 import com.xiaozipu.client.pojo.vo.order.OrderDetailVO;
 import com.xiaozipu.client.pojo.vo.order.OrderListVO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
-import com.xiaozipu.dao.entity.custom.OrderDetailDO;
-import com.xiaozipu.dao.entity.custom.OrderListDO;
+import com.xiaozipu.client.dao.entity.OrderDetailDO;
+import com.xiaozipu.client.dao.entity.OrderListDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +47,23 @@ public class OrderController {
         ResultInfo resultInfo = new ResultInfo();
         BigDecimal amount = orderService.calculateAmount(calculateAmountDTO);
         resultInfo.setData(amount);
+        return resultInfo;
+    }
+
+
+    /**
+     * 计算金额
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("/order/confirm/info")
+    public ResultInfo confirmOrderInfo(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
+        logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
+        ResultInfo resultInfo = new ResultInfo();
+        Integer userId= (Integer) request.getAttribute("userId");
+        ConfirmOrderInfoVO confirmOrderInfoVO =orderService.confirmOrderInfo(userId,calculateAmountDTO);
+        resultInfo.setData(confirmOrderInfoVO);
         return resultInfo;
     }
 

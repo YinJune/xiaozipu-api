@@ -1,18 +1,20 @@
 package com.xiaozipu.client.service.cart;
 
 import com.github.pagehelper.PageHelper;
+import com.xiaozipu.client.dao.entity.CartProductDO;
+import com.xiaozipu.client.dao.mapper.ShoppingCartDao;
 import com.xiaozipu.client.pojo.dto.AddCartDTO;
 import com.xiaozipu.client.pojo.dto.DeleteCartDTO;
-import com.xiaozipu.dao.entity.custom.CartProductDO;
-import com.xiaozipu.dao.entity.generator.TShoppingCartProduct;
-import com.xiaozipu.dao.entity.generator.TShoppingCartProductExample;
-import com.xiaozipu.dao.mapper.custom.ShoppingCartDao;
-import com.xiaozipu.dao.mapper.generator.TShoppingCartProductMapper;
+
+import com.xiaozipu.dao.entity.TShoppingCartProduct;
+import com.xiaozipu.dao.entity.TShoppingCartProductExample;
+import com.xiaozipu.dao.mapper.TShoppingCartProductMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -95,4 +97,24 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
     }
 
+    /**
+     * 计算购物车金额
+     *
+     * @param cartIds
+     * @return
+     */
+    @Override
+    public BigDecimal calculateAmount(List<Integer> cartIds) {
+        BigDecimal orderAmount=shoppingCartDao.calculateAmount(cartIds);
+        return orderAmount;
+    }
+
+    /**
+     * @param cartIds
+     * @return
+     */
+    @Override
+    public List<CartProductDO> batchGetProductSummary(List<Integer> cartIds) {
+        return shoppingCartDao.batchGetProductSummary(cartIds);
+    }
 }

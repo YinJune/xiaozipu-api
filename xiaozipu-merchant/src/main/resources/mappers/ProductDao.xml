@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaozipu.merchant.dao.mapper.ProductDao">
+
+    <resultMap id="productListResult" type="com.xiaozipu.merchant.dao.entity.ProductListDO">
+        <id column="id" property="productId"/>
+        <result column="price" property="productPrice"/>
+        <result column="code" property="code"/>
+        <result column="name" property="productName"/>
+        <result column="lineation_price" property="lineationPrice"/>
+        <result column="image_url" property="productImageUrl"/>
+        <result column="summary" property="summary"/>
+    </resultMap>
+
+    <select id="getProductList" resultMap="productListResult">
+    select p.id,p.price,p.name, p.lineation_price,pi.image_url from t_product p left join t_product_image pi
+    on p.id=pi.product_id where p.status=#{status} and pi.type ='1'
+  </select>
+</mapper>

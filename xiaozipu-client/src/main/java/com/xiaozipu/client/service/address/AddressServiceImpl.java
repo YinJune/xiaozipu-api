@@ -3,11 +3,11 @@ package com.xiaozipu.client.service.address;
 import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.AddressDTO;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
-import com.xiaozipu.dao.entity.generator.*;
-import com.xiaozipu.dao.mapper.generator.TCityMapper;
-import com.xiaozipu.dao.mapper.generator.TDistrictMapper;
-import com.xiaozipu.dao.mapper.generator.TProvinceMapper;
-import com.xiaozipu.dao.mapper.generator.TUserAddressMapper;
+import com.xiaozipu.dao.entity.*;
+import com.xiaozipu.dao.mapper.TCityMapper;
+import com.xiaozipu.dao.mapper.TDistrictMapper;
+import com.xiaozipu.dao.mapper.TProvinceMapper;
+import com.xiaozipu.dao.mapper.TUserAddressMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -143,5 +143,22 @@ public class AddressServiceImpl implements AddressService {
             throw new BusinessRuntimeException("", "城市编码非法");
         }
         return districts.get(0).getDistrict();
+    }
+
+    /**
+     * 默认地址
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public TUserAddress getDefaultAddress(Integer userId) {
+        TUserAddressExample example=new TUserAddressExample();
+        example.createCriteria().andIsDefaultEqualTo(StatusEnum.VALID.getKey()).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        List<TUserAddress> addresses=addressMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(addresses)){
+            return null;
+        }
+        return addresses.get(0);
     }
 }

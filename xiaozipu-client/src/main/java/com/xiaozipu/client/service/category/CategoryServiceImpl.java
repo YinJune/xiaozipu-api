@@ -2,9 +2,9 @@ package com.xiaozipu.client.service.category;
 
 import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.common.enums.CategoryLevelEnum;
-import com.xiaozipu.dao.entity.generator.TCategory;
-import com.xiaozipu.dao.entity.generator.TCategoryExample;
-import com.xiaozipu.dao.mapper.generator.TCategoryMapper;
+import com.xiaozipu.dao.entity.TCategory;
+import com.xiaozipu.dao.entity.TCategoryExample;
+import com.xiaozipu.dao.mapper.TCategoryMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

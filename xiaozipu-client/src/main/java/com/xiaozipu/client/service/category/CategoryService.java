@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.category;
 
-import com.xiaozipu.dao.entity.generator.TCategory;
+import com.xiaozipu.dao.entity.TCategory;
 
 import java.util.List;
 

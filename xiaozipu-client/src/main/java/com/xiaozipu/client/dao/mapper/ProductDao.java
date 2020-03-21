@@ -1,6 +1,6 @@
 package com.xiaozipu.client.dao.mapper;
 
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

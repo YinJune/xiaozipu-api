@@ -3,9 +3,9 @@ package com.xiaozipu.client.service.product;
 import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
-import com.xiaozipu.dao.entity.generator.TProductSpec;
-import com.xiaozipu.dao.entity.generator.TProductSpecExample;
-import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
+import com.xiaozipu.dao.entity.TProductSpec;
+import com.xiaozipu.dao.entity.TProductSpecExample;
+import com.xiaozipu.dao.mapper.TProductSpecMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -66,7 +66,7 @@ public class ProductSpecServiceImpl implements ProductSpecService {
      * @return
      */
     @Override
-    public TProductSpec getProductSpecById(Integer productSpecId) {
+    public TProductSpec getById(Integer productSpecId) {
         return productSpecsMapper.selectByPrimaryKey(productSpecId);
     }
 }

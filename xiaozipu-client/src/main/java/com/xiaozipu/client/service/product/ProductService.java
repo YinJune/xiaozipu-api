@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.product;
 
 import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 
 import java.util.List;
 

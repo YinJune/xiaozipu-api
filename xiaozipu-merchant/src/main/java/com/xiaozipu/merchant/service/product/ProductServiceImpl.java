@@ -1,15 +1,17 @@
 package com.xiaozipu.merchant.service.product;
 
+import com.github.pagehelper.PageHelper;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
+import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.common.util.MoneyUtils;
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
-import com.xiaozipu.dao.entity.generator.TProduct;
-import com.xiaozipu.dao.entity.generator.TProductImage;
-import com.xiaozipu.dao.mapper.custom.ProductDao;
-import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
-import com.xiaozipu.dao.mapper.generator.TProductMapper;
-import com.xiaozipu.dao.mapper.generator.TProductSpecMapper;
+import com.xiaozipu.dao.entity.TProduct;
+import com.xiaozipu.dao.entity.TProductImage;
+import com.xiaozipu.dao.mapper.TProductImageMapper;
+import com.xiaozipu.dao.mapper.TProductMapper;
+import com.xiaozipu.dao.mapper.TProductSpecMapper;
+import com.xiaozipu.merchant.dao.entity.ProductListDO;
+import com.xiaozipu.merchant.dao.mapper.ProductDao;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
@@ -38,16 +40,6 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private TProductImageMapper productImageMapper;
 
-    /**
-     * 根据商品id查询商品简要信息
-     *
-     * @param productId
-     * @return
-     */
-    @Override
-    public ProductSummaryDO getProductSummaryBoById(Integer productId) {
-        return productDao.getProductSummaryById(productId);
-    }
 
     /**
      * 添加商品
@@ -81,20 +73,6 @@ public class ProductServiceImpl implements ProductService {
         }
         productImageMapper.batchInsertSelective(productImageList, TProductImage.Column.productId, TProductImage.Column.status,
                 TProductImage.Column.type, TProductImage.Column.imageUrl);
-//        //插入规格
-//        List<TProductSpec> productSpecsList = new ArrayList<>();
-//        for (AddSpecsReqDTO addSpecsReqDto : addProductReqDto.getAddSpecsReqDTOList()) {
-//            TProductSpec productSpecs = new TProductSpec();
-//            productSpecs.setProductId(product.getId());
-//            productSpecs.setName(addSpecsReqDto.getSpecName());
-//            productSpecs.setPrice(addSpecsReqDto.getSpecPrice());
-//            productSpecs.setStock(addSpecsReqDto.getStock());
-//            productSpecs.setCostPrice(addSpecsReqDto.getCostPrice());
-//            productSpecs.setStatus(StatusEnum.VALID.getKey());
-//            productSpecs.setDeleted(StatusEnum.INVALID.getKey());
-//            productSpecsList.add(productSpecs);
-//        }
-//        specsMapper.batchInsertSelective(productSpecsList);
         return product.getId();
     }
 
@@ -121,8 +99,10 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<ProductListVO> getProductList(String status) {
-        productDao.getProductList()
-        return null;
+    public List<ProductListVO> getProductList(Integer currentPage,String status) {
+        PageHelper.startPage(currentPage,10);
+        List<ProductListDO> productListDOS= productDao.getProductList(status);
+        List<ProductListVO> productListVOS=BeanCopyUtils.copyListProperties(productListDOS,ProductListVO::new);
+        return productListVOS;
     }
 }

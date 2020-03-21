@@ -1,9 +1,9 @@
 package com.xiaozipu.merchant.service.category;
 
 import com.xiaozipu.common.enums.StatusEnum;
-import com.xiaozipu.dao.entity.generator.TCategory;
-import com.xiaozipu.dao.entity.generator.TCategoryExample;
-import com.xiaozipu.dao.mapper.generator.TCategoryMapper;
+import com.xiaozipu.dao.entity.TCategory;
+import com.xiaozipu.dao.entity.TCategoryExample;
+import com.xiaozipu.dao.mapper.TCategoryMapper;
 import com.xiaozipu.merchant.pojo.dto.category.AddCategoryReqDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

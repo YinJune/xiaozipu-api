@@ -1,16 +1,16 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
+import com.xiaozipu.client.dao.mapper.ProductDao;
 import com.xiaozipu.client.pojo.vo.product.*;
 import com.xiaozipu.client.service.spec.SpecService;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.product.SortTypeEnum;
 import com.xiaozipu.common.util.BeanCopyUtils;
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
-import com.xiaozipu.dao.entity.generator.*;
-import com.xiaozipu.dao.mapper.custom.ProductDao;
-import com.xiaozipu.dao.mapper.generator.TProductImageMapper;
-import com.xiaozipu.dao.mapper.generator.TProductMapper;
+import com.xiaozipu.dao.entity.*;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
+import com.xiaozipu.dao.mapper.TProductImageMapper;
+import com.xiaozipu.dao.mapper.TProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

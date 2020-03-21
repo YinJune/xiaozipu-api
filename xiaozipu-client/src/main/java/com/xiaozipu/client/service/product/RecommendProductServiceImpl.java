@@ -2,10 +2,10 @@ package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.enums.StatusEnum;
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
-import com.xiaozipu.dao.entity.generator.TRecommendProduct;
-import com.xiaozipu.dao.entity.generator.TRecommendProductExample;
-import com.xiaozipu.dao.mapper.generator.TRecommendProductMapper;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
+import com.xiaozipu.dao.entity.TRecommendProduct;
+import com.xiaozipu.dao.entity.TRecommendProductExample;
+import com.xiaozipu.dao.mapper.TRecommendProductMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

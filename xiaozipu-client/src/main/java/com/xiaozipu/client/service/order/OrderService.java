@@ -2,8 +2,9 @@ package com.xiaozipu.client.service.order;
 
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
-import com.xiaozipu.dao.entity.custom.OrderDetailDO;
-import com.xiaozipu.dao.entity.custom.OrderListDO;
+import com.xiaozipu.client.dao.entity.OrderDetailDO;
+import com.xiaozipu.client.dao.entity.OrderListDO;
+import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -47,4 +48,12 @@ public interface OrderService {
      * @return
      */
     OrderDetailDO getOrderDetail(Integer orderId);
+
+    /**
+     * 确认订单页信息
+     *
+     * @param calculateAmountDTO
+     * @return
+     */
+    ConfirmOrderInfoVO confirmOrderInfo(Integer userId, CalculateAmountDTO calculateAmountDTO);
 }

@@ -4,7 +4,7 @@ import com.xiaozipu.admin.dto.req.AddBannerReqDTO;
 import com.xiaozipu.admin.service.banner.BannerService;
 import com.xiaozipu.common.enums.banner.BannerStatusEnum;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.dao.entity.generator.TBanner;
+import com.xiaozipu.dao.entity.TBanner;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

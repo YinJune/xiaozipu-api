@@ -1,7 +1,7 @@
 //package com.xiaozipu.client.banner;
 //
 //import com.xiaozipu.client.service.product.RecommendProductService;
-//import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+//import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 //import org.junit.runner.RunWith;
 //import org.mybatis.spring.annotation.MapperScan;
 //import org.springframework.beans.factory.annotation.Autowired;

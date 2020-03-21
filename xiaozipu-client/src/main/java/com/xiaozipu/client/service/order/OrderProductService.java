@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.order;
 
-import com.xiaozipu.dao.entity.generator.TOrderProduct;
+import com.xiaozipu.dao.entity.TOrderProduct;
 
 import java.util.List;
 

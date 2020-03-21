@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.wechat;
 
-import com.xiaozipu.dao.entity.generator.TOrder;
+import com.xiaozipu.dao.entity.TOrder;
 
 /**
  * @author: YinJunJie

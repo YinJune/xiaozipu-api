@@ -1,6 +1,6 @@
 package com.xiaozipu.merchant.dao.mapper;
 
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.merchant.dao.entity.ProductListDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,5 +11,10 @@ import java.util.List;
  * @description:
  */
 public interface ProductDao {
-
+    /**
+     * 商品列表
+     * @param status
+     * @return
+     */
+    List<ProductListDO> getProductList(@Param("status") String status);
 }

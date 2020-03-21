@@ -1,30 +1,37 @@
 package com.xiaozipu.client.service.order;
 
 import com.github.pagehelper.PageHelper;
+import com.xiaozipu.client.dao.entity.CartProductDO;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
+import com.xiaozipu.client.dao.mapper.OrderDao;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
-import com.xiaozipu.client.pojo.vo.order.OrderDetailVO;
+import com.xiaozipu.client.pojo.vo.AddressVO;
+import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
+import com.xiaozipu.client.pojo.vo.product.CartProductVO;
+import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.service.address.AddressService;
+import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.client.service.payment.PaymentService;
+import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.ProductSpecService;
 import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
+import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.common.util.SerialNoUtils;
-import com.xiaozipu.dao.entity.custom.OrderDetailDO;
-import com.xiaozipu.dao.entity.custom.OrderListDO;
-import com.xiaozipu.dao.entity.generator.TOrder;
-import com.xiaozipu.dao.entity.generator.TOrderProduct;
-import com.xiaozipu.dao.entity.generator.TProductSpec;
-import com.xiaozipu.dao.entity.generator.TUserAddress;
-import com.xiaozipu.dao.mapper.custom.OrderDao;
-import com.xiaozipu.dao.mapper.generator.TOrderMapper;
+import com.xiaozipu.client.dao.entity.OrderDetailDO;
+import com.xiaozipu.client.dao.entity.OrderListDO;
+import com.xiaozipu.dao.entity.*;
+import com.xiaozipu.dao.mapper.TOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -51,6 +58,10 @@ public class OrderServiceImpl implements OrderService {
     private PaymentService paymentService;
     @Resource
     private OrderDao orderDao;
+    @Autowired
+    private ShoppingCartService cartService;
+    @Autowired
+    private ProductService productService;
 
     /**
      * 计算金额
@@ -93,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.insertSelective(order);
         List<TOrderProduct> orderProducts = new ArrayList<>();
         for (ProductSpecQuantity productSpecQuantity : placeOrderDTO.getProductSpecQuantityList()) {
-            TProductSpec productSpecs = productSpecService.getProductSpecById(productSpecQuantity.getProductSpecId());
+            TProductSpec productSpecs = productSpecService.getById(productSpecQuantity.getProductSpecId());
             TOrderProduct orderProduct = new TOrderProduct();
             orderProduct.setPrice(productSpecs.getPrice());
             orderProduct.setPayPrice(productSpecs.getPrice());
@@ -132,5 +143,47 @@ public class OrderServiceImpl implements OrderService {
     public OrderDetailDO getOrderDetail(Integer orderId) {
         OrderDetailDO orderDetailDO = orderDao.getOrderDetail(orderId);
         return orderDetailDO;
+    }
+
+    /**
+     * 确认订单页信息
+     *
+     * @param calculateAmountDTO
+     * @return
+     */
+    @Override
+    public ConfirmOrderInfoVO confirmOrderInfo(Integer userId, CalculateAmountDTO calculateAmountDTO) {
+        TUserAddress address = addressService.getDefaultAddress(userId);
+        AddressVO addressVO = new AddressVO();
+        BeanUtils.copyProperties(address, addressVO);
+        BigDecimal orderAmount;
+        List<CartProductVO> cartProductVOS;
+        if (!CollectionUtils.isEmpty(calculateAmountDTO.getCartIds())) {
+            //从购物车来
+            orderAmount = cartService.calculateAmount(calculateAmountDTO.getCartIds());
+            List<CartProductDO> cartProductDOS = cartService.batchGetProductSummary(calculateAmountDTO.getCartIds());
+            cartProductVOS = BeanCopyUtils.copyListProperties(cartProductDOS, CartProductVO::new);
+        } else {
+            //从商品详情来  只可能有一个商品规格
+            ProductSpecQuantity productSpecQuantity = calculateAmountDTO.getProductSpecQuantityList().get(0);
+            Integer productSpecId = productSpecQuantity.getProductSpecId();
+            orderAmount = calculateAmount(calculateAmountDTO);
+            cartProductVOS = new ArrayList<>();
+            TProductSpec productSpec = productSpecService.getById(productSpecId);
+            ProductSummaryDO productSummaryDO=productService.getProductSummaryBoById(productSpec.getProductId());
+            CartProductVO cartProductVO=new CartProductVO();
+            cartProductVO.setProductSpecId(productSpecId);
+            cartProductVO.setQuantity(productSpecQuantity.getQuantity());
+            cartProductVO.setProductImageUrl(productSummaryDO.getProductImageUrl());
+            cartProductVO.setProductName(productSummaryDO.getProductName());
+            cartProductVO.setProductPrice(productSpec.getPrice());
+            cartProductVO.setSummary(productSummaryDO.getSummary());
+            cartProductVOS.add(cartProductVO);
+        }
+        ConfirmOrderInfoVO confirmOrderInfoVO = new ConfirmOrderInfoVO();
+        confirmOrderInfoVO.setAddressVO(addressVO);
+        confirmOrderInfoVO.setCartProductVOS(cartProductVOS);
+        confirmOrderInfoVO.setOrderAmount(orderAmount);
+        return confirmOrderInfoVO;
     }
 }

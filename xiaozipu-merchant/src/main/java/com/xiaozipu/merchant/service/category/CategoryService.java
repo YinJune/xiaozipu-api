@@ -1,6 +1,6 @@
 package com.xiaozipu.merchant.service.category;
 
-import com.xiaozipu.dao.entity.generator.TCategory;
+import com.xiaozipu.dao.entity.TCategory;
 import com.xiaozipu.merchant.pojo.dto.category.AddCategoryReqDTO;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.xiaozipu.merchant.service.spec;
 
-import com.xiaozipu.dao.entity.generator.TSpecName;
-import com.xiaozipu.dao.entity.generator.TSpecValue;
+import com.xiaozipu.dao.entity.TSpecName;
+import com.xiaozipu.dao.entity.TSpecValue;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecNameReqDTO;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecValueReqDTO;
 

@@ -7,7 +7,7 @@ import com.xiaozipu.client.pojo.vo.product.CartProductVO;
 import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
-import com.xiaozipu.dao.entity.custom.CartProductDO;
+import com.xiaozipu.client.dao.entity.CartProductDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

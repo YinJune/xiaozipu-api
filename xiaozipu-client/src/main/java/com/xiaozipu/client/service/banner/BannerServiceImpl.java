@@ -2,9 +2,9 @@ package com.xiaozipu.client.service.banner;
 
 import com.xiaozipu.client.enums.BannerStatusEnum;
 import com.xiaozipu.common.enums.banner.BannerPositionEnum;
-import com.xiaozipu.dao.entity.generator.TBanner;
-import com.xiaozipu.dao.entity.generator.TBannerExample;
-import com.xiaozipu.dao.mapper.generator.TBannerMapper;
+import com.xiaozipu.dao.entity.TBanner;
+import com.xiaozipu.dao.entity.TBannerExample;
+import com.xiaozipu.dao.mapper.TBannerMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

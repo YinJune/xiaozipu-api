@@ -10,7 +10,7 @@ import com.xiaozipu.client.util.JwtUtils;
 import com.xiaozipu.client.util.RedisUtils;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.HttpUtils;
-import com.xiaozipu.dao.entity.generator.TUser;
+import com.xiaozipu.dao.entity.TUser;
 import com.xiaozipu.third.util.mp.MpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

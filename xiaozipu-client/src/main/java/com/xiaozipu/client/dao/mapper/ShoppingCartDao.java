@@ -1,8 +1,9 @@
 package com.xiaozipu.client.dao.mapper;
 
-import com.xiaozipu.dao.entity.custom.CartProductDO;
+import com.xiaozipu.client.dao.entity.CartProductDO;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -18,4 +19,18 @@ public interface ShoppingCartDao {
      * @return
      */
     List<CartProductDO> getCartProducts(@Param("userId") Integer userId);
+
+    /**
+     * @param cartId
+     * @return
+     */
+    BigDecimal calculateAmount(@Param("cartIds") List<Integer> cartId);
+
+    /**
+     * 获取确认订单页商品列表信息
+     *
+     * @param cartIds
+     * @return
+     */
+    List<CartProductDO> batchGetProductSummary(@Param("cartIds") List<Integer> cartIds);
 }

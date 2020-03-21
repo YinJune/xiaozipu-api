@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.banner;
 
-import com.xiaozipu.dao.entity.generator.TBanner;
+import com.xiaozipu.dao.entity.TBanner;
 
 import java.util.List;
 

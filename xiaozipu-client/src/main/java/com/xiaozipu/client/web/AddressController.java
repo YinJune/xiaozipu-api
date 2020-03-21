@@ -6,7 +6,7 @@ import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.client.service.address.AddressService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
-import com.xiaozipu.dao.entity.generator.TUserAddress;
+import com.xiaozipu.dao.entity.TUserAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

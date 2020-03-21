@@ -1,12 +1,12 @@
 package com.xiaozipu.client.service.spec;
 
 import com.xiaozipu.client.enums.StatusEnum;
-import com.xiaozipu.dao.entity.generator.TSpecName;
-import com.xiaozipu.dao.entity.generator.TSpecNameExample;
-import com.xiaozipu.dao.entity.generator.TSpecValue;
-import com.xiaozipu.dao.entity.generator.TSpecValueExample;
-import com.xiaozipu.dao.mapper.generator.TSpecNameMapper;
-import com.xiaozipu.dao.mapper.generator.TSpecValueMapper;
+import com.xiaozipu.dao.entity.TSpecName;
+import com.xiaozipu.dao.entity.TSpecNameExample;
+import com.xiaozipu.dao.entity.TSpecValue;
+import com.xiaozipu.dao.entity.TSpecValueExample;
+import com.xiaozipu.dao.mapper.TSpecNameMapper;
+import com.xiaozipu.dao.mapper.TSpecValueMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

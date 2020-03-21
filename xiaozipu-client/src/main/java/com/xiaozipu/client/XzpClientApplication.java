@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.xiaozipu"})
-@MapperScan(basePackages = {"com.xiaozipu.dao.mapper"})
+@MapperScan(basePackages = {"com.xiaozipu.dao.mapper","com.xiaozipu.client.dao.mapper"})
 public class XzpClientApplication {
     public static void main(String[] args) {
         SpringApplication.run(XzpClientApplication.class, args);

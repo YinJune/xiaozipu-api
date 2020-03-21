@@ -1,10 +1,11 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.common.result.ResultInfo;
-import com.xiaozipu.dao.entity.custom.ProductSummaryDO;
+import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
