@@ -22,14 +22,15 @@
      and cart.user_id=#{userId}
   </select>
 <select id="calculateAmount" resultType="java.math.BigDecimal">
-    select ps.price,scp.quantity from t_shopping_cart_product scp,t_product_spec ps
+    select sum(ps.price*scp.quantity) from t_shopping_cart_product scp,t_product_spec ps
     where scp.product_spec_id=ps.id and scp.id in 
     <foreach collection="cartIds" index="index" item="cartId" open="(" separator="," close=")">
         #{cartId}
     </foreach>
 </select>
     <select id="batchGetProductSummary" resultMap="productSummaryResult">
-        select p.name as productName,p.summary as summary,ps.price as productPrice, scp.quantity,pi.image_url as productImageUrl, from t_shopping_cart_product scp,t_product_spec ps,t_product_image pi,t_product p
+        select p.name as productName,p.summary as summary,ps.id as productSpecId,ps.price as productPrice, scp.quantity,pi.image_url as productImageUrl
+        from t_shopping_cart_product scp,t_product_spec ps,t_product_image pi,t_product p
         where scp.product_spec_id=ps.id and ps.product_id=p.id and p.id=pi.product_id and ps.product_id=pi.product_id and pi.type='1'
         and scp.id in
         <foreach collection="cartIds" index="index" item="cartId" open="(" separator="," close=")">

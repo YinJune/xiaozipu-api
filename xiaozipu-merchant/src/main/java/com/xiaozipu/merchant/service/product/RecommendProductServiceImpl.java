@@ -2,10 +2,10 @@ package com.xiaozipu.merchant.service.product;
 
 import com.github.pagehelper.PageHelper;
 import com.xiaozipu.common.enums.StatusEnum;
-import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 import com.xiaozipu.dao.entity.TRecommendProduct;
 import com.xiaozipu.dao.entity.TRecommendProductExample;
 import com.xiaozipu.dao.mapper.TRecommendProductMapper;
+import com.xiaozipu.merchant.dao.entity.ProductSummaryDO;
 import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

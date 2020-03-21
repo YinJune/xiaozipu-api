@@ -11,6 +11,7 @@ import com.xiaozipu.dao.mapper.TProductImageMapper;
 import com.xiaozipu.dao.mapper.TProductMapper;
 import com.xiaozipu.dao.mapper.TProductSpecMapper;
 import com.xiaozipu.merchant.dao.entity.ProductListDO;
+import com.xiaozipu.merchant.dao.entity.ProductSummaryDO;
 import com.xiaozipu.merchant.dao.mapper.ProductDao;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
@@ -102,7 +103,20 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductListVO> getProductList(Integer currentPage,String status) {
         PageHelper.startPage(currentPage,10);
         List<ProductListDO> productListDOS= productDao.getProductList(status);
-        List<ProductListVO> productListVOS=BeanCopyUtils.copyListProperties(productListDOS,ProductListVO::new);
+        List<ProductListVO> productListVOS=BeanCopyUtils.copyListProperties(productListDOS,ProductListVO::new,(productListDO,productListVO)->{
+            productListVO.setProductPrice(productListDO.getPrice().divide(MoneyUtils.UNIT));
+        });
         return productListVOS;
     }
+    /**
+     * 根据商品id查询商品简要信息
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductSummaryDO getProductSummaryBoById(Integer productId) {
+        return productDao.getProductSummaryById(productId);
+    }
+
 }

@@ -21,6 +21,7 @@ public interface ShoppingCartDao {
     List<CartProductDO> getCartProducts(@Param("userId") Integer userId);
 
     /**
+     * 计算这几个购物车商品的合计
      * @param cartId
      * @return
      */

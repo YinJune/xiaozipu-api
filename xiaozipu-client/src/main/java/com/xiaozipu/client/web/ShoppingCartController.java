@@ -8,6 +8,7 @@ import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.client.dao.entity.CartProductDO;
+import com.xiaozipu.common.util.MoneyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,9 @@ public class ShoppingCartController {
         logger.info("购物车商品列表:{}", userId);
         ResultInfo resultInfo = new ResultInfo();
         List<CartProductDO> productDOS = shoppingCartService.getCartProducts(userId, currentPage);
-        List<CartProductVO> productVOS = BeanCopyUtils.copyListProperties(productDOS, CartProductVO::new);
+        List<CartProductVO> productVOS = BeanCopyUtils.copyListProperties(productDOS, CartProductVO::new,(productDO,productVO)->{
+            productVO.setProductPrice(productDO.getProductPrice().divide(MoneyUtils.UNIT));
+        });
         resultInfo.setData(productVOS);
         return resultInfo;
     }

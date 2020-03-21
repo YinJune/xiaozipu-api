@@ -1,6 +1,6 @@
 package com.xiaozipu.merchant.service.product;
 
-import com.xiaozipu.client.dao.entity.ProductSummaryDO;
+import com.xiaozipu.merchant.dao.entity.ProductSummaryDO;
 import com.xiaozipu.merchant.pojo.dto.product.recommend.AddRecommendProductReqDTO;
 
 import java.util.List;

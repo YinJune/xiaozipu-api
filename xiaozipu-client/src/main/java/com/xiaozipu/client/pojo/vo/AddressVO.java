@@ -11,7 +11,7 @@ import lombok.Data;
 public class AddressVO {
     private Integer id;
     private String recipientName;
-    private String recipientMobile;
+    private String recipientPhone;
     private String addressDetail;
     /**
      * 是否是默认地址

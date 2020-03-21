@@ -20,6 +20,7 @@ import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
 import com.xiaozipu.common.util.BeanCopyUtils;
+import com.xiaozipu.common.util.MoneyUtils;
 import com.xiaozipu.common.util.SerialNoUtils;
 import com.xiaozipu.client.dao.entity.OrderDetailDO;
 import com.xiaozipu.client.dao.entity.OrderListDO;
@@ -183,7 +184,8 @@ public class OrderServiceImpl implements OrderService {
         ConfirmOrderInfoVO confirmOrderInfoVO = new ConfirmOrderInfoVO();
         confirmOrderInfoVO.setAddressVO(addressVO);
         confirmOrderInfoVO.setCartProductVOS(cartProductVOS);
-        confirmOrderInfoVO.setOrderAmount(orderAmount);
+        confirmOrderInfoVO.setOrderAmount(orderAmount.divide(MoneyUtils.UNIT));
+        confirmOrderInfoVO.setPayAmount(orderAmount.divide(MoneyUtils.UNIT));
         return confirmOrderInfoVO;
     }
 }
