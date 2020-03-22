@@ -45,6 +45,6 @@ public class ProductSpecServiceImpl implements ProductSpecService {
             productSpecs.setSpecImageUrl(addSpecsReqDTO.getSpecImageUrl());
             productSpecsList.add(productSpecs);
         }
-        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.spec, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.specImageUrl);
+        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.spec, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.name,TProductSpec.Column.specImageUrl);
     }
 }

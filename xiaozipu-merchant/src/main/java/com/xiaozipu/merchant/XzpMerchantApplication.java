@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.xiaozipu"})
-@MapperScan(basePackages = {"com.xiaozipu.dao.mapper"})
+@MapperScan(basePackages = {"com.xiaozipu.dao.mapper","com.xiaozipu.merchant.dao.mapper"})
 public class XzpMerchantApplication {
     public static void main(String[] args) {
         SpringApplication.run(XzpMerchantApplication.class,args);
