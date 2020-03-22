@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.address;
 
 import com.xiaozipu.client.pojo.dto.AddressDTO;
+import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.dao.entity.TUserAddress;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface AddressService {
      * @param userId
      * @return
      */
-    List<TUserAddress> getAddressesByUserId(Integer userId);
+    List<AddressVO> getAddressesByUserId(Integer userId);
 
     /**
      * 添加收货地址
@@ -48,4 +49,9 @@ public interface AddressService {
      * @return
      */
     TUserAddress getDefaultAddress(Integer userId);
+
+    TUserAddress getAddressesById(Integer addressId);
+    String convertProvince(String provinceCode) ;
+    String convertCity(String cityCode) ;
+    String convertDistrict(String districtCode) ;
 }

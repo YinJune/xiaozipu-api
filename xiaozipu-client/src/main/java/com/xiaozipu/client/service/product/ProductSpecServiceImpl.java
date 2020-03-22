@@ -11,7 +11,9 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -52,9 +54,11 @@ public class ProductSpecServiceImpl implements ProductSpecService {
         if (productSpecsList.size() != productSpecQuantities.size() || CollectionUtils.isEmpty(productSpecsList)) {
             throw new BusinessRuntimeException("", "存在无效商品");//TODO
         }
+        Map<Integer,Integer> psqMap=new HashMap<>();
+        productSpecQuantities.forEach(psq->psqMap.put(psq.getProductSpecId(),psq.getQuantity()));
         BigDecimal amount = BigDecimal.ZERO;
         for (TProductSpec productSpecs : productSpecsList) {
-            amount = amount.add(productSpecs.getPrice());
+            amount = amount.add(productSpecs.getPrice().multiply(new BigDecimal(psqMap.get(productSpecs.getId()))));
         }
         return amount;
     }

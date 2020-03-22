@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.sms;
 
-import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.common.constants.RedisKeyConstants;
 import com.xiaozipu.client.enums.aliyun.SmsTypeEnum;
 import com.xiaozipu.client.util.RedisUtils;
 import com.xiaozipu.common.exception.BusinessRuntimeException;

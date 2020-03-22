@@ -1,4 +1,4 @@
-package com.xiaozipu.client.interceptor;
+package com.xiaozipu.client.common.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

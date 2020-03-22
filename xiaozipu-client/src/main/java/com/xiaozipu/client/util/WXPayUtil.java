@@ -1,7 +1,7 @@
 package com.xiaozipu.client.util;
 
-import com.xiaozipu.client.constants.WXPayConstants;
-import com.xiaozipu.client.constants.WXPayConstants.SignType;
+import com.xiaozipu.client.common.constants.WXPayConstants;
+import com.xiaozipu.client.common.constants.WXPayConstants.SignType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;

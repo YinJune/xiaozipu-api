@@ -1,6 +1,6 @@
-package com.xiaozipu.client.interceptor;
+package com.xiaozipu.client.common.interceptor;
 
-import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.common.constants.RedisKeyConstants;
 import com.xiaozipu.client.util.JwtUtils;
 import com.xiaozipu.client.util.RedisUtils;
 import io.jsonwebtoken.Claims;
@@ -46,7 +46,6 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
         try {
-
             logger.info("请求uri:{},type:{}", request.getRequestURI(),request.getMethod());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();

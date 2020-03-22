@@ -157,13 +157,18 @@ public class OrderServiceImpl implements OrderService {
         TUserAddress address = addressService.getDefaultAddress(userId);
         AddressVO addressVO = new AddressVO();
         BeanUtils.copyProperties(address, addressVO);
+        addressVO.setProvinceWord(addressService.convertProvince(address.getProvince()));
+        addressVO.setCityWord(addressService.convertCity(address.getCity()));
+        addressVO.setDistrictWord(addressService.convertDistrict(address.getDistrict()));
         BigDecimal orderAmount;
         List<CartProductVO> cartProductVOS;
         if (!CollectionUtils.isEmpty(calculateAmountDTO.getCartIds())) {
             //从购物车来
             orderAmount = cartService.calculateAmount(calculateAmountDTO.getCartIds());
             List<CartProductDO> cartProductDOS = cartService.batchGetProductSummary(calculateAmountDTO.getCartIds());
-            cartProductVOS = BeanCopyUtils.copyListProperties(cartProductDOS, CartProductVO::new);
+            cartProductVOS = BeanCopyUtils.copyListProperties(cartProductDOS, CartProductVO::new,(cartDO,cartVO)->{
+                cartVO.setProductPrice(cartDO.getProductPrice().divide(MoneyUtils.UNIT));
+            });
         } else {
             //从商品详情来  只可能有一个商品规格
             ProductSpecQuantity productSpecQuantity = calculateAmountDTO.getProductSpecQuantityList().get(0);
@@ -177,7 +182,7 @@ public class OrderServiceImpl implements OrderService {
             cartProductVO.setQuantity(productSpecQuantity.getQuantity());
             cartProductVO.setProductImageUrl(productSummaryDO.getProductImageUrl());
             cartProductVO.setProductName(productSummaryDO.getProductName());
-            cartProductVO.setProductPrice(productSpec.getPrice());
+            cartProductVO.setProductPrice(productSpec.getPrice().divide(MoneyUtils.UNIT));
             cartProductVO.setSummary(productSummaryDO.getSummary());
             cartProductVOS.add(cartProductVO);
         }

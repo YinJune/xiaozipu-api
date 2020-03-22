@@ -1,5 +1,6 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.pojo.vo.product.ProductDetailVO;
@@ -41,6 +42,7 @@ public class ProductController {
      * @param orderType   排序类型 正序 倒叙
      * @return
      */
+    @TraceLog
     @GetMapping("/product/list")
     public ResultInfo getProductList(@RequestParam(value = "sortType", defaultValue = "1") String sortType,
                                      @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
@@ -66,6 +68,7 @@ public class ProductController {
      * @param productId
      * @return
      */
+    @TraceLog
     @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();

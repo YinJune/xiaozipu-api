@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
 import com.xiaozipu.client.pojo.vo.UserInfoVO;
@@ -31,6 +32,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @TraceLog
     @PostMapping("/anon/user/login/password")
     public ResultInfo loginPassword() {
         ResultInfo resultInfo = new ResultInfo();
@@ -44,6 +46,7 @@ public class UserController {
      * @param captchaLoginDto
      * @return
      */
+    @TraceLog
     @PostMapping("/anon/user/login/captcha")
     public ResultInfo loginCaptcha(CaptchaLoginDTO captchaLoginDto) {
         logger.info("验证码登陆:{}", JSONObject.toJSONString(captchaLoginDto));
@@ -103,6 +106,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @TraceLog
     @GetMapping("/user/info")
     public ResultInfo getUserInfo(HttpServletRequest request) {
         Integer userId = Integer.parseInt((String) request.getAttribute("userId"));

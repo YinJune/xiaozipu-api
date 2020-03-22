@@ -1,5 +1,6 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.vo.IndexVO;
 import com.xiaozipu.client.service.index.IndexService;
 import com.xiaozipu.common.result.ResultInfo;
@@ -24,6 +25,7 @@ public class IndexController {
      *
      * @return
      */
+    @TraceLog
     @GetMapping("/anon/index/all/data")
     public ResultInfo getIndexData() {
         ResultInfo resultInfo = new ResultInfo();

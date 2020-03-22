@@ -1,4 +1,4 @@
-package com.xiaozipu.client.constants;
+package com.xiaozipu.client.common.constants;
 
 import org.apache.http.client.HttpClient;
 

@@ -1,5 +1,6 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
 import com.xiaozipu.client.service.product.RecommendProductService;
 import com.xiaozipu.common.result.ResultInfo;
@@ -35,6 +36,7 @@ public class RecommendProductController {
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "currentPage", value = "当前页", required = true, paramType = "form")
 //    })
+    @TraceLog
     @GetMapping("/product/recommend/list")
     public ResultInfo listRecommendProduct(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage) {
         ResultInfo resultInfo = new ResultInfo();

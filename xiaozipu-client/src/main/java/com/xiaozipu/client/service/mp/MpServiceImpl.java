@@ -2,7 +2,7 @@ package com.xiaozipu.client.service.mp;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.config.WxConfig;
-import com.xiaozipu.client.constants.RedisKeyConstants;
+import com.xiaozipu.client.common.constants.RedisKeyConstants;
 import com.xiaozipu.client.pojo.dto.mp.DecryptUserInfoReqDTO;
 import com.xiaozipu.client.pojo.dto.mp.MpLoginResDTO;
 import com.xiaozipu.client.service.user.UserService;

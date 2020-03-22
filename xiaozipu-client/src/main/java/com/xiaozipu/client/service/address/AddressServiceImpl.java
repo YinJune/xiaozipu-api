@@ -2,12 +2,15 @@ package com.xiaozipu.client.service.address;
 
 import com.xiaozipu.client.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.AddressDTO;
+import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
+import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.dao.entity.*;
 import com.xiaozipu.dao.mapper.TCityMapper;
 import com.xiaozipu.dao.mapper.TDistrictMapper;
 import com.xiaozipu.dao.mapper.TProvinceMapper;
 import com.xiaozipu.dao.mapper.TUserAddressMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -38,10 +41,16 @@ public class AddressServiceImpl implements AddressService {
      * @return
      */
     @Override
-    public List<TUserAddress> getAddressesByUserId(Integer userId) {
+    public List<AddressVO> getAddressesByUserId(Integer userId) {
         TUserAddressExample example = new TUserAddressExample();
         example.createCriteria().andUserIdEqualTo(userId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
-        return addressMapper.selectByExample(example);
+        List<TUserAddress> addressList=addressMapper.selectByExample(example);
+       List<AddressVO> addressVOS= BeanCopyUtils.copyListProperties(addressList,AddressVO::new,(address,addressVO)->{
+            addressVO.setProvinceWord(convertProvince(address.getProvince()));
+            addressVO.setCityWord(convertCity(address.getCity()));
+            addressVO.setDistrictWord(convertDistrict(address.getDistrict()));
+        });
+        return addressVOS ;
     }
 
     /**
@@ -54,14 +63,8 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void addAddress(Integer userId, AddressDTO addressDTO) {
         TUserAddress address = new TUserAddress();
+        BeanUtils.copyProperties(addressDTO,address);
         address.setUserId(userId);
-        address.setRecipientPhone(addressDTO.getRecipientMobile());
-        address.setRecipientName(addressDTO.getRecipientName());
-        address.setProvince(convertProvince(addressDTO.getProvince()));
-        address.setCity(convertCity(addressDTO.getCity()));
-        address.setDistrict(convertDistrict(addressDTO.getDistrict()));
-        address.setAddressDetail(addressDTO.getAddressDetail());
-        address.setIsDefault(addressDTO.getIsDefault());
         address.setDeleted(StatusEnum.INVALID.getKey());
         addressMapper.insertSelective(address);
     }
@@ -75,14 +78,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void updateAddress(AddressDTO addressDTO) {
         TUserAddress address = addressMapper.selectByPrimaryKey(addressDTO.getId());
-        address.setRecipientPhone(addressDTO.getRecipientMobile());
-        address.setRecipientName(addressDTO.getRecipientName());
-        address.setProvince(convertProvince(addressDTO.getProvince()));
-        address.setCity(convertCity(addressDTO.getCity()));
-        address.setDistrict(convertDistrict(addressDTO.getDistrict()));
-        address.setAddressDetail(addressDTO.getAddressDetail());
-        address.setIsDefault(addressDTO.getIsDefault());
-        address.setDeleted(StatusEnum.INVALID.getKey());
+        BeanUtils.copyProperties(addressDTO,address);
         addressMapper.updateByPrimaryKey(address);
     }
 
@@ -103,7 +99,7 @@ public class AddressServiceImpl implements AddressService {
      * @param provinceCode
      * @return
      */
-    private String convertProvince(String provinceCode) {
+    public String convertProvince(String provinceCode) {
         TProvinceExample example = new TProvinceExample();
         example.createCriteria().andCodeEqualTo(provinceCode);
         List<TProvince> provinces = provinceMapper.selectByExample(example);
@@ -119,7 +115,7 @@ public class AddressServiceImpl implements AddressService {
      * @param cityCode
      * @return
      */
-    private String convertCity(String cityCode) {
+    public String convertCity(String cityCode) {
         TCityExample example = new TCityExample();
         example.createCriteria().andCodeEqualTo(cityCode);
         List<TCity> tCities = cityMapper.selectByExample(example);
@@ -135,7 +131,7 @@ public class AddressServiceImpl implements AddressService {
      * @param districtCode
      * @return
      */
-    private String convertDistrict(String districtCode) {
+    public String convertDistrict(String districtCode) {
         TDistrictExample example = new TDistrictExample();
         example.createCriteria().andCodeEqualTo(districtCode);
         List<TDistrict> districts = districtMapper.selectByExample(example);
@@ -160,5 +156,10 @@ public class AddressServiceImpl implements AddressService {
             return null;
         }
         return addresses.get(0);
+    }
+
+    @Override
+    public TUserAddress getAddressesById(Integer addressId) {
+        return addressMapper.selectByPrimaryKey(addressId);
     }
 }

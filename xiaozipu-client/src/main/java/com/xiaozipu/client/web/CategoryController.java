@@ -1,5 +1,6 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.vo.CategoryVO;
 import com.xiaozipu.client.service.category.CategoryService;
 import com.xiaozipu.common.result.ResultInfo;
@@ -31,6 +32,7 @@ public class CategoryController {
      * @param categoryId 不传 查全部一级分类
      * @return
      */
+    @TraceLog
     @GetMapping("/anon/category/list")
     public ResultInfo getCategoryList(@RequestParam(value = "categoryId", required = false) Integer categoryId) {
         ResultInfo resultInfo = new ResultInfo();

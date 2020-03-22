@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.mp.DecryptUserInfoReqDTO;
 import com.xiaozipu.client.pojo.dto.mp.MpLoginResDTO;
 import com.xiaozipu.client.service.mp.MpService;
@@ -27,6 +28,7 @@ public class MpController {
      *
      * @return
      */
+    @TraceLog
     @GetMapping("/anon/wechat/mini/login")
     public ResultInfo miniLogin(@RequestParam("jsCode") String jsCode) {
         logger.info("小程序登陆:jsCode={}", jsCode);
@@ -41,6 +43,7 @@ public class MpController {
      *
      * @return
      */
+    @TraceLog
     @PostMapping("/anon/wechat/mini/decrypt")
     public ResultInfo decryptData(@RequestBody @Validated DecryptUserInfoReqDTO decryptUserInfoReqDTO) {
         logger.info("小程序解密数据:decryptUserInfoReqDTO={}", JSONObject.toJSONString(decryptUserInfoReqDTO));

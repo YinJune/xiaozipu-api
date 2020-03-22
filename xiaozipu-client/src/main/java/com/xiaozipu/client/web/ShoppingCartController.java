@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.AddCartDTO;
 import com.xiaozipu.client.pojo.dto.DeleteCartDTO;
 import com.xiaozipu.client.pojo.vo.product.CartProductVO;
@@ -36,6 +37,7 @@ public class ShoppingCartController {
      *
      * @return
      */
+    @TraceLog
     @PostMapping("/shopping/cart/add")
     public ResultInfo addToCart(HttpServletRequest request, @RequestBody @Validated AddCartDTO addCartDTO) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -48,6 +50,7 @@ public class ShoppingCartController {
     /**
      * 购物车商品列表
      */
+    @TraceLog
     @GetMapping("/shopping/cart/list")
     public ResultInfo getCartProducts(HttpServletRequest request, @RequestParam("currentPage") Integer currentPage) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -68,6 +71,7 @@ public class ShoppingCartController {
      * @param deleteCartDTO
      * @return
      */
+    @TraceLog
     @PostMapping("/shopping/cart/delete")
     public ResultInfo deleteCartProducts(HttpServletRequest request, @RequestBody DeleteCartDTO deleteCartDTO) {
         ResultInfo resultInfo = new ResultInfo();

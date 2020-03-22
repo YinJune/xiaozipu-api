@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
@@ -11,6 +12,7 @@ import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.client.dao.entity.OrderDetailDO;
 import com.xiaozipu.client.dao.entity.OrderListDO;
+import com.xiaozipu.common.util.MoneyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -41,25 +43,26 @@ public class OrderController {
      * @param request
      * @return
      */
+    @TraceLog
     @PostMapping("/order/amount/calculate")
     public ResultInfo calculateAmount(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
         logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
         ResultInfo resultInfo = new ResultInfo();
         BigDecimal amount = orderService.calculateAmount(calculateAmountDTO);
-        resultInfo.setData(amount);
+        resultInfo.setData(amount.divide(MoneyUtils.UNIT));
         return resultInfo;
     }
 
 
     /**
-     * 计算金额
+     * 确认订单页
      *
      * @param request
      * @return
      */
+    @TraceLog
     @PostMapping("/order/confirm/info")
     public ResultInfo confirmOrderInfo(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
-        logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
         ResultInfo resultInfo = new ResultInfo();
         Integer userId= (Integer) request.getAttribute("userId");
         ConfirmOrderInfoVO confirmOrderInfoVO =orderService.confirmOrderInfo(userId,calculateAmountDTO);
@@ -74,6 +77,7 @@ public class OrderController {
      * @param request
      * @return
      */
+    @TraceLog
     @PostMapping("/order/place")
     public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -90,6 +94,7 @@ public class OrderController {
      * @param request
      * @return
      */
+    @TraceLog
     @PostMapping("/order/pay")
     public ResultInfo payOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -106,6 +111,7 @@ public class OrderController {
      * @param status 订单状态
      * @return
      */
+    @TraceLog
     @PostMapping("/order/list")
     public ResultInfo orderList(HttpServletRequest request, @RequestParam(value = "status", required = false) String status, @RequestParam("currentPage") Integer currentPage) {
         Integer userId = (Integer) request.getAttribute("userId");

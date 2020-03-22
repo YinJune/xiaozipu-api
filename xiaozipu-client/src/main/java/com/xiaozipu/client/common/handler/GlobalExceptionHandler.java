@@ -1,4 +1,4 @@
-package com.xiaozipu.client.handler;
+package com.xiaozipu.client.common.handler;
 
 import com.xiaozipu.client.enums.error.ErrorCodeEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;

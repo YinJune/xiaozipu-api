@@ -20,7 +20,7 @@ public class AddressDTO {
     /**
      * 收货人手机号
      */
-    private String recipientMobile;
+    private String recipientPhone;
     /**
      * 省份 code
      */

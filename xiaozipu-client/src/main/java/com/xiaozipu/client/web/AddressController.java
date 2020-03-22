@@ -1,7 +1,9 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.AddressDTO;
+import com.xiaozipu.client.pojo.vo.AddressDetailVO;
 import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.client.service.address.AddressService;
 import com.xiaozipu.common.result.ResultInfo;
@@ -9,11 +11,9 @@ import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.dao.entity.TUserAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -36,14 +36,35 @@ public class AddressController {
      * @param request
      * @return
      */
+    @TraceLog
     @GetMapping("/user/address/list")
     public ResultInfo getUserAddressList(HttpServletRequest request) {
         ResultInfo resultInfo = new ResultInfo();
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("收货地址列表:{}", userId);
-        List<TUserAddress> addressList = addressService.getAddressesByUserId(userId);
-        List<AddressVO> addressVOS = BeanCopyUtils.copyListProperties(addressList, AddressVO::new);
-        resultInfo.setData(addressVOS);
+        List<AddressVO> addressList = addressService.getAddressesByUserId(userId);
+        resultInfo.setData(addressList);
+        return resultInfo;
+    }
+   /**
+     * 收货地址详情
+     *
+     * @param request
+     * @return
+     */
+   @TraceLog
+    @GetMapping("/user/address/detail")
+    public ResultInfo getUserAddressDetail(HttpServletRequest request, @RequestParam("addressId")Integer addressId) {
+        ResultInfo resultInfo = new ResultInfo();
+        Integer userId = (Integer) request.getAttribute("userId");
+        logger.info("收货地址列表:{}", userId);
+        TUserAddress address = addressService.getAddressesById(addressId);
+        AddressDetailVO addressVO=new AddressDetailVO();
+        BeanUtils.copyProperties(address,addressVO);
+        addressVO.setProvinceWord(addressService.convertProvince(addressVO.getProvince()));
+        addressVO.setCityWord(addressService.convertCity(addressVO.getCity()));
+        addressVO.setDistrictWord(addressService.convertDistrict(addressVO.getDistrict()));
+        resultInfo.setData(addressVO);
         return resultInfo;
     }
 
@@ -53,11 +74,12 @@ public class AddressController {
      * @param request
      * @return
      */
+    @TraceLog
     @PostMapping("/user/address/add")
     public ResultInfo addAddress(HttpServletRequest request, @RequestBody AddressDTO addressDTO) {
         ResultInfo resultInfo = new ResultInfo();
         Integer userId = (Integer) request.getAttribute("userId");
-        logger.info("添加收货地址:{}", userId);
+        logger.info("添加收货地址:{}", JSONObject.toJSONString(addressDTO));
         addressService.addAddress(userId, addressDTO);
         return resultInfo;
     }
@@ -68,7 +90,8 @@ public class AddressController {
      * @param request
      * @return
      */
-    @GetMapping("/user/address/update")
+    @TraceLog
+    @PostMapping("/user/address/update")
     public ResultInfo updateAddress(HttpServletRequest request, @RequestBody AddressDTO addressDTO) {
         ResultInfo resultInfo = new ResultInfo();
         logger.info("修改收货地址:{}", JSONObject.toJSONString(addressDTO));
