@@ -2,6 +2,7 @@ package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductDetailVO;
 import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
 import com.xiaozipu.merchant.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,19 @@ public class ProductController {
         ResultInfo resultInfo = new ResultInfo();
         List<ProductListVO> productListVOList=productService.getProductList(currentPage,status);
         resultInfo.setData(productListVOList);
+        return resultInfo;
+    }
+    /**
+     * 商品列表
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("/product/detail/{productId}")
+    public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
+        ResultInfo resultInfo = new ResultInfo();
+        ProductDetailVO productDetail=productService.getProductDetail(productId);
+        resultInfo.setData(productDetail);
         return resultInfo;
     }
 }

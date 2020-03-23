@@ -7,6 +7,8 @@ import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.common.util.MoneyUtils;
 import com.xiaozipu.dao.entity.TProduct;
 import com.xiaozipu.dao.entity.TProductImage;
+import com.xiaozipu.dao.entity.TProductImageExample;
+import com.xiaozipu.dao.entity.TProductSpec;
 import com.xiaozipu.dao.mapper.TProductImageMapper;
 import com.xiaozipu.dao.mapper.TProductMapper;
 import com.xiaozipu.dao.mapper.TProductSpecMapper;
@@ -16,7 +18,12 @@ import com.xiaozipu.merchant.dao.mapper.ProductDao;
 import com.xiaozipu.merchant.enums.ErrorCodeEnum;
 import com.xiaozipu.merchant.pojo.dto.CommonKV;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductDetailVO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductImageVO;
 import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
+import com.xiaozipu.merchant.pojo.vo.product.ProductSpecVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +43,8 @@ public class ProductServiceImpl implements ProductService {
     private TProductMapper productMapper;
     @Resource
     private ProductDao productDao;
-    @Resource
-    private TProductSpecMapper specsMapper;
+    @Autowired
+    private ProductSpecService productSpecService;
     @Resource
     private TProductImageMapper productImageMapper;
 
@@ -119,4 +126,28 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getProductSummaryById(productId);
     }
 
+    /**
+     * 商品详情
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductDetailVO getProductDetail(Integer productId) {
+        TProduct product=productMapper.selectByPrimaryKey(productId);
+        List<TProductSpec> productSpecs=productSpecService.getProductSpecsByProductId(product.getId());
+        TProductImageExample imageExample=new TProductImageExample();
+        imageExample.createCriteria().andProductIdEqualTo(productId).andStatusEqualTo(StatusEnum.VALID.getKey());
+        List<TProductImage> productImages=productImageMapper.selectByExample(imageExample);
+        List<ProductImageVO> productImageVOS=BeanCopyUtils.copyListProperties(productImages,ProductImageVO::new);
+        List<ProductSpecVO> productSpecVOS=BeanCopyUtils.copyListProperties(productSpecs,ProductSpecVO::new,(spec,vo)->{
+            vo.setCostPrice(spec.getCostPrice().divide(MoneyUtils.UNIT));
+            vo.setPrice(spec.getPrice().divide(MoneyUtils.UNIT));
+        });
+        ProductDetailVO productDetailVO=new ProductDetailVO();
+        BeanUtils.copyProperties(product,productDetailVO);
+        productDetailVO.setProductImageVOS(productImageVOS);
+        productDetailVO.setProductSpecVOS(productSpecVOS);
+        return productDetailVO;
+    }
 }

@@ -3,6 +3,7 @@ package com.xiaozipu.merchant.service.product;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.util.MoneyUtils;
 import com.xiaozipu.dao.entity.TProductSpec;
+import com.xiaozipu.dao.entity.TProductSpecExample;
 import com.xiaozipu.dao.mapper.TProductSpecMapper;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
 import com.xiaozipu.merchant.pojo.dto.product.AddSpecsReqDTO;
@@ -46,5 +47,18 @@ public class ProductSpecServiceImpl implements ProductSpecService {
             productSpecsList.add(productSpecs);
         }
         productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.spec, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.name,TProductSpec.Column.specImageUrl);
+    }
+
+    /**
+     * 根据商品id查规格
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public List<TProductSpec> getProductSpecsByProductId(Integer productId) {
+        TProductSpecExample example=new TProductSpecExample();
+        example.createCriteria().andProductIdEqualTo(productId).andDeletedEqualTo(StatusEnum.INVALID.getKey());
+        return productSpecsMapper.selectByExample(example);
     }
 }

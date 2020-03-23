@@ -1,7 +1,10 @@
 package com.xiaozipu.merchant.service.product;
 
 
+import com.xiaozipu.dao.entity.TProductSpec;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
+
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -15,4 +18,12 @@ public interface ProductSpecService {
      * @param addProductSpecReqDTOS
      */
     void addProductSpec(AddProductSpecReqDTO addProductSpecReqDTOS);
+
+    /**
+     * 根据商品id查规格
+     *
+     * @param id
+     * @return
+     */
+    List<TProductSpec> getProductSpecsByProductId(Integer id);
 }
