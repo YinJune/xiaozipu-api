@@ -143,7 +143,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TUser findUserById(Integer userId) {
-
         return userMapper.selectByPrimaryKey(userId);
     }
 }
