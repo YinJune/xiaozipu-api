@@ -17,4 +17,8 @@ public class PlaceOrderDTO extends CalculateAmountDTO {
      * 地址id
      */
     private Integer addressId;
+    /**
+     * 支付方式
+     */
+    private String payType;
 }

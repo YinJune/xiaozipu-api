@@ -53,7 +53,6 @@ public class OrderController {
         return resultInfo;
     }
 
-
     /**
      * 确认订单页
      *
@@ -69,7 +68,6 @@ public class OrderController {
         resultInfo.setData(confirmOrderInfoVO);
         return resultInfo;
     }
-
 
     /**
      * 下单
