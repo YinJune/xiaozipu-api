@@ -101,6 +101,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
+    <!-- 支付宝easy sdk -->
+    <dependency>
+        <groupId>com.alipay.sdk</groupId>
+        <artifactId>alipay-sdk-java</artifactId>
+    </dependency>
+
 </dependencies>
     <build>
         <finalName>xiaozipu-client</finalName>
