@@ -1,5 +1,6 @@
-package com.xiaozipu.client.util;
+package com.xiaozipu.client.service.wx.pay;
 
+import com.xiaozipu.client.service.wx.pay.WXPayConstants.SignType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -19,6 +20,7 @@ import java.io.StringWriter;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.*;
+
 
 public class WXPayUtil {
 
@@ -72,7 +74,7 @@ public class WXPayUtil {
         org.w3c.dom.Document document = WXPayXmlUtil.newDocument();
         org.w3c.dom.Element root = document.createElement("xml");
         document.appendChild(root);
-        for (String key : data.keySet()) {
+        for (String key: data.keySet()) {
             String value = data.get(key);
             if (value == null) {
                 value = "";
@@ -93,7 +95,8 @@ public class WXPayUtil {
         String output = writer.getBuffer().toString(); //.replaceAll("\n|\r", "");
         try {
             writer.close();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
         }
         return output;
     }
@@ -103,7 +106,7 @@ public class WXPayUtil {
      * 生成带有 sign 的 XML 格式字符串
      *
      * @param data Map类型数据
-     * @param key  API密钥
+     * @param key API密钥
      * @return 含有sign字段的XML
      */
     public static String generateSignedXml(final Map<String, String> data, String key) throws Exception {
@@ -113,12 +116,12 @@ public class WXPayUtil {
     /**
      * 生成带有 sign 的 XML 格式字符串
      *
-     * @param data     Map类型数据
-     * @param key      API密钥
+     * @param data Map类型数据
+     * @param key API密钥
      * @param signType 签名类型
      * @return 含有sign字段的XML
      */
-    public static String generateSignedXml(final Map<String, String> data, String key, WXPayConstants.SignType signType) throws Exception {
+    public static String generateSignedXml(final Map<String, String> data, String key, SignType signType) throws Exception {
         String sign = generateSignature(data, key, signType);
         data.put(WXPayConstants.FIELD_SIGN, sign);
         return mapToXml(data);
@@ -129,13 +132,13 @@ public class WXPayUtil {
      * 判断签名是否正确
      *
      * @param xmlStr XML格式数据
-     * @param key    API密钥
+     * @param key API密钥
      * @return 签名是否正确
      * @throws Exception
      */
     public static boolean isSignatureValid(String xmlStr, String key) throws Exception {
         Map<String, String> data = xmlToMap(xmlStr);
-        if (!data.containsKey(WXPayConstants.FIELD_SIGN)) {
+        if (!data.containsKey(WXPayConstants.FIELD_SIGN) ) {
             return false;
         }
         String sign = data.get(WXPayConstants.FIELD_SIGN);
@@ -146,7 +149,7 @@ public class WXPayUtil {
      * 判断签名是否正确，必须包含sign字段，否则返回false。使用MD5签名。
      *
      * @param data Map类型数据
-     * @param key  API密钥
+     * @param key API密钥
      * @return 签名是否正确
      * @throws Exception
      */
@@ -157,14 +160,14 @@ public class WXPayUtil {
     /**
      * 判断签名是否正确，必须包含sign字段，否则返回false。
      *
-     * @param data     Map类型数据
-     * @param key      API密钥
+     * @param data Map类型数据
+     * @param key API密钥
      * @param signType 签名方式
      * @return 签名是否正确
      * @throws Exception
      */
     public static boolean isSignatureValid(Map<String, String> data, String key, SignType signType) throws Exception {
-        if (!data.containsKey(WXPayConstants.FIELD_SIGN)) {
+        if (!data.containsKey(WXPayConstants.FIELD_SIGN) ) {
             return false;
         }
         String sign = data.get(WXPayConstants.FIELD_SIGN);
@@ -175,7 +178,7 @@ public class WXPayUtil {
      * 生成签名
      *
      * @param data 待签名数据
-     * @param key  API密钥
+     * @param key API密钥
      * @return 签名
      */
     public static String generateSignature(final Map<String, String> data, String key) throws Exception {
@@ -185,8 +188,8 @@ public class WXPayUtil {
     /**
      * 生成签名. 注意，若含有sign_type字段，必须和signType参数保持一致。
      *
-     * @param data     待签名数据
-     * @param key      API密钥
+     * @param data 待签名数据
+     * @param key API密钥
      * @param signType 签名方式
      * @return 签名
      */
@@ -205,9 +208,11 @@ public class WXPayUtil {
         sb.append("key=").append(key);
         if (SignType.MD5.equals(signType)) {
             return MD5(sb.toString()).toUpperCase();
-        } else if (SignType.HMACSHA256.equals(signType)) {
+        }
+        else if (SignType.HMACSHA256.equals(signType)) {
             return HMACSHA256(sb.toString(), key);
-        } else {
+        }
+        else {
             throw new Exception(String.format("Invalid sign_type: %s", signType));
         }
     }
@@ -245,9 +250,8 @@ public class WXPayUtil {
 
     /**
      * 生成 HMACSHA256
-     *
      * @param data 待处理数据
-     * @param key  密钥
+     * @param key 密钥
      * @return 加密结果
      * @throws Exception
      */
@@ -265,7 +269,6 @@ public class WXPayUtil {
 
     /**
      * 日志
-     *
      * @return
      */
     public static Logger getLogger() {
@@ -275,16 +278,14 @@ public class WXPayUtil {
 
     /**
      * 获取当前时间戳，单位秒
-     *
      * @return
      */
     public static long getCurrentTimestamp() {
-        return System.currentTimeMillis() / 1000;
+        return System.currentTimeMillis()/1000;
     }
 
     /**
      * 获取当前时间戳，单位毫秒
-     *
      * @return
      */
     public static long getCurrentTimestampMs() {

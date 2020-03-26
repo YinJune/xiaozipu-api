@@ -9,11 +9,11 @@ import lombok.Data;
  */
 @Data
 public class UnifiedOrderReqDTO {
-    private String appid;
-    private String mch_id;
-    private String nonce_str;
-    private String sign;
-    private String sign_type;
+//    private String appid;
+//    private String mch_id;
+//    private String nonce_str;
+//    private String sign;
+//    private String sign_type;
     private String body;
     private String detail;
     private String out_trade_no;

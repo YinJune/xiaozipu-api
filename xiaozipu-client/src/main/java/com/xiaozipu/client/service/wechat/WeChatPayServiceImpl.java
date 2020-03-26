@@ -1,22 +1,22 @@
 package com.xiaozipu.client.service.wechat;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.config.MyWXPayConfig;
 import com.xiaozipu.client.config.WxConfig;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderReqDTO;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
+import com.xiaozipu.client.service.wx.pay.WXPay;
+import com.xiaozipu.client.service.wx.pay.WXPayConfig;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.TOrder;
-import org.apache.http.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: YinJunJie
@@ -25,12 +25,10 @@ import java.util.TreeMap;
  */
 @Service
 public class WeChatPayServiceImpl implements WeChatPayService {
+    private static final Logger logger= LoggerFactory.getLogger(WeChatPayServiceImpl.class);
+
     private static final String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
     private static final String SUCCESS = "SUCCESS";
-    @Autowired
-    private WxConfig wxConfig;
-    @Autowired
-    private RestTemplate restTemplate;
 
     /**
      * 微信支付统一下单
@@ -38,37 +36,48 @@ public class WeChatPayServiceImpl implements WeChatPayService {
      * @param order
      */
     @Override
-    public void unifiedOrder(TOrder order) {
-        UnifiedOrderReqDTO reqDTO = new UnifiedOrderReqDTO();
-        reqDTO.setAppid(wxConfig.getAppId());
-        reqDTO.setMch_id(wxConfig.getMchId());
-        reqDTO.setNonce_str("");
-        reqDTO.setSign("");
-        reqDTO.setSign_type();
-        reqDTO.setBody("");
-        reqDTO.setDetail();
-        reqDTO.setOut_trade_no();
-        reqDTO.setFee_type();
-        reqDTO.setTotal_fee();
-        reqDTO.setSpbill_create_ip();
-        reqDTO.setNonce_str();
-        reqDTO.setTrade_type();
-        reqDTO.setOpenid();
-        TreeMap treeMap = new TreeMap(JSONObject.parseObject(JSONObject.toJSONString(reqDTO)));
-        HttpHeaders headers = new HttpHeaders();
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        map.putAll(treeMap);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+    public String unifiedOrder(TOrder order) {
 
-        ResponseEntity<UnifiedOrderResDTO> responseEntity = restTemplate.postForEntity(UNIFIED_ORDER_URL, request, UnifiedOrderResDTO.class);
-        if (responseEntity.getStatusCode() != HttpStatus.OK) {
-            throw new BusinessRuntimeException("", "请求下单api异常");//TODO
+        WXPayConfig config = new MyWXPayConfig() ;
+        WXPay wxpay = null;
+        try {
+            wxpay = new WXPay(config);
+        } catch (Exception e) {
+           logger.error("创建微信支付请求对象异常:{}",e);
         }
-        UnifiedOrderResDTO resDTO = responseEntity.getBody();
-        if ((!SUCCESS.equals(resDTO.getReturn_code())) || (SUCCESS.equals(resDTO.getResult_code()))) {
-            throw new BusinessRuntimeException("", "");
+        UnifiedOrderReqDTO unifiedOrderReqDTO=new UnifiedOrderReqDTO();
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("body", "腾讯充值中心-QQ会员充值");
+        data.put("detail", "腾讯充值中心-QQ会员充值");
+        data.put("out_trade_no", "2016090910595900000012");
+        data.put("device_info", "");
+        data.put("fee_type", "CNY");
+        data.put("total_fee", "1");
+        data.put("spbill_create_ip", "123.12.12.123");
+        data.put("notify_url", "http://www.example.com/wxpay/notify");
+        data.put("trade_type", "JSAPI");  //
+        data.put("openid", "12");
+        data.put("product_id", "12");
+
+        UnifiedOrderResDTO unifiedOrderResDTO;
+        try {
+            Map<String, String> resp = wxpay.unifiedOrder(data);
+             unifiedOrderResDTO=JSONObject.parseObject(JSONObject.toJSONString(resp)).toJavaObject(UnifiedOrderResDTO.class);
+            logger.info("微信支付统一下单返回:{}",resp);
+        } catch (Exception e) {
+            logger.error("微信支付统一下单异常:{}",e);
+            throw new BusinessRuntimeException("","下单失败");
+        }
+        if (!SUCCESS.equals(unifiedOrderResDTO.getReturn_code())){
+            logger.info("微信支付统一下单失败:{}",unifiedOrderResDTO);
+            throw new BusinessRuntimeException("","微信支付统一下单通信失败");
+        }
+        if (!SUCCESS.equals(unifiedOrderResDTO.getResult_code())){
+            logger.info("微信支付统一下单失败:{}",unifiedOrderResDTO);
+            throw new BusinessRuntimeException("","微信支付统一下单通信失败");
         }
         //通信标识和交易标识都为成功 则为交易成功
-        return;
+
+        return unifiedOrderResDTO.getPrepay_id();
     }
 }

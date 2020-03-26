@@ -13,5 +13,5 @@ public interface WeChatPayService {
      *
      * @param order
      */
-    void unifiedOrder(TOrder order);
+    String unifiedOrder(TOrder order);
 }
