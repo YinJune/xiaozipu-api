@@ -110,7 +110,7 @@ public class OrderController {
      * @return
      */
     @TraceLog
-    @PostMapping("/order/list")
+    @GetMapping("/order/list")
     public ResultInfo orderList(HttpServletRequest request, @RequestParam(value = "status", required = false) String status, @RequestParam("currentPage") Integer currentPage) {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("订单列表userId={} status={}", userId, status);
@@ -122,7 +122,7 @@ public class OrderController {
     }
 
     /**
-     * 订单列表
+     * 订单详情
      *
      * @param orderId 订单id
      * @return

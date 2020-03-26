@@ -2,7 +2,6 @@ package com.xiaozipu.client.service.wechat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.config.MyWXPayConfig;
-import com.xiaozipu.client.config.WxConfig;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderReqDTO;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
 import com.xiaozipu.client.service.wx.pay.WXPay;
@@ -11,9 +10,7 @@ import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.TOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;

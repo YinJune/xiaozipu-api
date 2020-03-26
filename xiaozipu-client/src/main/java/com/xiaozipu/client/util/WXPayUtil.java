@@ -1,5 +1,6 @@
 package com.xiaozipu.client.util;
 
+import com.xiaozipu.client.service.wx.pay.WXPayConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -19,6 +20,7 @@ import java.io.StringWriter;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.*;
+import com.xiaozipu.client.service.wx.pay.WXPayConstants.SignType;
 
 public class WXPayUtil {
 
