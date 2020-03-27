@@ -30,5 +30,5 @@ public interface TOrderMapper {
 
     int batchInsert(@Param("list") List<TOrder> list);
 
-    int batchInsertSelective(@Param("list") List<TOrder> list, @Param("selective") TOrder.Column... selective);
+    int batchInsertSelective(@Param("list") List<TOrder> list, @Param("selective") TOrder.Column ... selective);
 }

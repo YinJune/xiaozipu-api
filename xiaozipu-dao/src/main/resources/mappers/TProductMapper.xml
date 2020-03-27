@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="lineation_price" jdbcType="DECIMAL" property="lineationPrice" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, price, lineation_price, summary, category_id, status, review_status, deleted, 
-    create_time, update_time
+    id, name, price, code, lineation_price, summary, category_id, status, review_status, 
+    deleted, create_time, update_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -136,14 +137,16 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_product (name, price, lineation_price, 
-      summary, category_id, status, 
-      review_status, deleted, create_time, 
-      update_time, description)
-    values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{lineationPrice,jdbcType=DECIMAL}, 
-      #{summary,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{reviewStatus,jdbcType=VARCHAR}, #{deleted,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+    insert into t_product (name, price, code, 
+      lineation_price, summary, category_id, 
+      status, review_status, deleted, 
+      create_time, update_time, description
+      )
+    values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, 
+      #{lineationPrice,jdbcType=DECIMAL}, #{summary,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{reviewStatus,jdbcType=VARCHAR}, #{deleted,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xiaozipu.dao.entity.TProduct">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -156,6 +159,9 @@
       </if>
       <if test="price != null">
         price,
+      </if>
+      <if test="code != null">
+        code,
       </if>
       <if test="lineationPrice != null">
         lineation_price,
@@ -191,6 +197,9 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
       </if>
       <if test="lineationPrice != null">
         #{lineationPrice,jdbcType=DECIMAL},
@@ -239,6 +248,9 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
       </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
       <if test="record.lineationPrice != null">
         lineation_price = #{record.lineationPrice,jdbcType=DECIMAL},
       </if>
@@ -276,6 +288,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
+      code = #{record.code,jdbcType=VARCHAR},
       lineation_price = #{record.lineationPrice,jdbcType=DECIMAL},
       summary = #{record.summary,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
@@ -294,6 +307,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
+      code = #{record.code,jdbcType=VARCHAR},
       lineation_price = #{record.lineationPrice,jdbcType=DECIMAL},
       summary = #{record.summary,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
@@ -314,6 +328,9 @@
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="lineationPrice != null">
         lineation_price = #{lineationPrice,jdbcType=DECIMAL},
@@ -349,6 +366,7 @@
     update t_product
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
+      code = #{code,jdbcType=VARCHAR},
       lineation_price = #{lineationPrice,jdbcType=DECIMAL},
       summary = #{summary,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
@@ -364,6 +382,7 @@
     update t_product
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
+      code = #{code,jdbcType=VARCHAR},
       lineation_price = #{lineationPrice,jdbcType=DECIMAL},
       summary = #{summary,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
@@ -376,14 +395,14 @@
   </update>
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     insert into t_product
-    (name, price, lineation_price, summary, category_id, status, review_status, deleted, 
-      create_time, update_time, description)
+    (name, price, code, lineation_price, summary, category_id, status, review_status, 
+      deleted, create_time, update_time, description)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.name,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.lineationPrice,jdbcType=DECIMAL}, 
-        #{item.summary,jdbcType=VARCHAR}, #{item.categoryId,jdbcType=INTEGER}, #{item.status,jdbcType=VARCHAR}, 
-        #{item.reviewStatus,jdbcType=VARCHAR}, #{item.deleted,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.description,jdbcType=LONGVARCHAR}
+      (#{item.name,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.code,jdbcType=VARCHAR}, 
+        #{item.lineationPrice,jdbcType=DECIMAL}, #{item.summary,jdbcType=VARCHAR}, #{item.categoryId,jdbcType=INTEGER}, 
+        #{item.status,jdbcType=VARCHAR}, #{item.reviewStatus,jdbcType=VARCHAR}, #{item.deleted,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.description,jdbcType=LONGVARCHAR}
         )
     </foreach>
   </insert>
@@ -402,6 +421,9 @@
         </if>
         <if test="'price'.toString() == column.value">
           #{item.price,jdbcType=DECIMAL}
+        </if>
+        <if test="'code'.toString() == column.value">
+          #{item.code,jdbcType=VARCHAR}
         </if>
         <if test="'lineation_price'.toString() == column.value">
           #{item.lineationPrice,jdbcType=DECIMAL}

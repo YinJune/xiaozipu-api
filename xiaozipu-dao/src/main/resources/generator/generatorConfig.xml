@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
-    <classPathEntry  location="D:\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>
+    <classPathEntry  location="D:\data\repository\mysql\mysql-connector-java\5.1.48\mysql-connector-java-5.1.48.jar"/>
 <!--    <classPathEntry  location="E:\yjj\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>-->
     <context id="DB2Tables"  targetRuntime="MyBatis3">
         <!-- 批量插入插件 -->
@@ -26,8 +26,8 @@
 
 
         <!--数据库链接URL，用户名、密码 -->
-<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://118.190.134.0/xiaozipu" userId="root" password="lm7d8QrVhfD1mnL9">-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/xiaozipu" userId="root" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://118.190.134.0/xiaozipu-dev" userId="root" password="lm7d8QrVhfD1mnL9">
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/xiaozipu-dev" userId="root" password="123456">-->
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -49,7 +49,7 @@
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
         <!--        <table tableName="t_user" domainObjectName="TUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="t_product" enableCountByExample="true" enableUpdateByExample="true"
+        <table tableName="t_order" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>

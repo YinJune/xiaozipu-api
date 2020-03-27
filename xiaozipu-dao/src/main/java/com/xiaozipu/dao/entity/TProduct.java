@@ -12,6 +12,8 @@ public class TProduct {
 
     private BigDecimal price;
 
+    private String code;
+
     private BigDecimal lineationPrice;
 
     private String summary;
@@ -52,6 +54,14 @@ public class TProduct {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
     public BigDecimal getLineationPrice() {
@@ -130,6 +140,7 @@ public class TProduct {
         id("id", "id", "INTEGER", false),
         name("name", "name", "VARCHAR", false),
         price("price", "price", "DECIMAL", false),
+        code("code", "code", "VARCHAR", false),
         lineationPrice("lineation_price", "lineationPrice", "DECIMAL", false),
         summary("summary", "summary", "VARCHAR", false),
         categoryId("category_id", "categoryId", "INTEGER", false),

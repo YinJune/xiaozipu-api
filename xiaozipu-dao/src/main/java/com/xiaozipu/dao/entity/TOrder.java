@@ -14,6 +14,8 @@ public class TOrder {
 
     private BigDecimal orderAmount;
 
+    private String payType;
+
     private BigDecimal payAmount;
 
     private String recipientName;
@@ -64,6 +66,14 @@ public class TOrder {
 
     public void setOrderAmount(BigDecimal orderAmount) {
         this.orderAmount = orderAmount;
+    }
+
+    public String getPayType() {
+        return payType;
+    }
+
+    public void setPayType(String payType) {
+        this.payType = payType == null ? null : payType.trim();
     }
 
     public BigDecimal getPayAmount() {
@@ -151,6 +161,7 @@ public class TOrder {
         orderCode("order_code", "orderCode", "VARCHAR", false),
         userId("user_id", "userId", "INTEGER", false),
         orderAmount("order_amount", "orderAmount", "DECIMAL", false),
+        payType("pay_type", "payType", "VARCHAR", false),
         payAmount("pay_amount", "payAmount", "DECIMAL", false),
         recipientName("recipient_name", "recipientName", "VARCHAR", false),
         recipientPhone("recipient_phone", "recipientPhone", "VARCHAR", false),
@@ -205,7 +216,7 @@ public class TOrder {
             return this.getEscapedColumnName() + " ASC";
         }
 
-        public static Column[] excludes(Column... excludes) {
+        public static Column[] excludes(Column ... excludes) {
             ArrayList<Column> columns = new ArrayList<>(Arrays.asList(Column.values()));
             if (excludes != null && excludes.length > 0) {
                 columns.removeAll(new ArrayList<>(Arrays.asList(excludes)));

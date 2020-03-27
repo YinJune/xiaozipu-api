@@ -17,8 +17,7 @@
   </select>
     <select id="getProductList" resultMap="productSummaryResult">
         select p.id,p.price,p.name, p.lineation_price,pi.image_url,p.summary from t_product p left join t_product_image
-        pi
-        on p.id=pi.product_id where pi.status='1' and pi.type ='1'
-        <if test="categoryId != null">and p.category_id=#{categoryId}</if>
+        pi on p.id=pi.product_id where pi.status='1' and pi.type ='1'
+        <if test="categoryId != null"> and p.category_id=#{categoryId}</if>
     </select>
 </mapper>

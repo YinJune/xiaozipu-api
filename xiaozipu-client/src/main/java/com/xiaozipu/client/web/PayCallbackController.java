@@ -23,9 +23,9 @@ import java.util.Map;
  * @description:
  */
 @RestController
-public class PaymentNotifyController {
+public class PayCallbackController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PaymentNotifyController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PayCallbackController.class);
 
     @Autowired
     private PaymentService paymentService;
