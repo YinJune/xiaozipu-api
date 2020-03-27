@@ -42,11 +42,10 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         } catch (Exception e) {
            logger.error("创建微信支付请求对象异常:{}",e);
         }
-        UnifiedOrderReqDTO unifiedOrderReqDTO=new UnifiedOrderReqDTO();
         Map<String, String> data = new HashMap<String, String>();
-        data.put("body", "腾讯充值中心-QQ会员充值");
-        data.put("detail", "腾讯充值中心-QQ会员充值");
-        data.put("out_trade_no", "2016090910595900000012");
+        data.put("body", "小资铺商品");
+        data.put("detail", "小资铺商品嘿嘿");
+        data.put("out_trade_no", order.getOrderCode());
         data.put("device_info", "");
         data.put("fee_type", "CNY");
         data.put("total_fee", "1");

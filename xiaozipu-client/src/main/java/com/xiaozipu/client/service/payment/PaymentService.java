@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.payment;
 
+import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
 import com.xiaozipu.dao.entity.TOrder;
 
 /**
@@ -14,4 +15,10 @@ public interface PaymentService {
      * @param order
      */
     void unifiedOrder(TOrder order);
+
+    /**
+     * 微信支付回调
+     * @param paymentNotifyResDTO
+     */
+    void payCallback(PaymentNotifyResDTO paymentNotifyResDTO);
 }

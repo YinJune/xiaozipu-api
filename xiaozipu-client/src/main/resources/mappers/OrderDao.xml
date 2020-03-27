@@ -5,42 +5,57 @@
     <resultMap id="orderListDO" type="com.xiaozipu.client.dao.entity.OrderListDO">
         <id column="id" property="orderId"/>
         <result column="order_code" property="orderCode"/>
-        <result column="name" property="productName"/>
         <result column="order_amount" property="orderAmount"/>
         <result column="status" property="orderStatus"/>
+        <result column="quantity" property="quantity"/>
         <result column="create_time" property="createTime"/>
         <collection property="products" ofType="com.xiaozipu.client.dao.entity.CartProductDO">
             <id column="productSpecId" property="productSpecId"/>
+            <result column="name" property="productName"/>
             <result column="image_url" property="productImageUrl"/>
         </collection>
     </resultMap>
 
     <select id="getOrderList" resultMap="orderListDO">
-           SELECT     c.ct,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,     ps.id as productSpecId,o.order_amount,p.name
+           SELECT     c.quantity,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,
+           ps.id as productSpecId,o.order_amount,p.name
         FROM     t_order o
          LEFT JOIN t_order_product op ON op.order_id = o.id and o.user_id=#{userId}
          LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
          LEFT JOIN t_product p ON ps.product_id = p.id
          LEFT JOIN (
-             SELECT      count( b.order_id ) ct,      b.order_id
+             SELECT      count( b.order_id ) quantity,      b.order_id
              FROM      t_order a,      t_order_product b
              WHERE      a.id = b.order_id
              GROUP BY     b.order_id
          ) c ON c.order_id = o.id
     </select>
 
-    <resultMap id="orderDetailDO" type="com.xiaozipu.client.dao.entity.OrderDetailDO" extends="orderListDO">
-    <result column="pay_type" property="payType"/>
-    <result column="pay_amount" property="payAmount"/>
-    <result column="recipient_name" property="recipientName"/>
-    <result column="recipient_phone" property="recipientMobile"/>
-    <result column="recipient_address" property="addressDetail"/>
+    <resultMap id="orderDetailDO" type="com.xiaozipu.client.dao.entity.OrderDetailDO">
+        <id column="id" property="orderId"/>
+        <result column="order_code" property="orderCode"/>
+        <result column="order_amount" property="orderAmount"/>
+        <result column="status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_type" property="payType"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="recipient_name" property="recipientName"/>
+        <result column="recipient_phone" property="recipientMobile"/>
+        <result column="recipient_address" property="addressDetail"/>
+        <collection property="products" ofType="com.xiaozipu.client.dao.entity.CartProductDO">
+            <id column="productSpecId" property="productSpecId"/>
+            <result column="name" property="productName"/>
+            <result column="summary" property="summary"/>
+            <result column="productPrice" property="productPrice"/>
+            <result column="quantity" property="quantity"/>
+            <result column="spec_image_url" property="productImageUrl"/>
+        </collection>
     </resultMap>
 
     <select id="getOrderDetail" resultMap="orderDetailDO">
-         SELECT     o.order_code,     o.`status`,     o.order_amount,    o.pay_time,o.pay_type,o.pay_amount,
+         SELECT o.id,    o.order_code,     o.`status`,     o.order_amount,    o.pay_time,o.pay_type,o.pay_amount,
          o.recipient_name,o.recipient_phone ,o.recipient_address,
-          ps.spec_image_url ,     ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
+          ps.spec_image_url , op.price as productPrice,op.pay_price,op.quantity    ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
         FROM     t_order o
          LEFT JOIN t_order_product op ON op.order_id = o.id
          LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id

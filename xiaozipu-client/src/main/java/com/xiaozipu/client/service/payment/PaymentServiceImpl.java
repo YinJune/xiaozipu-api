@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.payment;
 
+import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
 import com.xiaozipu.client.service.wechat.WeChatPayService;
 import com.xiaozipu.dao.entity.TOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,15 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void unifiedOrder(TOrder order) {
         weChatPayService.unifiedOrder(order);
+    }
+
+    /**
+     * 微信支付回调
+     *
+     * @param paymentNotifyResDTO
+     */
+    @Override
+    public void payCallback(PaymentNotifyResDTO paymentNotifyResDTO) {
+
     }
 }

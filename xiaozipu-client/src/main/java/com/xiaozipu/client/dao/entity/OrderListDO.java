@@ -34,7 +34,7 @@ public class OrderListDO {
      */
     private BigDecimal orderAmount;
     /**
-     * 订单商品的爽
+     * 订单商品的数量
      */
     private Integer quantity;
     /**
