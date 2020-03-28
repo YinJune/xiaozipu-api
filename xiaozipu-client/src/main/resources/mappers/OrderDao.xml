@@ -55,7 +55,7 @@
     <select id="getOrderDetail" resultMap="orderDetailDO">
          SELECT o.id,    o.order_code,     o.`status`,     o.order_amount,    o.pay_time,o.pay_type,o.pay_amount,
          o.recipient_name,o.recipient_phone ,o.recipient_address,
-          ps.spec_image_url , op.price as productPrice,op.pay_price,op.quantity    ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
+          ps.spec_image_url , op.price as productPrice,op.pay_price,op.quantity  ,  ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
         FROM     t_order o
          LEFT JOIN t_order_product op ON op.order_id = o.id
          LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
