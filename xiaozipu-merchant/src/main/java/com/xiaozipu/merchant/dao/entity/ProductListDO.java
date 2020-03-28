@@ -19,6 +19,7 @@ public class ProductListDO {
      */
     private String summary;
     private BigDecimal price;
+    private BigDecimal lineationPrice;
     private String imageUrl;
     private String status;
 }

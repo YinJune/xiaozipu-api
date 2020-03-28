@@ -2,9 +2,8 @@ package com.xiaozipu.dao.mapper;
 
 import com.xiaozipu.dao.entity.TProductSpec;
 import com.xiaozipu.dao.entity.TProductSpecExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TProductSpecMapper {
     long countByExample(TProductSpecExample example);
@@ -31,5 +30,5 @@ public interface TProductSpecMapper {
 
     int batchInsert(@Param("list") List<TProductSpec> list);
 
-    int batchInsertSelective(@Param("list") List<TProductSpec> list, @Param("selective") TProductSpec.Column... selective);
+    int batchInsertSelective(@Param("list") List<TProductSpec> list, @Param("selective") TProductSpec.Column ... selective);
 }

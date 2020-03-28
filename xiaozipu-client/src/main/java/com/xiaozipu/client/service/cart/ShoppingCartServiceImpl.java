@@ -36,9 +36,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * @return
      */
     @Override
-    public TShoppingCartProduct getCartProductByProductId(Integer productSpecId) {
+    public TShoppingCartProduct getUserCartProduct(Integer userId,Integer productSpecId) {
         TShoppingCartProductExample example = new TShoppingCartProductExample();
-        example.createCriteria().andProductSpecIdEqualTo(productSpecId);
+        example.createCriteria().andUserIdEqualTo(userId).andProductSpecIdEqualTo(productSpecId);
         List<TShoppingCartProduct> carts = cartMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(carts)) {
             return carts.get(0);
@@ -55,7 +55,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void addToCart(Integer userId, AddCartDTO addCartDTO) {
-        TShoppingCartProduct cartProduct = getCartProductByProductId(addCartDTO.getProductSpecId());
+        TShoppingCartProduct cartProduct = getUserCartProduct(userId,addCartDTO.getProductSpecId());
         if (cartProduct == null) {
             //购物车中无该商品 新增
             cartProduct = new TShoppingCartProduct();

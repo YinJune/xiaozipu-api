@@ -18,12 +18,12 @@ public class AddSpecsReqDTO {
      * 规格组合
      */
     @NotEmpty(message = "规格组合不能为空")
-    private String specs;
+    private String valueIds;
     /**
      * 规格组合
      */
-    @NotEmpty(message = "规格组合不能为空")
-    private String name;
+    @NotEmpty(message = "规格名称不能为空")
+    private String specName;
     /**
      * 该组合规格售价
      */

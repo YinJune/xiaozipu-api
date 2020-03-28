@@ -36,8 +36,8 @@ public class ProductSpecServiceImpl implements ProductSpecService {
         for (AddSpecsReqDTO addSpecsReqDTO : addProductSpecReqDTO.getSpecsReqDTOList()) {
             TProductSpec productSpecs = new TProductSpec();
             productSpecs.setProductId(addProductSpecReqDTO.getProductId());
-            productSpecs.setSpec(addSpecsReqDTO.getSpecs());
-            productSpecs.setName(addSpecsReqDTO.getName());
+            productSpecs.setValueIds(addSpecsReqDTO.getValueIds());
+            productSpecs.setSpecName(addSpecsReqDTO.getSpecName());
             productSpecs.setPrice(addSpecsReqDTO.getPrice().multiply(MoneyUtils.UNIT));
             productSpecs.setCostPrice(addSpecsReqDTO.getCostPrice().multiply(MoneyUtils.UNIT));
             productSpecs.setStock(addSpecsReqDTO.getStock());
@@ -46,7 +46,7 @@ public class ProductSpecServiceImpl implements ProductSpecService {
             productSpecs.setSpecImageUrl(addSpecsReqDTO.getSpecImageUrl());
             productSpecsList.add(productSpecs);
         }
-        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.spec, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.name,TProductSpec.Column.specImageUrl);
+        productSpecsMapper.batchInsertSelective(productSpecsList, TProductSpec.Column.price, TProductSpec.Column.productId, TProductSpec.Column.specValue, TProductSpec.Column.costPrice, TProductSpec.Column.stock, TProductSpec.Column.status, TProductSpec.Column.deleted, TProductSpec.Column.specName,TProductSpec.Column.specImageUrl);
     }
 
     /**

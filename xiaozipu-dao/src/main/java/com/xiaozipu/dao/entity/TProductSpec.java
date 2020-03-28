@@ -8,11 +8,15 @@ import java.util.Date;
 public class TProductSpec {
     private Integer id;
 
-    private String name;
+    private String nameId;
+
+    private String specName;
 
     private Integer productId;
 
-    private String spec;
+    private String valueIds;
+
+    private String specValue;
 
     private BigDecimal price;
 
@@ -38,12 +42,20 @@ public class TProductSpec {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameId() {
+        return nameId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setNameId(String nameId) {
+        this.nameId = nameId == null ? null : nameId.trim();
+    }
+
+    public String getSpecName() {
+        return specName;
+    }
+
+    public void setSpecName(String specName) {
+        this.specName = specName == null ? null : specName.trim();
     }
 
     public Integer getProductId() {
@@ -54,12 +66,20 @@ public class TProductSpec {
         this.productId = productId;
     }
 
-    public String getSpec() {
-        return spec;
+    public String getValueIds() {
+        return valueIds;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec == null ? null : spec.trim();
+    public void setValueIds(String valueIds) {
+        this.valueIds = valueIds == null ? null : valueIds.trim();
+    }
+
+    public String getSpecValue() {
+        return specValue;
+    }
+
+    public void setSpecValue(String specValue) {
+        this.specValue = specValue == null ? null : specValue.trim();
     }
 
     public BigDecimal getPrice() {
@@ -128,9 +148,11 @@ public class TProductSpec {
 
     public enum Column {
         id("id", "id", "INTEGER", false),
-        name("name", "name", "VARCHAR", false),
+        nameId("name_id", "nameId", "VARCHAR", false),
+        specName("spec_name", "specName", "VARCHAR", false),
         productId("product_id", "productId", "INTEGER", false),
-        spec("spec", "spec", "VARCHAR", false),
+        valueIds("value_ids", "valueIds", "VARCHAR", false),
+        specValue("spec_value", "specValue", "VARCHAR", false),
         price("price", "price", "DECIMAL", false),
         costPrice("cost_price", "costPrice", "DECIMAL", false),
         specImageUrl("spec_image_url", "specImageUrl", "VARCHAR", false),

@@ -54,7 +54,7 @@ public class ProductController {
      * @param
      * @return
      */
-    @PostMapping("/product/list")
+    @GetMapping("/product/list")
     public ResultInfo getProductList(@RequestParam("currentPage")Integer currentPage,@RequestParam("status")String status) {
         ResultInfo resultInfo = new ResultInfo();
         List<ProductListVO> productListVOList=productService.getProductList(currentPage,status);
@@ -62,12 +62,12 @@ public class ProductController {
         return resultInfo;
     }
     /**
-     * 商品列表
+     * 商品详情
      *
      * @param
      * @return
      */
-    @PostMapping("/product/detail/{productId}")
+    @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();
         ProductDetailVO productDetail=productService.getProductDetail(productId);

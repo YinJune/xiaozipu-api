@@ -20,7 +20,7 @@ public interface ShoppingCartService {
      * @param productSpecId 商品id
      * @return
      */
-    TShoppingCartProduct getCartProductByProductId(Integer productSpecId);
+    TShoppingCartProduct getUserCartProduct(Integer userId,Integer productSpecId);
 
     /**
      * 添加购物车
