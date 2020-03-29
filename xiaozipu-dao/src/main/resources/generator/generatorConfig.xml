@@ -26,8 +26,8 @@
 
 
         <!--数据库链接URL，用户名、密码 -->
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://118.190.134.0/xiaozipu" userId="root" password="lm7d8QrVhfD1mnL9">-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://118.190.134.0/xiaozipu" userId="root" password="lm7d8QrVhfD1mnL9">
-<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/xiaozipu-dev" userId="root" password="123456">-->
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
