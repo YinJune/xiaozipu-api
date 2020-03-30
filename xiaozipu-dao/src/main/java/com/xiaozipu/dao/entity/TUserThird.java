@@ -21,6 +21,8 @@ public class TUserThird {
 
     private String thirdUniqueId;
 
+    private String status;
+
     private Date createTime;
 
     private Date updateTime;
@@ -89,6 +91,14 @@ public class TUserThird {
         this.thirdUniqueId = thirdUniqueId == null ? null : thirdUniqueId.trim();
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -114,6 +124,7 @@ public class TUserThird {
         avatarUrl("avatar_url", "avatarUrl", "VARCHAR", false),
         openId("open_id", "openId", "VARCHAR", false),
         thirdUniqueId("third_unique_id", "thirdUniqueId", "VARCHAR", false),
+        status("status", "status", "VARCHAR", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false);
 

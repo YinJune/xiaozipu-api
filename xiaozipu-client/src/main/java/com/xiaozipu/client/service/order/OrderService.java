@@ -4,6 +4,7 @@ import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.dao.entity.OrderDetailDO;
 import com.xiaozipu.client.dao.entity.OrderListDO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
 
 import java.math.BigDecimal;
@@ -29,7 +30,7 @@ public interface OrderService {
      * @param placeOrderDTO
      * @return
      */
-    Integer placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO);
+    UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO);
 
     /**
      * 订单列表

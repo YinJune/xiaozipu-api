@@ -3,6 +3,7 @@ package com.xiaozipu.client.service.user;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
 import com.xiaozipu.dao.entity.TUser;
+import com.xiaozipu.dao.entity.TUserThird;
 
 /**
  * @author: YinJunJie
@@ -36,10 +37,19 @@ public interface UserService {
 
     /**
      * 是否已注册
+     *
      * @param thirdUniqueId
      * @return
      */
     TUser findUserByThirdUniqueId(String thirdUniqueId);
 
     TUser findUserById(Integer userId);
+
+    /**
+     * 根据userId,type查询第三方账号
+     *
+     * @param userId
+     * @return
+     */
+    TUserThird getUserThirdByType(Integer userId,String type);
 }

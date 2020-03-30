@@ -4,10 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.xiaozipu.client.dao.entity.CartProductDO;
 import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 import com.xiaozipu.client.dao.mapper.OrderDao;
+import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
 import com.xiaozipu.client.pojo.vo.AddressVO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
 import com.xiaozipu.client.pojo.vo.product.CartProductVO;
 import com.xiaozipu.client.pojo.vo.product.ProductSummaryVO;
@@ -85,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
+    public UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
         //校验库存
         // 减库存 TODO
 
@@ -116,8 +118,11 @@ public class OrderServiceImpl implements OrderService {
             orderProducts.add(orderProduct);
         }
         orderProductService.batchInsert(orderProducts);
-        paymentService.unifiedOrder(order);
-        return order.getId();
+        UnifiedOrderResDTO unifiedOrderResDTO=paymentService.unifiedOrder(order);
+        UnifiedOrderResVO unifiedOrderResVO=new UnifiedOrderResVO();
+        unifiedOrderResVO.setNonce_str(unifiedOrderResDTO.getNonce_str());
+        unifiedOrderResVO.setPackageStr("prepay_id="+unifiedOrderResDTO.getPrepay_id());
+        return unifiedOrderResVO;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.xiaozipu.client.service.user;
 
 import com.xiaozipu.client.common.constants.RedisKeyConstants;
 import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.client.enums.UserThirdTypeEnum;
 import com.xiaozipu.client.enums.aliyun.SmsTypeEnum;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;
 import com.xiaozipu.client.pojo.dto.user.ThirdRegisterReqDTO;
@@ -144,5 +145,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public TUser findUserById(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    /**
+     * 根据userId,type查询第三方账号
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public TUserThird getUserThirdByType(Integer userId,String type) {
+        TUserThirdExample example=new TUserThirdExample();
+        example.createCriteria().andUserIdEqualTo(userId).andTypeEqualTo(type);
+        List<TUserThird> tUserThirds=userThirdMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(tUserThirds)){
+            return null;
+        }
+        return tUserThirds.get(0);
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.pojo.dto.order.CalculateAmountDTO;
 import com.xiaozipu.client.pojo.dto.order.PlaceOrderDTO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
 import com.xiaozipu.client.pojo.vo.order.OrderDetailVO;
 import com.xiaozipu.client.pojo.vo.order.OrderListVO;
@@ -81,27 +82,11 @@ public class OrderController {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("计算商品金额:{}", JSONObject.toJSONString(placeOrderDTO));
         ResultInfo resultInfo = new ResultInfo();
-        Integer orderId = orderService.placeOrder(userId, placeOrderDTO);
-        resultInfo.setData(orderId);
+        UnifiedOrderResVO unifiedOrderResVO = orderService.placeOrder(userId, placeOrderDTO);
+        resultInfo.setData(unifiedOrderResVO);
         return resultInfo;
     }
 
-    /**
-     * 支付
-     *
-     * @param request
-     * @return
-     */
-    @TraceLog
-    @PostMapping("/order/pay")
-    public ResultInfo payOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
-        Integer userId = (Integer) request.getAttribute("userId");
-        logger.info("订单支付:{}", JSONObject.toJSONString(placeOrderDTO));
-        ResultInfo resultInfo = new ResultInfo();
-        Integer orderId = orderService.placeOrder(userId, placeOrderDTO);
-        resultInfo.setData(orderId);
-        return resultInfo;
-    }
 
     /**
      * 订单列表

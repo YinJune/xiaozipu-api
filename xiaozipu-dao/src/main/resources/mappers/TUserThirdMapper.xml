@@ -10,6 +10,7 @@
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="third_unique_id" jdbcType="VARCHAR" property="thirdUniqueId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, type, gender, nick_name, avatar_url, open_id, third_unique_id, create_time, 
-    update_time
+    id, user_id, type, gender, nick_name, avatar_url, open_id, third_unique_id, status, 
+    create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.xiaozipu.dao.entity.TUserThirdExample" resultMap="BaseResultMap">
     select
@@ -112,12 +113,12 @@
     </selectKey>
     insert into t_user_third (user_id, type, gender, 
       nick_name, avatar_url, open_id, 
-      third_unique_id, create_time, update_time
-      )
+      third_unique_id, status, create_time, 
+      update_time)
     values (#{userId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
-      #{thirdUniqueId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{thirdUniqueId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xiaozipu.dao.entity.TUserThird">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -145,6 +146,9 @@
       </if>
       <if test="thirdUniqueId != null">
         third_unique_id,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="createTime != null">
         create_time,
@@ -174,6 +178,9 @@
       </if>
       <if test="thirdUniqueId != null">
         #{thirdUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -216,6 +223,9 @@
       <if test="record.thirdUniqueId != null">
         third_unique_id = #{record.thirdUniqueId,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -237,6 +247,7 @@
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
       open_id = #{record.openId,jdbcType=VARCHAR},
       third_unique_id = #{record.thirdUniqueId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -267,6 +278,9 @@
       <if test="thirdUniqueId != null">
         third_unique_id = #{thirdUniqueId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -285,19 +299,20 @@
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       open_id = #{openId,jdbcType=VARCHAR},
       third_unique_id = #{thirdUniqueId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     insert into t_user_third
-    (user_id, type, gender, nick_name, avatar_url, open_id, third_unique_id, create_time, 
-      update_time)
+    (user_id, type, gender, nick_name, avatar_url, open_id, third_unique_id, status, 
+      create_time, update_time)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.userId,jdbcType=INTEGER}, #{item.type,jdbcType=VARCHAR}, #{item.gender,jdbcType=VARCHAR}, 
         #{item.nickName,jdbcType=VARCHAR}, #{item.avatarUrl,jdbcType=VARCHAR}, #{item.openId,jdbcType=VARCHAR}, 
-        #{item.thirdUniqueId,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.thirdUniqueId,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
         #{item.updateTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
@@ -331,6 +346,9 @@
         </if>
         <if test="'third_unique_id'.toString() == column.value">
           #{item.thirdUniqueId,jdbcType=VARCHAR}
+        </if>
+        <if test="'status'.toString() == column.value">
+          #{item.status,jdbcType=VARCHAR}
         </if>
         <if test="'create_time'.toString() == column.value">
           #{item.createTime,jdbcType=TIMESTAMP}
