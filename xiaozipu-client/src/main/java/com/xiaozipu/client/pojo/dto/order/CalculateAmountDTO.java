@@ -14,7 +14,8 @@ public class CalculateAmountDTO {
     /**
      * 商品规格id 从商品详情也来的时候用这个  进下单页面时 不会有多个商品
      */
-    private List<ProductSpecQuantity> productSpecQuantityList;
+    private Integer productSpecId;
+    private Integer quantity;
     /**
      * 从购物车来的时候用这个  进下单页面时会有多个商品
      */

@@ -20,7 +20,7 @@ public interface ShoppingCartService {
      * @param productSpecId 商品id
      * @return
      */
-    TShoppingCartProduct getUserCartProduct(Integer userId,Integer productSpecId);
+    TShoppingCartProduct getUserCartProduct(Integer userId, Integer productSpecId);
 
     /**
      * 添加购物车
@@ -54,9 +54,16 @@ public interface ShoppingCartService {
     BigDecimal calculateAmount(List<Integer> cartId);
 
     /**
-     *
      * @param cartIds
      * @return
      */
     List<CartProductDO> batchGetProductSummary(List<Integer> cartIds);
+
+    /**
+     * 根据id查询cart
+     *
+     * @param cartId
+     * @return
+     */
+    TShoppingCartProduct getById(Integer cartId);
 }

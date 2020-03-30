@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public BigDecimal calculateAmount(CalculateAmountDTO calculateAmountDTO) {
         //日后可能会有优惠券、运费、折扣
-        BigDecimal productAmount = productSpecService.calculateAmount(calculateAmountDTO.getProductSpecQuantityList());
+        BigDecimal productAmount = productSpecService.calculateAmount(calculateAmountDTO.getProductSpecId(),calculateAmountDTO.getQuantity());
         return productAmount;
     }
 
@@ -89,6 +89,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
         //校验库存
+        checkStock(placeOrderDTO);
         // 减库存 TODO
 
         TUserAddress address = addressService.getAddressById(placeOrderDTO.getAddressId());
@@ -106,13 +107,14 @@ public class OrderServiceImpl implements OrderService {
         order.setDeleted(StatusEnum.INVALID.getKey());
         orderMapper.insertSelective(order);
         List<TOrderProduct> orderProducts = new ArrayList<>();
-        for (ProductSpecQuantity productSpecQuantity : placeOrderDTO.getProductSpecQuantityList()) {
-            TProductSpec productSpecs = productSpecService.getById(productSpecQuantity.getProductSpecId());
+        for (Integer cartId : placeOrderDTO.getCartIds()) {
+            TShoppingCartProduct cartProduct=cartService.getById(cartId);
+            TProductSpec productSpecs = productSpecService.getById(cartProduct.getProductSpecId());
             TOrderProduct orderProduct = new TOrderProduct();
             orderProduct.setPrice(productSpecs.getPrice());
             orderProduct.setPayPrice(productSpecs.getPrice());
-            orderProduct.setQuantity(productSpecQuantity.getQuantity());
-            orderProduct.setProductSpecId(productSpecQuantity.getProductSpecId());
+            orderProduct.setQuantity(cartProduct.getQuantity());
+            orderProduct.setProductSpecId(cartProduct.getProductSpecId());
             orderProduct.setUserId(userId);
             orderProduct.setOrderId(order.getId());
             orderProducts.add(orderProduct);
@@ -123,6 +125,10 @@ public class OrderServiceImpl implements OrderService {
         unifiedOrderResVO.setNonce_str(unifiedOrderResDTO.getNonce_str());
         unifiedOrderResVO.setPackageStr("prepay_id="+unifiedOrderResDTO.getPrepay_id());
         return unifiedOrderResVO;
+    }
+
+    private void checkStock(PlaceOrderDTO placeOrderDTO) {
+
     }
 
     /**
@@ -176,15 +182,14 @@ public class OrderServiceImpl implements OrderService {
             });
         } else {
             //从商品详情来  只可能有一个商品规格
-            ProductSpecQuantity productSpecQuantity = calculateAmountDTO.getProductSpecQuantityList().get(0);
-            Integer productSpecId = productSpecQuantity.getProductSpecId();
-            orderAmount = calculateAmount(calculateAmountDTO);
+            TProductSpec productSpec=productSpecService.getById(calculateAmountDTO.getProductSpecId());
+            orderAmount=productSpec.getPrice().divide(MoneyUtils.UNIT).multiply(new BigDecimal(calculateAmountDTO.getQuantity()));
             cartProductVOS = new ArrayList<>();
-            TProductSpec productSpec = productSpecService.getById(productSpecId);
+//            TProductSpec productSpec = productSpecService.getById(calculateAmountDTO.getProductSpecId());
             ProductSummaryDO productSummaryDO=productService.getProductSummaryBoById(productSpec.getProductId());
             CartProductVO cartProductVO=new CartProductVO();
-            cartProductVO.setProductSpecId(productSpecId);
-            cartProductVO.setQuantity(productSpecQuantity.getQuantity());
+            cartProductVO.setProductSpecId(calculateAmountDTO.getProductSpecId());
+            cartProductVO.setQuantity(calculateAmountDTO.getQuantity());
             cartProductVO.setProductImageUrl(productSummaryDO.getProductImageUrl());
             cartProductVO.setProductName(productSummaryDO.getProductName());
             cartProductVO.setProductPrice(productSpec.getPrice().divide(MoneyUtils.UNIT));

@@ -24,10 +24,10 @@ public interface ProductSpecService {
     /**
      * 计算商品集合金额
      *
-     * @param productSpecQuantities
+     * @param productSpecId
      * @return
      */
-    BigDecimal calculateAmount(List<ProductSpecQuantity> productSpecQuantities);
+    BigDecimal calculateAmount(Integer productSpecId,Integer quantity);
 
     /**
      * 获取商品规格byid

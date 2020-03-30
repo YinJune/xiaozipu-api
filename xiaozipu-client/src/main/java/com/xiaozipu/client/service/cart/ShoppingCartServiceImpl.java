@@ -117,4 +117,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public List<CartProductDO> batchGetProductSummary(List<Integer> cartIds) {
         return shoppingCartDao.batchGetProductSummary(cartIds);
     }
+
+    /**
+     * 根据id查询cart
+     *
+     * @param cartId
+     * @return
+     */
+    @Override
+    public TShoppingCartProduct getById(Integer cartId) {
+        return cartMapper.selectByPrimaryKey(cartId);
+    }
 }
