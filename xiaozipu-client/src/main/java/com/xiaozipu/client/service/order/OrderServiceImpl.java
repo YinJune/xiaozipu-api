@@ -128,7 +128,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void checkStock(PlaceOrderDTO placeOrderDTO) {
-
+        placeOrderDTO.getCartIds();
     }
 
     /**
