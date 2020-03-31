@@ -148,7 +148,7 @@ public class OrderServiceImpl implements OrderService {
      * @param placeOrderDTO
      */
     @Transactional(rollbackFor = Exception.class)
-    private void reduceStock(PlaceOrderDTO placeOrderDTO) {
+    public void reduceStock(PlaceOrderDTO placeOrderDTO) {
         if (CollectionUtils.isEmpty(placeOrderDTO.getCartIds())) {
             //商品详情过来
             TProductSpec productSpec = productSpecService.getById(placeOrderDTO.getProductSpecId());
