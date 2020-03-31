@@ -5,6 +5,7 @@ wechat:
     echo-token: 123
   pay:
     mchId: 1582615011
+    notifyUrl: ${xiaozipu.domain}/client/notify/wxpay/order
 interceptor:
   patterns:
     include: /**
@@ -18,3 +19,6 @@ aliyun:
     domain-name:
     region:
     version:
+
+xiaozipu:
+  domain: http://20o609b535.imwork.net

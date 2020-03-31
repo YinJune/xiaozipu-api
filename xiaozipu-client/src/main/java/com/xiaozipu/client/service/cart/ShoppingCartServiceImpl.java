@@ -128,4 +128,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public TShoppingCartProduct getById(Integer cartId) {
         return cartMapper.selectByPrimaryKey(cartId);
     }
+
+    /**
+     * 批量获取根据id
+     *
+     * @param cartIds
+     * @return
+     */
+    @Override
+    public List<TShoppingCartProduct> listByIds(List<Integer> cartIds) {
+        TShoppingCartProductExample example=new TShoppingCartProductExample();
+        example.createCriteria().andIdIn(cartIds);
+        return cartMapper.selectByExample(example);
+    }
 }

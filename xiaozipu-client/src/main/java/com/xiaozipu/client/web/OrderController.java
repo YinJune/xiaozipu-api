@@ -62,7 +62,7 @@ public class OrderController {
      */
     @TraceLog
     @PostMapping("/order/confirm/info")
-    public ResultInfo confirmOrderInfo(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
+    public ResultInfo confirmOrderInfo(HttpServletRequest request, @RequestBody CalculateAmountDTO calculateAmountDTO) {
         ResultInfo resultInfo = new ResultInfo();
         Integer userId= (Integer) request.getAttribute("userId");
         ConfirmOrderInfoVO confirmOrderInfoVO =orderService.confirmOrderInfo(userId,calculateAmountDTO);

@@ -66,4 +66,12 @@ public interface ShoppingCartService {
      * @return
      */
     TShoppingCartProduct getById(Integer cartId);
+
+    /**
+     * 批量获取根据id
+     *
+     * @param cartIds
+     * @return
+     */
+    List<TShoppingCartProduct> listByIds(List<Integer> cartIds);
 }

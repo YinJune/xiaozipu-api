@@ -8,6 +8,7 @@ import com.xiaozipu.dao.entity.TProductSpec;
 import com.xiaozipu.dao.entity.TProductSpecExample;
 import com.xiaozipu.dao.mapper.TProductSpecMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -74,5 +75,42 @@ public class ProductSpecServiceImpl implements ProductSpecService {
     @Override
     public TProductSpec getById(Integer productSpecId) {
         return productSpecsMapper.selectByPrimaryKey(productSpecId);
+    }
+
+    /**
+     * 批量查询商品规格根据id
+     *
+     * @param productSpecIds
+     * @return
+     */
+    @Override
+    public List<TProductSpec> listProductSpec(List<Integer> productSpecIds) {
+        TProductSpecExample example=new TProductSpecExample();
+        example.createCriteria().andIdIn(productSpecIds);
+        return productSpecsMapper.selectByExample(example);
+    }
+
+    /**
+     * 更新商品规格
+     *
+     * @param productSpec
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateProductSpec(TProductSpec productSpec) {
+        productSpecsMapper.updateByPrimaryKeySelective(productSpec);
+    }
+
+    /**
+     * 批量更新商品规格
+     *
+     * @param productSpecs
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void batchUpdateProductSpec(List<TProductSpec> productSpecs) {
+        for (TProductSpec productSpec:productSpecs){
+            updateProductSpec(productSpec);
+        }
     }
 }
