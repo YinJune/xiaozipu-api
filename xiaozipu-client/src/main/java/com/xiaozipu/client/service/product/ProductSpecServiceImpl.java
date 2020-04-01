@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.product;
 
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.order.ProductSpecQuantity;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.common.util.MoneyUtils;

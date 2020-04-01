@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.product;
 
 import com.github.pagehelper.PageHelper;
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.client.dao.entity.ProductSummaryDO;
 import com.xiaozipu.dao.entity.TRecommendProduct;
 import com.xiaozipu.dao.entity.TRecommendProductExample;

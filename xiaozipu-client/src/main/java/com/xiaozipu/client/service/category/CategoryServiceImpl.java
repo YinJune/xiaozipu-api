@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.category;
 
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.CategoryLevelEnum;
 import com.xiaozipu.dao.entity.TCategory;
 import com.xiaozipu.dao.entity.TCategoryExample;

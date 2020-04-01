@@ -437,4 +437,17 @@
       )
     </foreach>
   </insert>
+  <select id="selectOneByExample" parameterType="com.xiaozipu.dao.entity.TOrderExample" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
 </mapper>

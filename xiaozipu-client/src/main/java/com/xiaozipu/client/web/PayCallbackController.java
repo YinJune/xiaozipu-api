@@ -38,6 +38,7 @@ public class PayCallbackController {
      */
     @GetMapping("/notify/wxpay/order")
     public String payCallback(HttpServletRequest request) {
+        String result = "FAIL";
         BufferedReader bufferedReader = null;
         InputStream inputStream = null;
         StringBuffer xmlData = new StringBuffer();
@@ -73,14 +74,14 @@ public class PayCallbackController {
         try {
             wxpay = new WXPay(config);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("支付回调异常:{}", e);
         }
 
         Map<String, String> notifyMap = null;  // 转换成map
         try {
             notifyMap = WXPayUtil.xmlToMap(notifyData);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("xml转map错误:{}", e);
         }
 
         try {
@@ -88,16 +89,17 @@ public class PayCallbackController {
                 // 签名正确
                 // 进行处理。
                 // 注意特殊情况：订单已经退款，但收到了支付结果成功的通知，不应把商户侧订单状态从退款改成支付成功
+                PaymentNotifyResDTO paymentNotifyResDTO = JSONObject.parseObject(JSONObject.toJSONString(notifyMap)).toJavaObject(PaymentNotifyResDTO.class);
+                paymentService.payCallback(paymentNotifyResDTO);
+                result = "SUCCESS";
             } else {
                 // 签名错误，如果数据里没有sign字段，也认为是签名错误
+                logger.error("签名错误:{}");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("支付回调异常:{}", e);
         }
 
-        ResultInfo resultInfo = new ResultInfo();
-        PaymentNotifyResDTO paymentNotifyResDTO = JSONObject.parseObject(JSONObject.toJSONString(notifyMap)).toJavaObject(PaymentNotifyResDTO.class);
-        paymentService.payCallback(paymentNotifyResDTO);
-        return "SUCCESS";
+        return result;
     }
 }

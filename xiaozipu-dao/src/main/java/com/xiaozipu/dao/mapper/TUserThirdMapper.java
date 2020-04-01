@@ -16,6 +16,8 @@ public interface TUserThirdMapper {
 
     int insertSelective(TUserThird record);
 
+    TUserThird selectOneByExample(TUserThirdExample example);
+
     List<TUserThird> selectByExample(TUserThirdExample example);
 
     TUserThird selectByPrimaryKey(Integer id);

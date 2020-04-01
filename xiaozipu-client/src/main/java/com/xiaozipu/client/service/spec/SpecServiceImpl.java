@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.spec;
 
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.dao.entity.TSpecName;
 import com.xiaozipu.dao.entity.TSpecNameExample;
 import com.xiaozipu.dao.entity.TSpecValue;

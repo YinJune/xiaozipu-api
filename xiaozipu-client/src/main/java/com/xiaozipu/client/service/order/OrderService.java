@@ -6,6 +6,7 @@ import com.xiaozipu.client.dao.entity.OrderDetailDO;
 import com.xiaozipu.client.dao.entity.OrderListDO;
 import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.pojo.vo.order.ConfirmOrderInfoVO;
+import com.xiaozipu.dao.entity.TOrder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -57,4 +58,19 @@ public interface OrderService {
      * @return
      */
     ConfirmOrderInfoVO confirmOrderInfo(Integer userId, CalculateAmountDTO calculateAmountDTO);
+
+    /**
+     * 根据code查询订单
+     *
+     * @param orderCode
+     * @return
+     */
+    TOrder getOrderByCode(String orderCode);
+
+    /**
+     * 支付成功
+     *
+     * @param orderCode
+     */
+    void paySuccess(String orderCode);
 }

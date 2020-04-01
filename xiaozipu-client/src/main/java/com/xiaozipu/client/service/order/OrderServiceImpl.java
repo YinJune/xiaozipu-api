@@ -16,6 +16,7 @@ import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.client.service.payment.PaymentService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.ProductSpecService;
+import com.xiaozipu.common.enums.PayTypeEnum;
 import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
@@ -38,10 +39,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: YinJunJie
@@ -246,5 +244,32 @@ public class OrderServiceImpl implements OrderService {
         confirmOrderInfoVO.setOrderAmount(orderAmount.divide(MoneyUtils.UNIT));
         confirmOrderInfoVO.setPayAmount(orderAmount.divide(MoneyUtils.UNIT));
         return confirmOrderInfoVO;
+    }
+
+    /**
+     * 根据code查询订单
+     *
+     * @param orderCode
+     * @return
+     */
+    @Override
+    public TOrder getOrderByCode(String orderCode) {
+        TOrderExample example=new TOrderExample();
+        example.createCriteria().andOrderCodeEqualTo(orderCode);
+        return orderMapper.selectOneByExample(example);
+    }
+
+    /**
+     * 支付成功
+     *
+     * @param orderCode
+     */
+    @Override
+    public void paySuccess(String orderCode) {
+        TOrder order=getOrderByCode(orderCode);
+        order.setPayStatus(StatusEnum.VALID.getKey());
+        order.setPayTime(new Date());
+        order.setPayType(PayTypeEnum.WX.getKey());
+        orderMapper.updateByPrimaryKeySelective(order);
     }
 }

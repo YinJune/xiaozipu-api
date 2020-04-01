@@ -16,6 +16,8 @@ public interface TOrderMapper {
 
     int insertSelective(TOrder record);
 
+    TOrder selectOneByExample(TOrderExample example);
+
     List<TOrder> selectByExample(TOrderExample example);
 
     TOrder selectByPrimaryKey(Integer id);

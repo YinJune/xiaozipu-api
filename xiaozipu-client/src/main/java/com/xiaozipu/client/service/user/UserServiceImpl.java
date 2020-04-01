@@ -1,7 +1,7 @@
 package com.xiaozipu.client.service.user;
 
 import com.xiaozipu.client.common.constants.RedisKeyConstants;
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.client.enums.UserThirdTypeEnum;
 import com.xiaozipu.client.enums.aliyun.SmsTypeEnum;
 import com.xiaozipu.client.pojo.dto.CaptchaLoginDTO;

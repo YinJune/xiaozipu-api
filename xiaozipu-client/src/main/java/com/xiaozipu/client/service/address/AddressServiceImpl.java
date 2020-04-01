@@ -1,6 +1,6 @@
 package com.xiaozipu.client.service.address;
 
-import com.xiaozipu.client.enums.StatusEnum;
+import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.client.pojo.dto.AddressDTO;
 import com.xiaozipu.client.pojo.vo.AddressVO;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
