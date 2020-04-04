@@ -6,8 +6,8 @@ package com.xiaozipu.client.enums;
  * @description:
  */
 public enum UserThirdTypeEnum {
-    WECHAT("1","微信"),
-    ALIPAY("2","支付宝");
+    WECHAT("01","微信"),
+    ALIPAY("02","支付宝");
     private String key;
     private String value;
 

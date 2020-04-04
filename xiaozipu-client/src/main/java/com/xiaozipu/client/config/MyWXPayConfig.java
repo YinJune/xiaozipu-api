@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 
@@ -14,6 +15,7 @@ import java.io.InputStream;
  * @date: 2020/3/26 16:13
  * @description:
  */
+@Component
 public class MyWXPayConfig extends WXPayConfig implements   EnvironmentAware {
 
     private Environment environment;
@@ -45,7 +47,9 @@ public class MyWXPayConfig extends WXPayConfig implements   EnvironmentAware {
         return new IWXPayDomain() {
             @Override
             public void report(String domain, long elapsedTimeMillis, Exception ex) {
-                logger.info("请求微信支付:{}",ex);
+                if (ex!=null){
+                    logger.error("请求微信支付异常:{}",ex);
+                }
             }
 
             @Override

@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
         //校验参数
-        if (StringUtils.isEmpty(placeOrderDTO.getCartIds())&&placeOrderDTO.getProductSpecId()==null){
+        if (StringUtils.isEmpty(placeOrderDTO.getCartIds())&&(placeOrderDTO.getProductSpecId()==null||placeOrderDTO.getQuantity()==null)){
             throw new BusinessRuntimeException("","参数错误");
         }
         //校验并减库存
@@ -168,7 +168,7 @@ public class OrderServiceImpl implements OrderService {
                 if (productSpec.getStock() < productMap.get(productSpec.getId())) {
                     throw new BusinessRuntimeException("", "库存不足");
                 }
-                productSpec.setStock(productSpec.getStock() - placeOrderDTO.getQuantity());
+                productSpec.setStock(productSpec.getStock() - productMap.get(productSpec.getId()));
             }
             productSpecService.batchUpdateProductSpec(productSpecs);
         }

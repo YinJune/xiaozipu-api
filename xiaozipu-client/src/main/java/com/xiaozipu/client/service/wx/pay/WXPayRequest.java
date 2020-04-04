@@ -1,5 +1,6 @@
 package com.xiaozipu.client.service.wx.pay;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,6 +16,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -27,6 +30,7 @@ import java.security.SecureRandom;
 import static com.xiaozipu.client.service.wx.pay.WXPayConstants.USER_AGENT;
 
 public class WXPayRequest {
+    private static Logger logger=LoggerFactory.getLogger(WXPayRequest.class);
     private WXPayConfig config;
     public WXPayRequest(WXPayConfig config) throws Exception{
 
@@ -104,6 +108,7 @@ public class WXPayRequest {
         httpPost.addHeader("Content-Type", "text/xml");
         httpPost.addHeader("User-Agent", USER_AGENT + " " + config.getMchID());
         httpPost.setEntity(postEntity);
+        logger.info("请求微信支付:{}", JSONObject.toJSONString(data));
 
         HttpResponse httpResponse = httpClient.execute(httpPost);
         HttpEntity httpEntity = httpResponse.getEntity();

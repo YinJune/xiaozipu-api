@@ -42,6 +42,9 @@ public class WeChatPayServiceImpl implements WeChatPayService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MyWXPayConfig myWXPayConfig;
+
     /**
      * 微信支付统一下单
      *
@@ -52,10 +55,9 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         TUserThird userThird=userService.getUserThirdByType(order.getUserId(), UserThirdTypeEnum.WECHAT.getKey());
-        WXPayConfig config = new MyWXPayConfig() ;
         WXPay wxpay = null;
         try {
-            wxpay = new WXPay(config);
+            wxpay = new WXPay(myWXPayConfig);
         } catch (Exception e) {
            logger.error("创建微信支付请求对象异常:{}",e);
         }

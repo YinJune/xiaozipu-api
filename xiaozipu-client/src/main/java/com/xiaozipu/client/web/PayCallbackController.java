@@ -30,6 +30,9 @@ public class PayCallbackController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private MyWXPayConfig myWXPayConfig;
+
     /**
      * 微信支付回调
      *
@@ -69,10 +72,9 @@ public class PayCallbackController {
         }
         String notifyData = "...."; // 支付结果通知的xml格式数据
 
-        MyWXPayConfig config = new MyWXPayConfig();
         WXPay wxpay = null;
         try {
-            wxpay = new WXPay(config);
+            wxpay = new WXPay(myWXPayConfig);
         } catch (Exception e) {
             logger.error("支付回调异常:{}", e);
         }
