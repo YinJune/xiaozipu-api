@@ -1,12 +1,17 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.dao.entity.TOrder;
+import com.xiaozipu.merchant.dao.entity.OrderListDO;
+import com.xiaozipu.merchant.pojo.dto.order.OrderListReqDTO;
+import com.xiaozipu.merchant.service.order.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author: YinJunJie
@@ -17,9 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 public class OrderController {
     private static final Logger logger= LoggerFactory.getLogger(OrderController.class);
 
-    @GetMapping
-    public ResultInfo orderList(HttpServletRequest request){
+    @Autowired
+    private OrderService orderService;
+
+    @PostMapping("/order/list")
+    public ResultInfo orderList(HttpServletRequest request, @RequestBody OrderListReqDTO orderListReqDTO){
         ResultInfo resultInfo= new ResultInfo();
+        List<OrderListDO> orderListDOS=orderService.getOrderList(orderListReqDTO);
         return resultInfo;
     }
 }
