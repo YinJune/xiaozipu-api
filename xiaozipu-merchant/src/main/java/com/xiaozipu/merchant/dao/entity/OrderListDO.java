@@ -40,4 +40,6 @@ public class OrderListDO {
      * 创建时间
      */
     private Date createTime;
+
+    private List<OrderProductDTO> orderProducts;
 }
