@@ -46,7 +46,6 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
         try {
-            logger.info("----请求uri:{},type:{}", request.getRequestURI(),request.getMethod());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();
             request.setAttribute("userId", Integer.parseInt(userId));

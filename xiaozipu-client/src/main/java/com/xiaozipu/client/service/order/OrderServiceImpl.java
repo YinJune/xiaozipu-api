@@ -135,6 +135,7 @@ public class OrderServiceImpl implements OrderService {
         }
         orderProductService.batchInsert(orderProducts);
         UnifiedOrderResVO unifiedOrderResVO = paymentService.unifiedOrder(order);
+        unifiedOrderResVO.setOrderId(order.getId());
         return unifiedOrderResVO;
     }
 

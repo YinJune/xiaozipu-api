@@ -14,4 +14,5 @@ public class UnifiedOrderResVO {
     private String timeStamp;
     private String signType;
     private String paySign;
+    private Integer orderId;
 }

@@ -88,6 +88,7 @@ public class PayCallbackController {
 
         try {
             if (wxpay.isPayResultNotifySignatureValid(notifyMap)) {
+                logger.info("支付回调:{}",JSONObject.toJSONString(notifyMap));
                 // 签名正确
                 // 进行处理。
                 // 注意特殊情况：订单已经退款，但收到了支付结果成功的通知，不应把商户侧订单状态从退款改成支付成功
