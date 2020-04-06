@@ -3,7 +3,9 @@ package com.xiaozipu.common.util;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -12,6 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -30,12 +33,12 @@ public class HttpUtils {
 
     //无参方式
     public static String getForResult(String url) throws Exception {
-       return getWithParams(url, new HashMap());
+        return getWithParams(url, new HashMap());
     }
 
     //有参方式
     public static String getWithParams(String url, Map<String, Object> params) throws Exception {
-        logger.info("请求url:{},参数:{}",url, JSONObject.toJSONString(params));
+        logger.info("请求url:{},参数:{}", url, JSONObject.toJSONString(params));
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;
         try {
@@ -53,7 +56,7 @@ public class HttpUtils {
             HttpEntity responseEntity = response.getEntity();
             logger.info("响应状态为:{}", response.getStatusLine());
             if (responseEntity != null) {
-                String result=EntityUtils.toString(responseEntity);
+                String result = EntityUtils.toString(responseEntity);
                 logger.info("响应内容长度为：{}", responseEntity.getContentLength());
                 logger.info("响应内容为：{}", result);
                 return result;
@@ -136,7 +139,7 @@ public class HttpUtils {
         return pairs;
     }
 
-    public String postJson(String url, Map params) {
+    public static String postJson(String url, Map params) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;
         try {
@@ -212,4 +215,19 @@ public class HttpUtils {
 
         return urlBuilder.toString();
     }
+
+
+    // 使用POST方法发送XML数据
+    public static String sendXMLDataByPost(String url, String xmlData) throws Exception {
+        HttpClient client = HttpClients.createDefault();
+        HttpPost post = new HttpPost(url);
+       StringEntity stringEntity=new StringEntity(xmlData);
+       post.setEntity(stringEntity);
+        HttpResponse response = client.execute(post);
+        System.out.println("heihei---"+response.toString());
+        HttpEntity entity = response.getEntity();
+        String result = EntityUtils.toString(entity, "UTF-8");
+        return result;
+    }
+
 }

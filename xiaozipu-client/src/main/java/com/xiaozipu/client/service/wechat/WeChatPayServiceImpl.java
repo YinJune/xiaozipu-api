@@ -6,9 +6,11 @@ import com.xiaozipu.client.config.WxConfig;
 import com.xiaozipu.client.enums.UserThirdTypeEnum;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderReqDTO;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.service.user.UserService;
 import com.xiaozipu.client.service.wx.pay.WXPay;
 import com.xiaozipu.client.service.wx.pay.WXPayConfig;
+import com.xiaozipu.client.service.wx.pay.WXPayConstants;
 import com.xiaozipu.client.service.wx.pay.WXPayUtil;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
 import com.xiaozipu.dao.entity.TOrder;
@@ -33,17 +35,20 @@ import java.util.Map;
  */
 @Service
 public class WeChatPayServiceImpl implements WeChatPayService {
-    private static final Logger logger= LoggerFactory.getLogger(WeChatPayServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(WeChatPayServiceImpl.class);
 
     private static final String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
     private static final String SUCCESS = "SUCCESS";
 
-    private String notifyUrl="http://20o609b535.imwork.net/client/notify/wxpay/order";
+    private String notifyUrl = "http://20o609b535.imwork.net/client/notify/wxpay/order";
     @Autowired
     private UserService userService;
 
     @Autowired
     private MyWXPayConfig myWXPayConfig;
+
+    @Autowired
+    private WxConfig wxConfig;
 
     /**
      * 微信支付统一下单
@@ -51,15 +56,16 @@ public class WeChatPayServiceImpl implements WeChatPayService {
      * @param order
      */
     @Override
-    public UnifiedOrderResDTO unifiedOrder(TOrder order) {
+    public UnifiedOrderResVO unifiedOrder(TOrder order) throws Exception {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        TUserThird userThird=userService.getUserThirdByType(order.getUserId(), UserThirdTypeEnum.WECHAT.getKey());
+        TUserThird userThird = userService.getUserThirdByType(order.getUserId(), UserThirdTypeEnum.WECHAT.getKey());
         WXPay wxpay = null;
         try {
+//            wxpay = new WXPay(myWXPayConfig,false,true);
             wxpay = new WXPay(myWXPayConfig);
         } catch (Exception e) {
-           logger.error("创建微信支付请求对象异常:{}",e);
+            logger.error("创建微信支付请求对象异常:{}", e);
         }
         Map<String, String> data = new HashMap<String, String>();
         // appid mch_id nonce_str sign sign_type fillRequestData中填充
@@ -69,31 +75,55 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         data.put("out_trade_no", order.getOrderCode());
         data.put("fee_type", "CNY");
         data.put("total_fee", "1");
-        data.put("spbill_create_ip",getIpAddr(request) );
+        data.put("spbill_create_ip", getIpAddr(request));
         data.put("notify_url", notifyUrl);
         data.put("trade_type", "JSAPI");  //
-        data.put("openid",userThird.getOpenId());
+        data.put("openid", userThird.getOpenId());
 
         UnifiedOrderResDTO unifiedOrderResDTO;
         try {
             Map<String, String> resp = wxpay.unifiedOrder(data);
-             unifiedOrderResDTO=JSONObject.parseObject(JSONObject.toJSONString(resp)).toJavaObject(UnifiedOrderResDTO.class);
-            logger.info("微信支付统一下单返回:{}",resp);
+            unifiedOrderResDTO = JSONObject.parseObject(JSONObject.toJSONString(resp)).toJavaObject(UnifiedOrderResDTO.class);
+            logger.info("微信支付统一下单返回:{}", resp);
         } catch (Exception e) {
-            logger.error("微信支付统一下单异常:{}",e);
-            throw new BusinessRuntimeException("","下单失败");
+            logger.error("微信支付统一下单异常:{}", e);
+            throw new BusinessRuntimeException("", "下单失败");
         }
-        if (!SUCCESS.equals(unifiedOrderResDTO.getReturn_code())){
-            logger.info("微信支付统一下单失败:{}",unifiedOrderResDTO);
-            throw new BusinessRuntimeException("","微信支付统一下单通信失败");
+        if (!SUCCESS.equals(unifiedOrderResDTO.getReturn_code())) {
+            logger.info("微信支付统一下单失败:{}", unifiedOrderResDTO);
+            throw new BusinessRuntimeException("", "微信支付统一下单通信失败");
         }
-        if (!SUCCESS.equals(unifiedOrderResDTO.getResult_code())){
-            logger.info("微信支付统一下单失败:{}",unifiedOrderResDTO);
-            throw new BusinessRuntimeException("","微信支付统一下单通信失败");
+        if (!SUCCESS.equals(unifiedOrderResDTO.getResult_code())) {
+            logger.info("微信支付统一下单失败:{}", unifiedOrderResDTO);
+            throw new BusinessRuntimeException("", "微信支付统一下单通信失败");
         }
         //通信标识和交易标识都为成功 则为交易成功
+        unifiedOrderResDTO.setNonce_str(WXPayUtil.generateNonceStr());
 
-        return unifiedOrderResDTO;
+        //------------
+        //返回给APP端的参数，APP端再调起支付接口
+        Map<String, String> repData = new HashMap<>();
+        UnifiedOrderResVO unifiedOrderResVO = new UnifiedOrderResVO();
+        //注意参数要区分大小写
+        repData.put("appId", wxConfig.getAppId());
+        String packag = "prepay_id=" + unifiedOrderResDTO.getPrepay_id();
+        repData.put("package", packag);
+        //要添加签名方式
+        repData.put("signType", "HMAC-SHA256");
+        String nonStr = WXPayUtil.generateNonceStr();
+        repData.put("nonceStr", nonStr);
+        String timeStamp = String.valueOf(System.currentTimeMillis() / 1000);
+        repData.put("timeStamp", timeStamp);
+        //签名
+        String key = "03447810be8fc1d58d64eb9ea3a73cc0";
+        String sign = WXPayUtil.generateSignature(repData, key);
+        unifiedOrderResVO.setPackageStr(packag);
+        unifiedOrderResVO.setTimeStamp(timeStamp);
+        unifiedOrderResVO.setNonce_str(nonStr);
+        unifiedOrderResVO.setSignType("HMAC-SHA256");
+        unifiedOrderResVO.setPaySign(sign);
+        logger.info("返回前端：{}", JSONObject.toJSONString(unifiedOrderResVO));
+        return unifiedOrderResVO;
     }
 
     /**
@@ -118,7 +148,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
                 try {
                     inet = InetAddress.getLocalHost();
                 } catch (UnknownHostException e) {
-                   logger.error("获取ip异常:",e);
+                    logger.error("获取ip异常:", e);
                 }
                 ipAddress = inet.getHostAddress();
             }

@@ -2,6 +2,7 @@ package com.xiaozipu.client.service.payment;
 
 import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.dao.entity.TOrder;
 
 /**
@@ -15,7 +16,7 @@ public interface PaymentService {
      *
      * @param order
      */
-    UnifiedOrderResDTO unifiedOrder(TOrder order);
+    UnifiedOrderResVO unifiedOrder(TOrder order) throws Exception;
 
     /**
      * 微信支付回调

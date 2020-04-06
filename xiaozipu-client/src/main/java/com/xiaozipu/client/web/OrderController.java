@@ -78,7 +78,7 @@ public class OrderController {
      */
     @TraceLog
     @PostMapping("/order/place")
-    public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) {
+    public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) throws Exception {
         Integer userId = (Integer) request.getAttribute("userId");
         logger.info("计算商品金额:{}", JSONObject.toJSONString(placeOrderDTO));
         ResultInfo resultInfo = new ResultInfo();

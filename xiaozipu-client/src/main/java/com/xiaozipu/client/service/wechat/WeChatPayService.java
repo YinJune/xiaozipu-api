@@ -1,6 +1,7 @@
 package com.xiaozipu.client.service.wechat;
 
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.dao.entity.TOrder;
 
 /**
@@ -14,5 +15,5 @@ public interface WeChatPayService {
      *
      * @param order
      */
-    UnifiedOrderResDTO unifiedOrder(TOrder order);
+    UnifiedOrderResVO unifiedOrder(TOrder order) throws Exception;
 }

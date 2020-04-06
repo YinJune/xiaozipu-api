@@ -46,7 +46,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
         try {
-            logger.info("请求uri:{},type:{}", request.getRequestURI(),request.getMethod());
+            logger.info("----请求uri:{},type:{}", request.getRequestURI(),request.getMethod());
             Claims claims = JwtUtils.verifyAndGetClaimsByToken(token);
             String userId = claims.getAudience();
             request.setAttribute("userId", Integer.parseInt(userId));
@@ -64,6 +64,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             try {
                 printWriter = response.getWriter();
                 printWriter.write("令牌无效");
+                logger.error("--令牌无效");
             } catch (IOException ex) {
                 logger.error("设置返回内容出错:{}", ex);
             } finally {

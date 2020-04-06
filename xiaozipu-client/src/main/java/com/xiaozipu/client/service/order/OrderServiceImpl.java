@@ -16,6 +16,7 @@ import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.client.service.payment.PaymentService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.ProductSpecService;
+import com.xiaozipu.client.service.wx.pay.WXPayUtil;
 import com.xiaozipu.common.enums.PayTypeEnum;
 import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
@@ -97,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) {
+    public UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) throws Exception {
         //校验参数
         if (StringUtils.isEmpty(placeOrderDTO.getCartIds())&&(placeOrderDTO.getProductSpecId()==null||placeOrderDTO.getQuantity()==null)){
             throw new BusinessRuntimeException("","参数错误");
@@ -133,10 +134,7 @@ public class OrderServiceImpl implements OrderService {
             orderProducts.add(orderProduct);
         }
         orderProductService.batchInsert(orderProducts);
-        UnifiedOrderResDTO unifiedOrderResDTO = paymentService.unifiedOrder(order);
-        UnifiedOrderResVO unifiedOrderResVO = new UnifiedOrderResVO();
-        unifiedOrderResVO.setNonce_str(unifiedOrderResDTO.getNonce_str());
-        unifiedOrderResVO.setPackageStr("prepay_id=" + unifiedOrderResDTO.getPrepay_id());
+        UnifiedOrderResVO unifiedOrderResVO = paymentService.unifiedOrder(order);
         return unifiedOrderResVO;
     }
 

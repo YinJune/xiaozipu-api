@@ -31,7 +31,7 @@ public interface OrderService {
      * @param placeOrderDTO
      * @return
      */
-    UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO);
+    UnifiedOrderResVO placeOrder(Integer userId, PlaceOrderDTO placeOrderDTO) throws Exception;
 
     /**
      * 订单列表

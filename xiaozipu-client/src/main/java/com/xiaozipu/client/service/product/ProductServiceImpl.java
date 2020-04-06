@@ -104,7 +104,9 @@ public class ProductServiceImpl implements ProductService {
         }
         //商品规格列表
         List<TProductSpec> productSpecs = productSpecService.getSpecsByProductId(productId);
-        List<ProductSpecVO> productSpecVOS = BeanCopyUtils.copyListProperties(productSpecs, ProductSpecVO::new);
+        List<ProductSpecVO> productSpecVOS = BeanCopyUtils.copyListProperties(productSpecs, ProductSpecVO::new,(spec,specVo)->{
+            specVo.setSpec(spec.getValueIds());
+        });
         productDetailVo.setProductId(product.getId());
         productDetailVo.setName(product.getName());
         productDetailVo.setSummary(product.getName());

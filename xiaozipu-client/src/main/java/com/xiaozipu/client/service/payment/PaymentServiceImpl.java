@@ -2,6 +2,7 @@ package com.xiaozipu.client.service.payment;
 
 import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
 import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
+import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.client.service.wechat.WeChatPayService;
 import com.xiaozipu.common.enums.PayTypeEnum;
@@ -30,9 +31,9 @@ public class PaymentServiceImpl implements PaymentService {
      * @param order
      */
     @Override
-    public UnifiedOrderResDTO unifiedOrder(TOrder order) {
-        UnifiedOrderResDTO unifiedOrderResDTO=weChatPayService.unifiedOrder(order);
-        return unifiedOrderResDTO;
+    public UnifiedOrderResVO unifiedOrder(TOrder order) throws Exception {
+        UnifiedOrderResVO unifiedOrderResVO=weChatPayService.unifiedOrder(order);
+        return unifiedOrderResVO;
     }
 
     /**
