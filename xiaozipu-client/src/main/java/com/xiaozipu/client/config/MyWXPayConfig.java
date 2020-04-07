@@ -40,17 +40,18 @@ public class MyWXPayConfig extends WXPayConfig implements   EnvironmentAware {
     @Override
     protected String getKey() {
         String key="";
-        if ("prod".equals(environment.getProperty("spring.profiles.active"))){
-            key=environment.getProperty("wechat.pay.key");
-        }else {
-
-            try {
-                key=getSignKey();
-            } catch (Exception e) {
-                logger.error("获取沙箱key异常:{}",e);
-                throw new BusinessRuntimeException("","获取沙箱key异常");
-            }
-        }
+        key=environment.getProperty("wechat.pay.key");
+//        if ("prod".equals(environment.getProperty("spring.profiles.active"))){
+//            key=environment.getProperty("wechat.pay.key");
+//        }else {
+//
+//            try {
+//                key=getSignKey();
+//            } catch (Exception e) {
+//                logger.error("获取沙箱key异常:{}",e);
+//                throw new BusinessRuntimeException("","获取沙箱key异常");
+//            }
+//        }
         return key;
     }
 
