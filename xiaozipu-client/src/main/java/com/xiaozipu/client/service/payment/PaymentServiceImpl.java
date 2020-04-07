@@ -1,17 +1,13 @@
 package com.xiaozipu.client.service.payment;
 
 import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
-import com.xiaozipu.client.pojo.dto.mp.UnifiedOrderResDTO;
 import com.xiaozipu.client.pojo.vo.UnifiedOrderResVO;
 import com.xiaozipu.client.service.order.OrderService;
 import com.xiaozipu.client.service.wechat.WeChatPayService;
-import com.xiaozipu.common.enums.PayTypeEnum;
-import com.xiaozipu.common.enums.StatusEnum;
 import com.xiaozipu.dao.entity.TOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 
 /**
  * @author: YinJunJie
@@ -44,7 +40,6 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void payCallback(PaymentNotifyResDTO paymentNotifyResDTO) {
         String orderCode=paymentNotifyResDTO.getOut_trade_no();
-
         orderService.paySuccess(orderCode);
     }
 }

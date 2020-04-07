@@ -16,7 +16,6 @@ import com.xiaozipu.client.service.cart.ShoppingCartService;
 import com.xiaozipu.client.service.payment.PaymentService;
 import com.xiaozipu.client.service.product.ProductService;
 import com.xiaozipu.client.service.product.ProductSpecService;
-import com.xiaozipu.client.service.wx.pay.WXPayUtil;
 import com.xiaozipu.common.enums.PayTypeEnum;
 import com.xiaozipu.common.enums.ShopOrderStatusEnum;
 import com.xiaozipu.common.enums.StatusEnum;
