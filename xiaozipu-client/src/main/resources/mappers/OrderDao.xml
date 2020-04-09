@@ -20,7 +20,7 @@
            SELECT     c.quantity,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,
            ps.id as productSpecId,o.order_amount,p.name
         FROM     t_order o
-         inner JOIN t_order_product op ON op.order_id = o.id and o.user_id=#{userId}
+         inner JOIN t_order_product op ON op.order_id = o.id
          inner JOIN t_product_spec ps ON op.product_spec_id = ps.id
          inner JOIN t_product p ON ps.product_id = p.id
          inner JOIN (
@@ -28,7 +28,7 @@
              FROM      t_order a,      t_order_product b
              WHERE      a.id = b.order_id
              GROUP BY     b.order_id
-         ) c ON c.order_id = o.id
+         ) c ON c.order_id = o.id where  o.user_id=#{userId}
     </select>
 
     <resultMap id="orderDetailDO" type="com.xiaozipu.client.dao.entity.OrderDetailDO">
