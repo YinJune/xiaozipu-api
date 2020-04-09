@@ -20,10 +20,10 @@
            SELECT     c.quantity,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,
            ps.id as productSpecId,o.order_amount,p.name
         FROM     t_order o
-         LEFT JOIN t_order_product op ON op.order_id = o.id and o.user_id=#{userId}
-         LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
-         LEFT JOIN t_product p ON ps.product_id = p.id
-         LEFT JOIN (
+         inner JOIN t_order_product op ON op.order_id = o.id and o.user_id=#{userId}
+         inner JOIN t_product_spec ps ON op.product_spec_id = ps.id
+         inner JOIN t_product p ON ps.product_id = p.id
+         inner JOIN (
              SELECT      count( b.order_id ) quantity,      b.order_id
              FROM      t_order a,      t_order_product b
              WHERE      a.id = b.order_id
@@ -57,8 +57,8 @@
          o.recipient_name,o.recipient_phone ,o.recipient_address, op.product_spec_id as productSpecId,
           ps.spec_image_url , op.price as productPrice,op.pay_price,op.quantity  ,  ps.id as productSpecId,p.summary,p.name,op.price,op.quantity
         FROM     t_order o
-         LEFT JOIN t_order_product op ON op.order_id = o.id
-         LEFT JOIN t_product_spec ps ON op.product_spec_id = ps.id
-         LEFT JOIN t_product p ON ps.product_id = p.id and o.id=#{orderId}
+         inner JOIN t_order_product op ON op.order_id = o.id
+         inner JOIN t_product_spec ps ON op.product_spec_id = ps.id
+         inner JOIN t_product p ON ps.product_id = p.id and o.id=#{orderId}
     </select>
 </mapper>

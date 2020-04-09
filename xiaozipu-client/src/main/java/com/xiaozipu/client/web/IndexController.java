@@ -25,7 +25,7 @@ public class IndexController {
      *
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "查询banner")
     @GetMapping("/anon/index/all/data")
     public ResultInfo getIndexData() {
         ResultInfo resultInfo = new ResultInfo();

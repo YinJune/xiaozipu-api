@@ -36,7 +36,7 @@ public class AddressController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "收货地址列表")
     @GetMapping("/user/address/list")
     public ResultInfo getUserAddressList(HttpServletRequest request) {
         ResultInfo resultInfo = new ResultInfo();
@@ -52,7 +52,7 @@ public class AddressController {
      * @param request
      * @return
      */
-   @TraceLog
+   @TraceLog(desc = "收货地址详情")
     @GetMapping("/user/address/detail")
     public ResultInfo getUserAddressDetail(HttpServletRequest request, @RequestParam("addressId")Integer addressId) {
         ResultInfo resultInfo = new ResultInfo();
@@ -74,7 +74,7 @@ public class AddressController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "添加收货地址")
     @PostMapping("/user/address/add")
     public ResultInfo addAddress(HttpServletRequest request, @RequestBody AddressDTO addressDTO) {
         ResultInfo resultInfo = new ResultInfo();
@@ -90,7 +90,7 @@ public class AddressController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "收货地址列表")
     @PostMapping("/user/address/update")
     public ResultInfo updateAddress(HttpServletRequest request, @RequestBody AddressDTO addressDTO) {
         ResultInfo resultInfo = new ResultInfo();

@@ -1,5 +1,6 @@
 package com.xiaozipu.client.web;
 
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.common.result.ResultInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class AfterSalesOrderController {
      *
      * @return
      */
+    @TraceLog(desc = "退货")
     @PostMapping("/after-sales/order/refund")
     public ResultInfo refundOrder() {
         ResultInfo resultInfo = new ResultInfo();

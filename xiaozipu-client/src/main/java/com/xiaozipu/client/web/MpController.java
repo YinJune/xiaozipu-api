@@ -28,7 +28,7 @@ public class MpController {
      *
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "小程序登录")
     @GetMapping("/anon/wechat/mini/login")
     public ResultInfo miniLogin(@RequestParam("jsCode") String jsCode) {
         logger.info("小程序登陆:jsCode={}", jsCode);
@@ -43,7 +43,7 @@ public class MpController {
      *
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "小程序解密数据")
     @PostMapping("/anon/wechat/mini/decrypt")
     public ResultInfo decryptData(@RequestBody @Validated DecryptUserInfoReqDTO decryptUserInfoReqDTO) {
         logger.info("小程序解密数据:decryptUserInfoReqDTO={}", JSONObject.toJSONString(decryptUserInfoReqDTO));

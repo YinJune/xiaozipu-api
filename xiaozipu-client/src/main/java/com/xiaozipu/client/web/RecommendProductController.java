@@ -36,7 +36,7 @@ public class RecommendProductController {
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "currentPage", value = "当前页", required = true, paramType = "form")
 //    })
-    @TraceLog
+    @TraceLog(desc = "推荐商品列表")
     @GetMapping("/product/recommend/list")
     public ResultInfo listRecommendProduct(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage) {
         ResultInfo resultInfo = new ResultInfo();

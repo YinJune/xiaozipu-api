@@ -42,7 +42,7 @@ public class ProductController {
      * @param orderType   排序类型 正序 倒叙
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "商品列表")
     @GetMapping("/product/list")
     public ResultInfo getProductList(@RequestParam(value = "sortType", defaultValue = "1") String sortType,
                                      @RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
@@ -68,7 +68,7 @@ public class ProductController {
      * @param productId
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "商品详情")
     @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();

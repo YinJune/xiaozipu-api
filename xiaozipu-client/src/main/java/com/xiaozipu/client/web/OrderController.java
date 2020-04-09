@@ -44,7 +44,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "计算金额")
     @PostMapping("/order/amount/calculate")
     public ResultInfo calculateAmount(HttpServletRequest request, @RequestBody @Validated CalculateAmountDTO calculateAmountDTO) {
         logger.info("计算商品金额:{}", JSONObject.toJSONString(calculateAmountDTO));
@@ -60,7 +60,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "确认订单页信息")
     @PostMapping("/order/confirm/info")
     public ResultInfo confirmOrderInfo(HttpServletRequest request, @RequestBody CalculateAmountDTO calculateAmountDTO) {
         ResultInfo resultInfo = new ResultInfo();
@@ -76,7 +76,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "下单")
     @PostMapping("/order/place")
     public ResultInfo placeOrder(HttpServletRequest request, @RequestBody @Validated PlaceOrderDTO placeOrderDTO) throws Exception {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -94,7 +94,7 @@ public class OrderController {
      * @param status 订单状态
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "订单列表")
     @GetMapping("/order/list")
     public ResultInfo orderList(HttpServletRequest request, @RequestParam(value = "status", required = false) String status, @RequestParam("currentPage") Integer currentPage) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -112,6 +112,7 @@ public class OrderController {
      * @param orderId 订单id
      * @return
      */
+    @TraceLog(desc = "订单详情")
     @GetMapping("/order/detail/{orderId}")
     public ResultInfo getOrderDetail(HttpServletRequest request, @PathVariable("orderId") Integer orderId) {
         Integer userId = (Integer) request.getAttribute("userId");

@@ -3,9 +3,12 @@ wechat:
     appId: wxf985df3154d6f74b
     secret: 49c13833c5740e2dc4743a04d693411f
     echo-token: 123
+    mchId: 1582615011
   pay:
     mchId: 1582615011
     notifyUrl: ${xiaozipu.domain}/client/notify/wxpay/order
+    key: 03447810be8fc1d58d64eb9ea3a73cc0
+    domain: api.mch.weixin.qq.com
 interceptor:
   patterns:
     include: /**
@@ -21,4 +24,4 @@ aliyun:
     version:
 
 xiaozipu:
-  domain: http://118.190.134.0
+  domain: http://20o609b535.imwork.net

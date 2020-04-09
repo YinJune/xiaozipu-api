@@ -120,14 +120,29 @@ public class OrderServiceImpl implements OrderService {
         order.setDeleted(StatusEnum.INVALID.getKey());
         orderMapper.insertSelective(order);
         List<TOrderProduct> orderProducts = new ArrayList<>();
-        for (Integer cartId : placeOrderDTO.getCartIds()) {
-            TShoppingCartProduct cartProduct = cartService.getById(cartId);
-            TProductSpec productSpecs = productSpecService.getById(cartProduct.getProductSpecId());
+        if(!CollectionUtils.isEmpty(placeOrderDTO.getCartIds())){
+
+            for (Integer cartId : placeOrderDTO.getCartIds()) {
+                TShoppingCartProduct cartProduct = cartService.getById(cartId);
+                TProductSpec productSpecs = productSpecService.getById(cartProduct.getProductSpecId());
+                TOrderProduct orderProduct = new TOrderProduct();
+                orderProduct.setPrice(productSpecs.getPrice());
+                orderProduct.setPayPrice(productSpecs.getPrice());
+                orderProduct.setQuantity(cartProduct.getQuantity());
+                orderProduct.setProductSpecId(cartProduct.getProductSpecId());
+                orderProduct.setUserId(userId);
+                orderProduct.setOrderId(order.getId());
+                orderProducts.add(orderProduct);
+            }
+        }else {
+            Integer productSpecId=placeOrderDTO.getProductSpecId();
+            Integer quantity=placeOrderDTO.getQuantity();
+            TProductSpec productSpecs=productSpecService.getById(productSpecId);
             TOrderProduct orderProduct = new TOrderProduct();
             orderProduct.setPrice(productSpecs.getPrice());
             orderProduct.setPayPrice(productSpecs.getPrice());
-            orderProduct.setQuantity(cartProduct.getQuantity());
-            orderProduct.setProductSpecId(cartProduct.getProductSpecId());
+            orderProduct.setQuantity(quantity);
+            orderProduct.setProductSpecId(productSpecs.getId());
             orderProduct.setUserId(userId);
             orderProduct.setOrderId(order.getId());
             orderProducts.add(orderProduct);

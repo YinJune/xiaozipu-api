@@ -1,6 +1,7 @@
 package com.xiaozipu.client.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xiaozipu.client.common.annotation.TraceLog;
 import com.xiaozipu.client.config.MyWXPayConfig;
 import com.xiaozipu.client.pojo.dto.mp.PaymentNotifyResDTO;
 import com.xiaozipu.client.service.payment.PaymentService;
@@ -39,6 +40,7 @@ public class PayCallbackController {
      * @param request
      * @return
      */
+    @TraceLog(desc = "微信支付回调")
     @GetMapping("/notify/wxpay/order")
     public String payCallback(HttpServletRequest request) {
         String result = "FAIL";

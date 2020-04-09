@@ -32,7 +32,7 @@ public class CategoryController {
      * @param categoryId 不传 查全部一级分类
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "分类列表")
     @GetMapping("/anon/category/list")
     public ResultInfo getCategoryList(@RequestParam(value = "categoryId", required = false) Integer categoryId) {
         ResultInfo resultInfo = new ResultInfo();

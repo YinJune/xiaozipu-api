@@ -37,7 +37,7 @@ public class ShoppingCartController {
      *
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "添加购物车")
     @PostMapping("/shopping/cart/add")
     public ResultInfo addToCart(HttpServletRequest request, @RequestBody @Validated AddCartDTO addCartDTO) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -50,7 +50,7 @@ public class ShoppingCartController {
     /**
      * 购物车商品列表
      */
-    @TraceLog
+    @TraceLog(desc = "购物车列表")
     @GetMapping("/shopping/cart/list")
     public ResultInfo getCartProducts(HttpServletRequest request, @RequestParam("currentPage") Integer currentPage) {
         Integer userId = (Integer) request.getAttribute("userId");
@@ -71,7 +71,7 @@ public class ShoppingCartController {
      * @param deleteCartDTO
      * @return
      */
-    @TraceLog
+    @TraceLog(desc = "购物车删除")
     @PostMapping("/shopping/cart/delete")
     public ResultInfo deleteCartProducts(HttpServletRequest request, @RequestBody DeleteCartDTO deleteCartDTO) {
         ResultInfo resultInfo = new ResultInfo();

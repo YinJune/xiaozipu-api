@@ -48,7 +48,13 @@ public class TraceLogAspect {
             }
             params.add(args[i]);
         }
-        logger.info("用户:{} 手机:{} 请求url:{} type:{} 参数：{}",request.getAttribute("userId"),request.getAttribute("phone"),request.getRequestURL(),request.getMethod(),JSONObject.toJSONString(params));
+        Integer userId= (Integer) request.getAttribute("userId");
+        String phone = (String) request.getAttribute("phone");
+        String desc=getAspectLogDescription(joinPoint);
+        String uri=request.getRequestURI();
+        String method=request.getMethod();
+        String paramStr=JSONObject.toJSONString(params);
+        logger.info("用户:{} 手机:{} {} url:{} type:{} 参数：{}",userId,phone,desc,uri,method,paramStr);
         Object result=joinPoint.proceed();
         logger.info("请求url:{} 返回值:{}",request.getRequestURL(), JSONObject.toJSONString(result));
         return result;
