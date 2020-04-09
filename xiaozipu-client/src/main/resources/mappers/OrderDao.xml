@@ -7,18 +7,20 @@
         <result column="order_code" property="orderCode"/>
         <result column="order_amount" property="orderAmount"/>
         <result column="status" property="orderStatus"/>
-        <result column="quantity" property="quantity"/>
         <result column="create_time" property="createTime"/>
         <collection property="products" ofType="com.xiaozipu.client.dao.entity.CartProductDO">
             <id column="productSpecId" property="productSpecId"/>
             <result column="name" property="productName"/>
-            <result column="image_url" property="productImageUrl"/>
+            <result column="summary" property="summary"/>
+            <result column="quantity" property="quantity"/>
+            <result column="spec_image_url" property="productImageUrl"/>
+            <result column="productPrice" property="productPrice"/>
         </collection>
     </resultMap>
 
     <select id="getOrderList" resultMap="orderListDO">
-           SELECT     c.quantity,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,
-           ps.id as productSpecId,o.order_amount,p.name
+           SELECT  o.id ,   c.quantity,     o.order_code,     o.`status`,     o.pay_amount,     ps.spec_image_url ,
+           ps.id as productSpecId,o.order_amount,p.name,op.quantity,p.summary,ps.spec_image_url,op.price as productPrice
         FROM     t_order o
          inner JOIN t_order_product op ON op.order_id = o.id
          inner JOIN t_product_spec ps ON op.product_spec_id = ps.id
@@ -28,7 +30,7 @@
              FROM      t_order a,      t_order_product b
              WHERE      a.id = b.order_id
              GROUP BY     b.order_id
-         ) c ON c.order_id = o.id where  o.user_id=#{userId}
+         ) c ON c.order_id = o.id where  o.user_id=#{userId} and o.status=#{status}
     </select>
 
     <resultMap id="orderDetailDO" type="com.xiaozipu.client.dao.entity.OrderDetailDO">

@@ -33,7 +33,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 pagehelper:
-  reasonable: true
+  reasonable: false
   support-methods-arguments: true
   params: count=countSql
   helper-dialect: mysql
