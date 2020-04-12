@@ -1,5 +1,6 @@
 package com.xiaozipu.merchant.service.order;
 
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.merchant.dao.entity.OrderListDO;
 import com.xiaozipu.merchant.pojo.dto.order.OrderListReqDTO;
 
@@ -17,5 +18,5 @@ public interface OrderService {
      * @param orderListReqDTO
      * @return
      */
-    List<OrderListDO> getOrderList(OrderListReqDTO orderListReqDTO);
+    PageResultInfo getOrderList(OrderListReqDTO orderListReqDTO);
 }

@@ -61,7 +61,7 @@ public class ProductController {
      */
     @TraceLog(desc = "商品列表")
     @GetMapping("/product/list")
-    public PageResultInfo getProductList(@RequestParam("currentPage") Integer currentPage, @RequestParam("status") String status) {
+    public PageResultInfo getProductList(@RequestParam("currentPage") Integer currentPage, @RequestParam(value = "status", required = false) String status) {
         PageResultInfo resultInfo = productService.getProductList(currentPage, status);
         return resultInfo;
     }

@@ -10,10 +10,13 @@
         <result column="lineation_price" property="lineationPrice"/>
         <result column="image_url" property="imageUrl"/>
         <result column="summary" property="summary"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <select id="getProductList" resultMap="productListResult">
-    select p.id,p.price,p.name,p.code,p.summary, p.lineation_price,pi.image_url from t_product p inner join t_product_image pi
-    on p.id=pi.product_id where p.status=#{status} and pi.type ='1'
-  </select>
+        select p.id,p.price,p.name,p.code,p.summary, p.lineation_price,pi.image_url,p.status from t_product p inner join
+        t_product_image pi
+        on p.id=pi.product_id where pi.type ='1'
+        <if test="status != null">and p.status=#{status}</if>
+    </select>
 </mapper>

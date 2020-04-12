@@ -10,17 +10,59 @@
         <result column="createTime" property="createTime"/>
         <result column="payAmount" property="payAmount"/>
         <result column="orderAmount" property="orderAmount"/>
-        <collection property="orderProducts" ofType="com.xiaozipu.merchant.dao.entity.OrderProductDTO">
-            <id column="productId" property="productId"/>
-            <result column="productCode" property="productCode"/>
-            <result column="productImage" property="productImage"/>
-            <result column="productName" property="productName"/>
-            <result column="productPrice" property="productPrice"/>
-            <result column="quantity" property="quantity"/>
+        <collection property="orderProducts" ofType="com.xiaozipu.merchant.dao.entity.OrderProductDTO"
+                    select="getOrderProduct" column="orderId">
+
         </collection>
     </resultMap>
 
-<!--<select id="getOrderList" resultMap="">-->
+    <resultMap id="orderProductDO" type="com.xiaozipu.merchant.dao.entity.OrderProductDTO">
+        <id column="productId" property="productId"/>
+        <result column="productCode" property="productCode"/>
+        <result column="productImage" property="productImage"/>
+        <result column="productName" property="productName"/>
+        <result column="price" property="productPrice"/>
+        <result column="quantity" property="quantity"/>
+    </resultMap>
 
-    <!--</select>-->
+    <select id="getOrderList" resultMap="orderListDOS">
+        select o.id as orderId ,o.order_code as orderCode,o.status as orderStatus,o.create_time as createTime ,
+        o.order_amount as orderAmount ,o.pay_amount as payAmount
+        from t_order o
+        <where>
+            <if test="orderListReqDTO.userId != null">
+                o.user_id=#{orderListReqDTO.userId}
+            </if>
+
+            <if test="orderListReqDTO.orderStatus != null">
+                o.status=#{orderListReqDTO.status}
+            </if>
+            <if test="orderListReqDTO.orderCode != null">
+                o.order_code=#{orderListReqDTO.orderCode}
+            </if>
+            <if test="orderListReqDTO.startDateTime != null">
+                o.create_time &gt;= #{orderListReqDTO.startDateTime}
+            </if>
+            <if test="orderListReqDTO.endDateTime != null">
+                o.create_time &lt;= {orderListReqDTO.endDateTime}
+            </if>
+
+        </where>
+    </select>
+    <select id="getOrderProduct" resultMap="orderProductDO">
+        select op.id             as orderProductId,
+               op.price,
+               op.quantity,
+               ps.spec_image_url as productImage,
+               p.code            as productCode,
+               p.id              as productId,
+               p.name            as productName
+        from t_order_product op,
+             t_product_spec ps,
+             t_product p
+        where op.product_spec_id = ps.id
+          and ps.product_id = p.id
+          and op.order_id = #{orderId}
+
+    </select>
 </mapper>

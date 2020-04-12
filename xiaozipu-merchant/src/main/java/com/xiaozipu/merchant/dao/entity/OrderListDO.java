@@ -32,6 +32,7 @@ public class OrderListDO {
      * 订单金额
      */
     private BigDecimal orderAmount;
+    private BigDecimal payAmount;
     /**
      * 订单商品的爽
      */

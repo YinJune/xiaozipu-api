@@ -1,5 +1,6 @@
 package com.xiaozipu.merchant.web;
 
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.common.result.ResultInfo;
 import com.xiaozipu.dao.entity.TOrder;
 import com.xiaozipu.merchant.common.annotation.TraceLog;
@@ -28,9 +29,8 @@ public class OrderController {
 
     @TraceLog(desc = "订单列表")
     @PostMapping("/order/list")
-    public ResultInfo orderList(HttpServletRequest request, @RequestBody OrderListReqDTO orderListReqDTO){
-        ResultInfo resultInfo= new ResultInfo();
-        List<OrderListDO> orderListDOS=orderService.getOrderList(orderListReqDTO);
+    public PageResultInfo orderList(HttpServletRequest request, @RequestBody OrderListReqDTO orderListReqDTO) {
+        PageResultInfo resultInfo = orderService.getOrderList(orderListReqDTO);
         return resultInfo;
     }
 }

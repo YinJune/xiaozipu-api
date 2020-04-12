@@ -2,6 +2,7 @@ package com.xiaozipu.merchant.dao.mapper;
 
 import com.xiaozipu.merchant.dao.entity.OrderListDO;
 import com.xiaozipu.merchant.pojo.dto.order.OrderListReqDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface OrderDao {
      * @param orderListReqDTO
      * @return
      */
-    List<OrderListDO> getOrderList(OrderListReqDTO orderListReqDTO);
+    List<OrderListDO> getOrderList(@Param("orderListReqDTO") OrderListReqDTO orderListReqDTO);
 }

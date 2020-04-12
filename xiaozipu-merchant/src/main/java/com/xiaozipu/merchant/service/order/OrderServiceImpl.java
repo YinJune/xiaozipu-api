@@ -1,6 +1,9 @@
 package com.xiaozipu.merchant.service.order;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.dao.mapper.TOrderMapper;
 import com.xiaozipu.merchant.dao.entity.OrderListDO;
 import com.xiaozipu.merchant.dao.mapper.OrderDao;
@@ -29,8 +32,11 @@ public class OrderServiceImpl implements OrderService{
      * @return
      */
     @Override
-    public List<OrderListDO> getOrderList(OrderListReqDTO orderListReqDTO) {
-        List<OrderListDO> orderListDOS= orderDao.getOrderList(orderListReqDTO);
-        return null;
+    public PageResultInfo getOrderList(OrderListReqDTO orderListReqDTO) {
+        PageHelper.startPage(orderListReqDTO.getCurrentPage(), 20);
+        List<OrderListDO> orderListDOS = orderDao.getOrderList(orderListReqDTO);
+        PageInfo<OrderListDO> pageInfo = new PageInfo<>(orderListDOS);
+        PageResultInfo pageResultInfo = new PageResultInfo(orderListReqDTO.getCurrentPage(), pageInfo.getTotal(), orderListDOS);
+        return pageResultInfo;
     }
 }
