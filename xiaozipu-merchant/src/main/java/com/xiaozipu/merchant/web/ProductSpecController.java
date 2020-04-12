@@ -1,6 +1,7 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.common.annotation.TraceLog;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductSpecReqDTO;
 import com.xiaozipu.merchant.service.product.ProductSpecService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class ProductSpecController {
      * @param addProductSpecReqDTO
      * @return
      */
+    @TraceLog(desc = "添加商品规格")
     @PostMapping("/product/spec/add")
     public ResultInfo addProductSpec(@RequestBody @Validated AddProductSpecReqDTO addProductSpecReqDTO) {
         ResultInfo resultInfo = new ResultInfo();

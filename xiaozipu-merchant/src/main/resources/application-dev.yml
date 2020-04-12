@@ -20,6 +20,11 @@ spring:
     database: 0
   profiles:
     include: config/config-dev
+pagehelper:
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql
 
 mybatis:
   mapper-locations: classpath*:mappers/*Mapper.xml,classpath*:mappers/*Dao.xml #*可以表示任意目录

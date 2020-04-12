@@ -1,6 +1,7 @@
 package com.xiaozipu.merchant.web;
 
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.common.annotation.TraceLog;
 import com.xiaozipu.merchant.pojo.dto.category.AddCategoryReqDTO;
 import com.xiaozipu.merchant.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class CategoryController {
      * @param addCategoryReqDTO
      * @return
      */
+    @TraceLog(desc = "添加分类")
     @PostMapping("/category/add")
     public ResultInfo addCategory(@RequestBody @Validated AddCategoryReqDTO addCategoryReqDTO) {
         ResultInfo resultInfo = new ResultInfo();

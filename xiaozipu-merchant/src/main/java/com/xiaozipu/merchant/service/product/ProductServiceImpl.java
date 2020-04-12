@@ -1,10 +1,15 @@
 package com.xiaozipu.merchant.service.product;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xiaozipu.common.enums.StatusEnum;
+import com.xiaozipu.common.enums.serial.SerialNoTypeEnum;
 import com.xiaozipu.common.exception.BusinessRuntimeException;
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.common.util.BeanCopyUtils;
 import com.xiaozipu.common.util.MoneyUtils;
+import com.xiaozipu.common.util.SerialNoUtils;
 import com.xiaozipu.dao.entity.TProduct;
 import com.xiaozipu.dao.entity.TProductImage;
 import com.xiaozipu.dao.entity.TProductImageExample;
@@ -63,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
         if (addProductReqDto.getLineationPrice() != null) {
             product.setLineationPrice(addProductReqDto.getLineationPrice().multiply(MoneyUtils.UNIT));
         }
+        product.setCode(SerialNoUtils.generateSerialNo(SerialNoTypeEnum.SHOP_ORDER));
         product.setName(addProductReqDto.getName());
         product.setCategoryId(addProductReqDto.getCategoryId());
         product.setStatus(StatusEnum.VALID.getKey());
@@ -107,14 +113,17 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<ProductListVO> getProductList(Integer currentPage,String status) {
-        PageHelper.startPage(currentPage,10);
-        List<ProductListDO> productListDOS= productDao.getProductList(status);
-        List<ProductListVO> productListVOS=BeanCopyUtils.copyListProperties(productListDOS,ProductListVO::new,(productListDO,productListVO)->{
+    public PageResultInfo getProductList(Integer currentPage, String status) {
+        Page page = PageHelper.startPage(currentPage, 10);
+        List<ProductListDO> productListDOS = productDao.getProductList(status);
+        PageInfo<ProductListDO> pageInfo = new PageInfo<ProductListDO>(page.getResult());
+        List<ProductListVO> productListVOS = BeanCopyUtils.copyListProperties(productListDOS, ProductListVO::new, (productListDO, productListVO) -> {
             productListVO.setProductPrice(productListDO.getPrice().divide(MoneyUtils.UNIT));
         });
-        return productListVOS;
+        PageResultInfo pageResultInfo = new PageResultInfo(currentPage, pageInfo.getTotal(), productListVOS);
+        return pageResultInfo;
     }
+
     /**
      * 根据商品id查询商品简要信息
      *

@@ -20,7 +20,7 @@
         </collection>
     </resultMap>
 
-<select id="getOrderList" resultMap="">
+<!--<select id="getOrderList" resultMap="">-->
 
-</select>
+    <!--</select>-->
 </mapper>

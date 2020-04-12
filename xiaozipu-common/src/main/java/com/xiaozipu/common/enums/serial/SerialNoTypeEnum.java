@@ -6,7 +6,8 @@ package com.xiaozipu.common.enums.serial;
  * @description:
  */
 public enum SerialNoTypeEnum {
-    SHOP_ORDER("01", "商城订单");
+    PRODUCT_CODE("01", "商品编号"),
+    SHOP_ORDER("02", "商城订单");
     private String type;
     private String desc;
 

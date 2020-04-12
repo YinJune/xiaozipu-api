@@ -1,6 +1,8 @@
 package com.xiaozipu.merchant.web;
 
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.common.annotation.TraceLog;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
 import com.xiaozipu.merchant.pojo.vo.product.ProductDetailVO;
 import com.xiaozipu.merchant.pojo.vo.product.ProductListVO;
@@ -28,6 +30,7 @@ public class ProductController {
      * @param addProductReqDto
      * @return
      */
+    @TraceLog(desc = "添加商品")
     @PostMapping("/product/add")
     public ResultInfo addProduct(@RequestBody @Validated AddProductReqDTO addProductReqDto) {
         ResultInfo resultInfo = new ResultInfo();
@@ -42,31 +45,34 @@ public class ProductController {
      * @param
      * @return
      */
+    @TraceLog(desc = "更新商品状态")
     @PostMapping("/product/update/status/{productId}/{status}")
-    public ResultInfo updateProductStatus(@PathVariable("productId") Integer productId,@PathVariable("status")String status) {
+    public ResultInfo updateProductStatus(@PathVariable("productId") Integer productId, @PathVariable("status")String status) {
         ResultInfo resultInfo = new ResultInfo();
         productService.updateProductStatus(productId,status);
         return resultInfo;
     }
+
     /**
      * 商品列表
      *
      * @param
      * @return
      */
+    @TraceLog(desc = "商品列表")
     @GetMapping("/product/list")
-    public ResultInfo getProductList(@RequestParam("currentPage")Integer currentPage,@RequestParam("status")String status) {
-        ResultInfo resultInfo = new ResultInfo();
-        List<ProductListVO> productListVOList=productService.getProductList(currentPage,status);
-        resultInfo.setData(productListVOList);
+    public PageResultInfo getProductList(@RequestParam("currentPage") Integer currentPage, @RequestParam("status") String status) {
+        PageResultInfo resultInfo = productService.getProductList(currentPage, status);
         return resultInfo;
     }
+
     /**
      * 商品详情
      *
      * @param
      * @return
      */
+    @TraceLog(desc = "商品详情")
     @GetMapping("/product/detail/{productId}")
     public ResultInfo getProductDetail(@PathVariable("productId") Integer productId) {
         ResultInfo resultInfo = new ResultInfo();

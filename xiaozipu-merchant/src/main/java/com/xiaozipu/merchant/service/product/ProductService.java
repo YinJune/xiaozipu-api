@@ -1,5 +1,6 @@
 package com.xiaozipu.merchant.service.product;
 
+import com.xiaozipu.common.result.PageResultInfo;
 import com.xiaozipu.merchant.dao.entity.ProductSummaryDO;
 import com.xiaozipu.merchant.pojo.dto.product.AddProductReqDTO;
 import com.xiaozipu.merchant.pojo.vo.product.ProductDetailVO;
@@ -33,7 +34,7 @@ public interface ProductService {
      * @param status
      * @return
      */
-    List<ProductListVO> getProductList(Integer currentPage, String status);
+    PageResultInfo getProductList(Integer currentPage, String status);
 
     /**
      * 根据商品id查询商品简要信息

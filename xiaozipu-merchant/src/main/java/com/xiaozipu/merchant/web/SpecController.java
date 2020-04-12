@@ -2,6 +2,7 @@ package com.xiaozipu.merchant.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiaozipu.common.result.ResultInfo;
+import com.xiaozipu.merchant.common.annotation.TraceLog;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecNameReqDTO;
 import com.xiaozipu.merchant.pojo.dto.spec.AddSpecValueReqDTO;
 import com.xiaozipu.merchant.service.spec.SpecService;
@@ -30,6 +31,7 @@ public class SpecController {
      * @param addSpecNameReqDto
      * @return
      */
+    @TraceLog(desc = "添加规格名")
     @PostMapping("/spec/add/name")
     public ResultInfo addSpecName(@RequestBody AddSpecNameReqDTO addSpecNameReqDto) {
         logger.info("添加规格名:{}", JSONObject.toJSONString(addSpecNameReqDto));
@@ -45,6 +47,7 @@ public class SpecController {
      * @param addSpecValueReqDto
      * @return
      */
+    @TraceLog(desc = "添加规格值")
     @PostMapping("/spec/add/value")
     public ResultInfo addSpecValue(@RequestBody AddSpecValueReqDTO addSpecValueReqDto) {
         ResultInfo resultInfo = new ResultInfo();
@@ -59,6 +62,7 @@ public class SpecController {
      * @param specId
      * @return
      */
+    @TraceLog(desc = "删除规格名")
     @PostMapping("/spec/delete/name/{specId}")
     public ResultInfo deleteSpecName(@PathVariable Integer specId) {
         ResultInfo resultInfo = new ResultInfo();
@@ -72,6 +76,7 @@ public class SpecController {
      * @param valueId
      * @return
      */
+    @TraceLog(desc = "删除规格值")
     @PostMapping("/spec/delete/value/{valueId}")
     public ResultInfo deleteSpecValue(@PathVariable Integer valueId) {
         ResultInfo resultInfo = new ResultInfo();

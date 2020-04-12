@@ -23,6 +23,10 @@ public class ResultInfo<T> {
     public ResultInfo() {
     }
 
+    public ResultInfo(T data) {
+        this.data = data;
+    }
+
     public ResultInfo(String code, String message) {
         this.code = code;
         this.message = message;
