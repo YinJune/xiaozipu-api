@@ -36,7 +36,7 @@ public class OrderListDO {
     /**
      * 订单商品的爽
      */
-    private Integer quantity;
+//    private Integer quantity;
     /**
      * 创建时间
      */

@@ -70,6 +70,8 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setCode(SerialNoUtils.generateSerialNo(SerialNoTypeEnum.SHOP_ORDER));
         product.setName(addProductReqDto.getName());
+        product.setSummary(addProductReqDto.getSummary());
+        product.setDescription(addProductReqDto.getDescription());
         product.setCategoryId(addProductReqDto.getCategoryId());
         product.setStatus(StatusEnum.VALID.getKey());
         product.setReviewStatus(StatusEnum.INVALID.getKey());
