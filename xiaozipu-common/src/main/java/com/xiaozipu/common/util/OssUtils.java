@@ -14,8 +14,8 @@ public class OssUtils {
     // Endpoint以杭州为例，其它Region请按实际情况填写。
     private static final String OSS_ENDPOINT = "oss-cn-beijing.aliyuncs.com";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-    private static final String ACCESS_KEY_ID = "LTAI4Fipvg9bzUaU3W8E8gu1";
-    private static final String ACCESS_KEY_SECRET = "O3RZbt0XNK9J01LiFmXNWRIeASBFkl";
+    private static final String ACCESS_KEY_ID = "testID";
+    private static final String ACCESS_KEY_SECRET = "testSecret";
     private static final String BUCKET_NAME = "yinjune-ceshi";
     private static final String PREFIX = "https://yinjune-ceshi.oss-cn-beijing.aliyuncs.com/";
 
